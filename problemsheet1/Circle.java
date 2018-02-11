@@ -26,24 +26,28 @@ public class Circle {
 	}
 	
 	// methods -- you should remove the comments, and complete the method bodies
-	/*
+	
+	final double PI = 3.142;
+	
 	public double getArea(){
-		// add your own code here to return the area of the circle
+		double area = (radius)*(radius)*PI;
+		return area;
 	}
 	public double getCircumference(){
-		// add your own code here to return the circumference of the circle
+		double circumference = 2*(radius)*PI;
+		return circumference;
 	}
 	public double getRadius(){
 		return radius;
 	}
 	public void setPosition( double newX, double newY ){
-		this.xPosition = newX;
-		this.yPosition = newY;
+		xPosition = (int)newX;
+		yPosition = (int)newY;
 	}	
 	public void setRadius( double newRadius ){
-		this.radius = newRadius;
+		radius = newRadius;
 	}
-	*/	
+	
 	
 	
 	// instance variables
