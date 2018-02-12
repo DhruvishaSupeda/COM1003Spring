@@ -30,11 +30,15 @@ public class Circle {
 	final double PI = 3.142;
 	
 	public double getArea(){
+		//Works out the area of the circle
 		double area = (radius)*(radius)*PI;
+		//Returns the area to the MakeCircles class
 		return area;
 	}
 	public double getCircumference(){
+		//Works out the circumference of the circle
 		double circumference = 2*(radius)*PI;
+		//Returns the circumference to the MakeCircles class
 		return circumference;
 	}
 	public double getRadius(){

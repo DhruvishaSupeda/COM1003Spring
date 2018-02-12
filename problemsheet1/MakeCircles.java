@@ -26,17 +26,22 @@ public class MakeCircles{
 		Circle firstCircle = new Circle(20,20,20);
 		Circle secondCircle = new Circle(40,40,40);
 		
+		//Initialising the canvas
 		EasyGraphics g = new EasyGraphics(CANVAS_WIDTH,CANVAS_HEIGHT);
 		
+		//Outputs the values of the area and circumference of both circles
 		System.out.println("Values for initial circles:");
 		areaAndCircumference(firstCircle, secondCircle);
 		
+		//Sets new radii for both circles
 		firstCircle.setRadius(60);
 		secondCircle.setRadius(100);
 
+		//Outputs the new values of the area and circumference of both circles
 		System.out.println("Values for edited circles:");
 		areaAndCircumference(firstCircle, secondCircle);		
 		
+		//Draws both new circles on the canvas
 		int newRadius = (int)firstCircle.getRadius();
 		g.setColor(204, 153, 255);
 		g.drawEllipse(20,20,newRadius*2,newRadius*2);
