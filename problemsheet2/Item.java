@@ -20,22 +20,21 @@ package uk.ac.sheffield.com1003.problemsheet2;
 	public String toString() { return (name + " = ukp" + price); }
 		
 	// equals method to be added here
-	public boolean equals(Object obj) {
+	public boolean equals(Object otherObject) {
 		// check if identical objects
-		 if (this == obj) {
+		 if (this == otherObject) {
 			 return true;
 		 }
 		// must be false if parameter is null
-		 if (obj == null) {
+		 if (otherObject == null) {
 			 return false;
 		 }
 		// must be false if objects have different classes
-		 if (getClass() != obj.getClass()) {
+		 if (getClass() != otherObject.getClass()) {
 			 return false;
 		 } 
 		// now we can cast and do something specific for Item
-
-		 Item other = (Item) obj; //CHANGE THIS SOMEHOW (names and how it works)
+		 Item other = (Item) otherObject;
 		 return (name.equals(other.name)) && (price == other.price);
 	}
 		
