@@ -34,7 +34,8 @@ package uk.ac.sheffield.com1003.problemsheet2;
 			 return false;
 		 } 
 		// now we can cast and do something specific for Item
-		 Item other = (Item) otherObject;
+		 Item other = (Item)otherObject;
+		 //Returns true if the instance variables are the same, otherwise returns false
 		 return (name.equals(other.name)) && (price == other.price);
 	}
 		
