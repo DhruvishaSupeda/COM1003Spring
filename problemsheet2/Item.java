@@ -19,7 +19,9 @@ package uk.ac.sheffield.com1003.problemsheet2;
 	// properly in MS Command Window
 	public String toString() { return (name + " = ukp" + price); }
 		
-	// equals method to be added here
+	/**
+	 * Checks if two objects are identical by checking the classes, types and parameters
+	 */
 	public boolean equals(Object otherObject) {
 		// check if identical objects
 		 if (this == otherObject) {
