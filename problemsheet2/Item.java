@@ -24,6 +24,7 @@ public class Item {
 
 	// using ukp to denote pounds sterling as unicode pound does not display
 	// properly in MS Command Window
+<<<<<<< HEAD
 	public String toString() {
 		return (name + " = ukp" + price);
 	}
@@ -31,6 +32,12 @@ public class Item {
 	/**
 	 * Checks if two objects are identical by checking the classes, types and
 	 * parameters
+=======
+	public String toString() { return (name + " = ukp" + price); }
+		
+	/**
+	 * Checks if two objects are identical by checking the classes, types and parameters
+>>>>>>> 03647f320c9a61776b8853e006fb03273776ac2b
 	 */
 	public boolean equals(Object otherObject) {
 		// check if identical objects
@@ -46,8 +53,13 @@ public class Item {
 			return false;
 		}
 		// now we can cast and do something specific for Item
+<<<<<<< HEAD
 		Item other = (Item) otherObject;
 		return (name.equals(other.name)) && (price == other.price);
+=======
+		 Item other = (Item)otherObject;
+		 return (name.equals(other.name)) && (price == other.price);
+>>>>>>> 03647f320c9a61776b8853e006fb03273776ac2b
 	}
 
 	// instance fields
