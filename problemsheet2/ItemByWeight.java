@@ -25,13 +25,13 @@ public class ItemByWeight extends Item {
 	/**
 	 * Checks if two objects are equal using the equals method from the superclass and checking the weights
 	 */
-	public boolean equals(Object obj) {
+	public boolean equals(Object otherObject) {
 		//Uses the superclass equals method
-		if (!super.equals(obj)) 
+		if (!super.equals(otherObject)) 
 			return false;
 		else {
 			//Checks the weight of the objects if name and price are the same 
-			ItemByWeight other = (ItemByWeight) obj;
+			ItemByWeight other = (ItemByWeight)otherObject;
 			return weight == other.weight;
 		}
 	}

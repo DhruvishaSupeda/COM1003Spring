@@ -25,6 +25,8 @@ public class Basket {
 		for (int i=0; i< shopping.length; i++) {
 			tot = tot + shopping[i].getPrice();
 		}
+		tot = Math.round(tot*100);
+		tot = tot/100;
 		return tot;
 	}
 		

@@ -43,7 +43,7 @@ public class ShoppingBasket {
 	 */
 	public static void outputTotal(Item[] shopping) {
 		Basket basketObject = new Basket(shopping);
-		System.out.print("The total price is: ");
+		System.out.print("The total price is: ukp");
 		System.out.println(basketObject.totalPrice(shopping));
 	}
 	

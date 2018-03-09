@@ -9,15 +9,15 @@ public class TestItemEquals{
 		
 		//Tests the first and second objects to see if they are equal
 		boolean passCase = item1.equals(item2);
-		System.out.println("1vs2: " + passCase);
+		System.out.println("Baked Beans and Bananas: " + passCase);
 		
 		//Compares the second object against himself to see if it returns true
 		passCase = item2.equals(item2);
-		System.out.println("2vs2: " + passCase);
+		System.out.println("Bananas and Bananas: " + passCase);
 		
 		//Compares the first and third objects to see if they are equal
 		passCase = item3.equals(item1);
-		System.out.println("3vs1: " + passCase);
+		System.out.println("Baked Beans and Baked Beans: " + passCase);
 		
 	}
 }
