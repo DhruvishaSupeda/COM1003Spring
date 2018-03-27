@@ -6,4 +6,8 @@ public class TextDisplay implements Display {
   //Displays current state of the Board
   //Updated after every move
 
+  public void displayBoard(Board b) {
+    
+  }
+
 }
