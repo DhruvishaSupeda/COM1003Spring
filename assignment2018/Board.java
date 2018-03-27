@@ -11,5 +11,12 @@ public class Board {
     Return state of entire board
   */
 
+  public initBoard() {
+    Piece playingBoard[][] = new Piece[8][8];
+    Pieces initPiecesW = new Pieces(playingBoard, PieceCode.WHITE);
+    Pieces initPiecesB = new Pieces(playingBoard, PieceCode.BLACK);
+
+
+  }
   }
 }
