@@ -35,40 +35,40 @@ public class Rook extends Piece {
         Move theMove = null;
 
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
-        while (()!getBoard().occupied(x, y+1) || getBoard().occupied(x, y+1)
-                && (getBoard().getPiece(x, y+1).getColour() != this.getColour()))
-                && (!getBoard().outOfRange(x, y+1)) ) {
+        while ((!getBoard().occupied(x, y+i) || getBoard().occupied(x, y+i)
+                && (getBoard().getPiece(x, y+i).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x, y+i)) ) {
 
-            if (getBoard().occupied(x, y+1) && (getBoard().getPiece(x, y+1).getColour() != this.getColour())) {
-              theMove = new Move(this, x, y, x, y+1, true);
+            if (getBoard().occupied(x, y+i) && (getBoard().getPiece(x, y+i).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x, y+i, true);
               legalMoves.add(theMove);
             }
             else {
-              theMove = new Move(this, x, y, x, y+1, false);
+              theMove = new Move(this, x, y, x, y+i, false);
               legalMoves.add(theMove);
             }
             i+=1;
         }
 
         i=-1;
-        while (()!getBoard().occupied(x, y+1) || getBoard().occupied(x, y+1)
-                && (getBoard().getPiece(x, y+1).getColour() != this.getColour()))
-                && (!getBoard().outOfRange(x, y+1)) ) {
+        while ((!getBoard().occupied(x, y+i) || getBoard().occupied(x, y+i)
+                && (getBoard().getPiece(x, y+i).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x, y+i)) ) {
 
-            if (getBoard().occupied(x, y+1) && (getBoard().getPiece(x, y+1).getColour() != this.getColour())) {
-              theMove = new Move(this, x, y, x, y+1, true);
+            if (getBoard().occupied(x, y+i) && (getBoard().getPiece(x, y+1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x, y+i, true);
               legalMoves.add(theMove);
             }
             else {
-              theMove = new Move(this, x, y, x, y+1, false);
+              theMove = new Move(this, x, y, x, y+i, false);
               legalMoves.add(theMove);
             }
-            i+=1;
+            i-=1;
         }
 
 
         i=1;
-        while (()!getBoard().occupied(x+i, y) || getBoard().occupied(x+i, y)
+        while ((!getBoard().occupied(x+i, y) || getBoard().occupied(x+i, y)
                 && (getBoard().getPiece(x+i, y).getColour() != this.getColour()))
                 && (!getBoard().outOfRange(x+i, y)) ) {
 
@@ -84,7 +84,7 @@ public class Rook extends Piece {
         }
 
         i=-1;
-        while (()!getBoard().occupied(x+i, y) || getBoard().occupied(x+i, y)
+        while ((!getBoard().occupied(x+i, y) || getBoard().occupied(x+i, y)
                 && (getBoard().getPiece(x+i, y).getColour() != this.getColour()))
                 && (!getBoard().outOfRange(x+i, y)) ) {
 
@@ -96,7 +96,7 @@ public class Rook extends Piece {
               theMove = new Move(this, x, y, x+i, y, false);
               legalMoves.add(theMove);
             }
-            i+=1;
+            i-=1;
         }
 
         if (legalMoves.isEmpty())
