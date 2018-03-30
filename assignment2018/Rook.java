@@ -14,11 +14,6 @@ public class Rook extends Piece {
     // method implements abstract availableMoves method in Piece class
     public ArrayList<Move> availableMoves() {
         return legalRook();
-
-    public ArrayList<Move> moveYCoords() {
-      //???? MAYBE NEED A WAY TO PUT THEM IN THE SAME ARRAYLIST IDK
-      //IF ITS BY REFERENCE, CAN DO IT???
-      //BUT ALSO NEED TO RETURN IT IDK DON'T WANT TO return
     }
 
     // method to return list of legal moves for a white rook
@@ -35,8 +30,8 @@ public class Rook extends Piece {
         Move theMove = null;
 
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
-        while ((!getBoard().occupied(x, y+i) || getBoard().occupied(x, y+i)
-                && (getBoard().getPiece(x, y+i).getColour() != this.getColour()))
+        while ((!getBoard().occupied(x, y+i) || (getBoard().occupied(x, y+i)
+                && (getBoard().getPiece(x, y+i).getColour() != this.getColour())))
                 && (!getBoard().outOfRange(x, y+i)) ) {
 
             if (getBoard().occupied(x, y+i) && (getBoard().getPiece(x, y+i).getColour() != this.getColour())) {
@@ -51,8 +46,8 @@ public class Rook extends Piece {
         }
 
         i=-1;
-        while ((!getBoard().occupied(x, y+i) || getBoard().occupied(x, y+i)
-                && (getBoard().getPiece(x, y+i).getColour() != this.getColour()))
+        while ((!getBoard().occupied(x, y+i) || (getBoard().occupied(x, y+i)
+                && (getBoard().getPiece(x, y+i).getColour() != this.getColour())))
                 && (!getBoard().outOfRange(x, y+i)) ) {
 
             if (getBoard().occupied(x, y+i) && (getBoard().getPiece(x, y+1).getColour() != this.getColour())) {
@@ -68,8 +63,8 @@ public class Rook extends Piece {
 
 
         i=1;
-        while ((!getBoard().occupied(x+i, y) || getBoard().occupied(x+i, y)
-                && (getBoard().getPiece(x+i, y).getColour() != this.getColour()))
+        while ((!getBoard().occupied(x+i, y) || (getBoard().occupied(x+i, y)
+                && (getBoard().getPiece(x+i, y).getColour() != this.getColour())))
                 && (!getBoard().outOfRange(x+i, y)) ) {
 
             if (getBoard().occupied(x+i, y) && (getBoard().getPiece(x+i, y).getColour() != this.getColour())) {
@@ -84,8 +79,8 @@ public class Rook extends Piece {
         }
 
         i=-1;
-        while ((!getBoard().occupied(x+i, y) || getBoard().occupied(x+i, y)
-                && (getBoard().getPiece(x+i, y).getColour() != this.getColour()))
+        while ((!getBoard().occupied(x+i, y) || (getBoard().occupied(x+i, y)
+                && (getBoard().getPiece(x+i, y).getColour() != this.getColour())))
                 && (!getBoard().outOfRange(x+i, y)) ) {
 
             if (getBoard().occupied(x+i, y) && (getBoard().getPiece(x+i, y).getColour() != this.getColour())) {
