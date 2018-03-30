@@ -15,7 +15,7 @@ public class King extends Piece {
         return legalMoves();
     }
 
-    private ArrayList<Move> legalRook() {
+    private ArrayList<Move> legalKing() {
         // obtain current co-ordinates
         int x = this.getX();
         int y = this.getY();
@@ -26,9 +26,125 @@ public class King extends Piece {
         // set up m to refer to a Move object
         Move theMove = null;
 
-        while ((!getBoard().occupied(x, y+i) || getBoard().occupied(x, y+i)
-                && (getBoard().getPiece(x, y+i).getColour() != this.getColour()))
-                && (!getBoard().outOfRange(x, y+i)) ) {
+        //Checks square above king
+        if ((!getBoard().occupied(x, y+1) || getBoard().occupied(x, y+1)
+                && (getBoard().getPiece(x, y+1).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x, y+1)) ) {
 
-            if (getBoard().occupied(x, y+i) && (getBoard().getPiece(x, y+i).getColour() != this.getColour())) {
-                
+            if (getBoard().occupied(x, y+1) && (getBoard().getPiece(x, y+1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x, y+1, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x, y+1, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square above king on the right
+        if ((!getBoard().occupied(x+1, y+1) || getBoard().occupied(x+1, y+1)
+                && (getBoard().getPiece(x+1, y+1).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x+1, y+1)) ) {
+
+            if (getBoard().occupied(x+1, y+1) && (getBoard().getPiece(x+1, y+1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x+1, y+1, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x+1, y+1, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square above king on the left
+        if ((!getBoard().occupied(x-1, y+1) || getBoard().occupied(x-1, y+1)
+                && (getBoard().getPiece(x-1, y+1).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x-1, y+1)) ) {
+
+            if (getBoard().occupied(x-1, y+1) && (getBoard().getPiece(x-1, y+1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x-1, y+1, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x-1, y+1, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square on the left
+        if ((!getBoard().occupied(x-1, y) || getBoard().occupied(x-1, y)
+                && (getBoard().getPiece(x-1, y).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x-1, y)) ) {
+
+            if (getBoard().occupied(x-1, y) && (getBoard().getPiece(x-1, y).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x-1, y, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x-1, y, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square on the right
+        if ((!getBoard().occupied(x+1, y) || getBoard().occupied(x+1, y)
+                && (getBoard().getPiece(x+1, y).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x+1, y)) ) {
+
+            if (getBoard().occupied(x+1, y) && (getBoard().getPiece(x+1, y).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x+1, y, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x+1, y, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square below the king
+        if ((!getBoard().occupied(x, y-1) || getBoard().occupied(x, y-1)
+                && (getBoard().getPiece(x, y-1).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x, y-1)) ) {
+
+            if (getBoard().occupied(x, y-1) && (getBoard().getPiece(x, y-1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x, y-1, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x, y-1, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square below king on the left
+        if ((!getBoard().occupied(x-1, y-1) || getBoard().occupied(x-1, y-1)
+                && (getBoard().getPiece(x-1, y-1).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x-1, y-1)) ) {
+
+            if (getBoard().occupied(x-1, y-1) && (getBoard().getPiece(x-1, y-1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x-1, y-1, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x-1, y-1, false);
+              legalMoves.add(theMove);
+            }
+        }
+
+        //Checks square above king on the right
+        if ((!getBoard().occupied(x+1, y-1) || getBoard().occupied(x+1, y-1)
+                && (getBoard().getPiece(x+1, y-1).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x+1, y-1)) ) {
+
+            if (getBoard().occupied(x+1, y-1) && (getBoard().getPiece(x+1, y-1).getColour() != this.getColour())) {
+              theMove = new Move(this, x, y, x+1, y-1, true);
+              legalMoves.add(theMove);
+            }
+            else {
+              theMove = new Move(this, x, y, x+1, y-1, false);
+              legalMoves.add(theMove);
+            }
+        }
+    } //legalmoves end
+
+} //class end
