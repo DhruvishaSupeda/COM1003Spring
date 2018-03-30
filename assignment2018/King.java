@@ -10,11 +10,25 @@ public class King extends Piece {
         super(PieceCode.KING, ix, iy, c, b);
     }
 
-    //HIS CODE
     // method implements abstract availableMoves method in Piece class
     public ArrayList<Move> availableMoves() {
-        if (getColour() == PieceCode.WHITE)
-            return whitePawn();
-        else
-            return blackPawn();
+        return legalMoves();
     }
+
+    private ArrayList<Move> legalRook() {
+        // obtain current co-ordinates
+        int x = this.getX();
+        int y = this.getY();
+
+        // Create a new vector to store legal legalMoves
+        ArrayList<Move> legalMoves = new ArrayList<Move>();
+
+        // set up m to refer to a Move object
+        Move theMove = null;
+
+        while ((!getBoard().occupied(x, y+i) || getBoard().occupied(x, y+i)
+                && (getBoard().getPiece(x, y+i).getColour() != this.getColour()))
+                && (!getBoard().outOfRange(x, y+i)) ) {
+
+            if (getBoard().occupied(x, y+i) && (getBoard().getPiece(x, y+i).getColour() != this.getColour())) {
+                
