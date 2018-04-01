@@ -2,24 +2,25 @@ package assignment2018;
 
 import assignment2018.codeprovided.*;
 
-public class Board {
+public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   private Piece playingBoard[][] = new Piece[8][8];
 
   public Board() {
-    Piece playingBoard[][] = new Piece[8][8];
-    Pieces initPiecesW = new Pieces(playingBoard, PieceCode.WHITE);
-    Pieces initPiecesB = new Pieces(playingBoard, PieceCode.BLACK);
+    for (int row = 1; row < 8; row++) {
+      for (int column = 1; column < 8; column++)
+          playingBoard[row][column] = null;
+    }
   }
 
   public void setPosition(int x, int y, Piece piece){
     piece.setPosition(x, y);
   }
 
-  public void removePiece(int x, int y, Board playingBoard) {
+  public void removePiece(int x, int y) {
     playingBoard[x][y] = null;
   }
 
-  public Piece getPiece(int x, int y, Board playingBoard) {
+  public Piece getPiece(int x, int y) {
     return playingBoard[x][y];
   }
 
