@@ -1,6 +1,8 @@
 package assignment2018;
 
 import java.util.*;
+import assignment2018.codeprovided.Piece;
+import assignment2018.codeprovided.PieceCode;
 import assignment2018.Board;
 import assignment2018.Move;
 

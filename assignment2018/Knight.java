@@ -13,7 +13,8 @@ public class Knight extends Piece {
     //HIS CODE
     // method implements abstract availableMoves method in Piece class
     public ArrayList<Move> availableMoves() {
-        return legalRook();
+        return legalKnight();
+    }
 
     private ArrayList<Move> legalKnight() {
         // obtain current co-ordinates

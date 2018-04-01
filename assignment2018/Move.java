@@ -1,5 +1,6 @@
 package assignment2018;
-import assignment2018.codeprovided;
+
+import assignment2018.codeprovided.*;
 
 public class Move {
 

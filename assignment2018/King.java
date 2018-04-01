@@ -12,7 +12,7 @@ public class King extends Piece {
 
     // method implements abstract availableMoves method in Piece class
     public ArrayList<Move> availableMoves() {
-        return legalMoves();
+        return legalKing();
     }
 
     private ArrayList<Move> legalKing() {
@@ -145,6 +145,10 @@ public class King extends Piece {
               legalMoves.add(theMove);
             }
         }
+
+        if (legalMoves.isEmpty())
+            return null;
+        return legalMoves;
     } //legalmoves end
 
 } //class end

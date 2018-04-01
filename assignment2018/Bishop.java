@@ -12,7 +12,7 @@ public class Bishop extends Piece {
 
     // method implements abstract availableMoves method in Piece class
     public ArrayList<Move> availableMoves() {
-        return legalMoves();
+        return legalBishop();
     }
 
     private ArrayList<Move> legalBishop() {
@@ -97,5 +97,9 @@ public class Bishop extends Piece {
             i+=1;
             j-=1;
         }
+
+        if (legalMoves.isEmpty())
+            return null;
+        return legalMoves;
     }
 }
