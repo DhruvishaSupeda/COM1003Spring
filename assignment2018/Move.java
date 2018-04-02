@@ -20,4 +20,9 @@ public class Move {
     newY = nY;
     occupiedToTake = o;
   }
+
+  public boolean equals(Move move2) {
+      return (piece==move2.piece && x==move2.x && y==move2.y && newX==move2.newX && newY==move2.newY &&
+          occupiedToTake==move2.occupiedToTake);
+  }
 }
