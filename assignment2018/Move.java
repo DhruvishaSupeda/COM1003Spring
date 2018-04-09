@@ -25,4 +25,8 @@ public class Move {
       return (piece==move2.piece && x==move2.x && y==move2.y && newX==move2.newX && newY==move2.newY &&
           occupiedToTake==move2.occupiedToTake);
   }
+
+  public String toString() {
+      return (piece.toString() + " " + x + " " + y + " " + newX + " " + newY + " " + occupiedToTake);
+  }
 }
