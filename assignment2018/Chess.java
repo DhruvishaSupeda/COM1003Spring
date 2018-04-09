@@ -14,7 +14,6 @@ public class Chess {
         Board playingBoard = new Board();
         Pieces PiecesW = new Pieces(playingBoard, PieceCode.WHITE);
         Pieces PiecesB = new Pieces(playingBoard, PieceCode.BLACK);
-        playingBoard.toStrin();
         HumanPlayer playerW = new HumanPlayer();
         boolean occupiedFlag;
         ArrayList<Move> theLegalMoves = new ArrayList<Move>();
@@ -76,7 +75,7 @@ public class Chess {
 
             if (theLegalMoves != null) {
                 System.out.println(theLegalMoves.size() + "legalMovesSize");
-                for (int i = 1; i < theLegalMoves.size(); i++) {
+                for (int i = 0; i < theLegalMoves.size(); i++) {
                     if (theLegalMoves.get(i).equals(currentMove)) {
                         legalMoveFlag = true;
                         break;
@@ -89,8 +88,8 @@ public class Chess {
             System.out.println(legalMoveFlag + "legalMoveFlag");
 
             //Get Pieces based on colour
+            //Add piece in new position (use setPosition)
             //Remove current piece
-            //Add piece in new position
             //Display again
 
             /*if (currentPiece.getColour() == PieceCode.WHITE) {

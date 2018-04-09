@@ -40,12 +40,4 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
         return false;
   }
 
-  public void toStrin() {
-    for (int row = 0; row < 8; row++) {
-      for (int column = 0; column < 8; column++)
-        if(playingBoard[row][column] != null)
-            System.out.print(playingBoard[row][column].toString());
-    }
-  }
-
 }
