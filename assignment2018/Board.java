@@ -6,14 +6,15 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   private Piece playingBoard[][] = new Piece[8][8];
 
   public Board() {
-    for (int row = 1; row < 8; row++) {
-      for (int column = 1; column < 8; column++)
+    for (int row = 0; row < 8; row++) {
+      for (int column = 0; column < 8; column++)
           playingBoard[row][column] = null;
     }
   }
 
   public void setPosition(int x, int y, Piece piece){
     piece.setPosition(x, y);
+    playingBoard[x][y] = piece;
   }
 
   public void removePiece(int x, int y) {
@@ -36,6 +37,14 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
         return false;
     else
         return true;
+  }
+
+  public void toStrin() {
+    for (int row = 0; row < 8; row++) {
+      for (int column = 0; column < 8; column++)
+        if(playingBoard[row][column] != null)
+            System.out.print(playingBoard[row][column].toString());
+    }
   }
 
 }

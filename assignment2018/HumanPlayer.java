@@ -8,21 +8,21 @@ public class HumanPlayer {
   public int checkCoords(char xCoord) {
     int equivInt = 0;
     switch (xCoord) {
-      case 'A': equivInt = 1;
+      case 'A': equivInt = 0;
                 break;
-      case 'B': equivInt = 2;
+      case 'B': equivInt = 1;
                 break;
-      case 'C': equivInt = 3;
+      case 'C': equivInt = 2;
                 break;
-      case 'D': equivInt = 4;
+      case 'D': equivInt = 3;
                 break;
-      case 'E': equivInt = 5;
+      case 'E': equivInt = 4;
                 break;
-      case 'F': equivInt = 6;
+      case 'F': equivInt = 5;
                 break;
-      case 'G': equivInt = 7;
+      case 'G': equivInt = 6;
                 break;
-      case 'H': equivInt = 8;
+      case 'H': equivInt = 7;
                 break;
     }
     return equivInt;
