@@ -1,6 +1,9 @@
 package assignment2018;
 
 import assignment2018.*;
+import assignment2018.codeprovided.*;
+
+import java.util.*;
 
 public class HumanPlayer {
 
@@ -28,6 +31,42 @@ public class HumanPlayer {
     return equivInt;
   }
 
+  public int[] playerInput() {
+      Scanner scanner = new Scanner(System.in);
+      System.out.print("Player 1 (white) move: ");
+      //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
+      String coords = scanner.nextLine();
+      //Uses space as delimiter and puts from and to into 2 elements of array
+      char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
+
+      int[] arrayOfCoordsInts = new int[4];
+      arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
+      arrayOfCoordsInts[1] = ((int) arrayOfCoords[1] - '0')-1;
+      arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
+      arrayOfCoordsInts[3] = ((int) arrayOfCoords[3] - '0')-1;
+      return arrayOfCoordsInts;
+  }
+
+  public boolean checkMove(Piece currentPiece, Move currentMove) {
+      boolean legalMoveFlag = false;
+      //Now iterate through move arraylist somehow
+
+      ArrayList<Move> theLegalMoves = new ArrayList<Move>();
+      theLegalMoves = currentPiece.availableMoves();
+      System.out.println(theLegalMoves);
+
+      if (theLegalMoves != null) {
+          System.out.println(theLegalMoves.size() + "legalMovesSize");
+          for (int i = 0; i < theLegalMoves.size(); i++) {
+              if (theLegalMoves.get(i).equals(currentMove)) {
+                  legalMoveFlag = true;
+                  break;
+              } else
+                  legalMoveFlag = false;
+          }
+      }
+      return legalMoveFlag;
+  }
   //Interacts with the user through the console and keyboard to move the pieces
 
 

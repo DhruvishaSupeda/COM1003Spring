@@ -47,7 +47,7 @@ public class TextDisplay implements Display {
       System.out.println("- - - - - - - - -");
       for (int i = 0; i < 8; i++) { //MAKE BOARD_WIDTH AND HEUGHT CONSTANTS
           //8-i becAause it goes 8 downto 1 but can't change loop
-          System.out.print(8-i + "|");
+          System.out.print(i+1 + "|");
           for (int j = 0; j < 8; j++) {
               System.out.print(pieceArray[j][i] + " ");
           }
