@@ -24,42 +24,47 @@ public class Chess {
         boolean occupiedFlag;
         ArrayList<Move> theLegalMoves = new ArrayList<Move>();
         Piece currentPiece = null;
+        boolean kingTaken = false;
 
         display(piecesW, piecesB);
 
-        int[] arrayOfCoords = playerW.playerInput();
+        while (!kingTaken) {
 
-        if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
-            currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
+            int[] arrayOfCoords = playerW.playerInput();
 
-            //if black piece in new coordinate, make thing in move true, else false
-            if (playingBoard.occupied(arrayOfCoords[2], arrayOfCoords[3]))
-                occupiedFlag = true;
-            else
-                occupiedFlag = false;
-            System.out.println(occupiedFlag + "occupiedFlag");
+            if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
+                currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
-            //makes new move for current move
-            Move currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1],
-                    arrayOfCoords[2], arrayOfCoords[3], occupiedFlag);
+                //if black piece in new coordinate, make thing in move true, else false
+                if (playingBoard.occupied(arrayOfCoords[2], arrayOfCoords[3]))
+                    occupiedFlag = true;
+                else
+                    occupiedFlag = false;
+                System.out.println(occupiedFlag + "occupiedFlag");
 
-            boolean legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
+                //makes new move for current move
+                Move currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1],
+                        arrayOfCoords[2], arrayOfCoords[3], occupiedFlag);
 
-            System.out.println(legalMoveFlag + "legalMoveFlag");
+                boolean legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
 
-            //Get Pieces based on colour
-            //Add piece in new position (use setPosition)
-            //Remove current piece
-            //Display again
-            if (!(occupiedFlag)) {
-                playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-                playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-                currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+                System.out.println(legalMoveFlag + "legalMoveFlag");
+
+                //Get Pieces based on colour
+                //Add piece in new position (use setPosition)
+                //Remove current piece
+                //Display again
+                if (!(occupiedFlag)) {
+                    playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+                    playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+                    currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+                }
+
             }
 
+            display(piecesW, piecesB);
+
+            //kingTaken = true;
         }
-
-        display(piecesW, piecesB);
-
     }
 }

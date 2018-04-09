@@ -32,7 +32,7 @@ public class Rook extends Piece {
         Move theMove = null;
 
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
-        if (y<8) {
+        if (y<7) {
             i = 1;
             while ((!getBoard().occupied(x, y + i) || (getBoard().occupied(x, y + i)
                     && (getBoard().getPiece(x, y + i).getColour() != this.getColour())))
@@ -66,7 +66,7 @@ public class Rook extends Piece {
             }
         }
 
-        if (x<8) {
+        if (x<7) {
             i = 1;
             while ((!getBoard().occupied(x + i, y) || (getBoard().occupied(x + i, y)
                     && (getBoard().getPiece(x + i, y).getColour() != this.getColour())))
