@@ -26,17 +26,18 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   }
 
   public boolean occupied(int x, int y) {
-    if (playingBoard[x][y] != null)
+
+    if ((playingBoard[x][y] != null) && !(outOfRange(x,y)))
       return true;
     else
       return false;
   }
 
   public boolean outOfRange(int x, int y) {
-    if ((x > 8 || y > 8) || (x < 1 || y < 1))
-        return false;
-    else
+    if ((x > 7 || y > 7) || (x < 0 || y < 0))
         return true;
+    else
+        return false;
   }
 
   public void toStrin() {

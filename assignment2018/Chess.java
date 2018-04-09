@@ -32,7 +32,6 @@ public class Chess {
         //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
         String coords = scanner.nextLine();
         //Uses space as delimiter and puts from and to into 2 elements of array
-        //String[] arrayOfCoords = coords.split("\\s+");
         char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
         //Prints out array (for debugging)
         //for (int i = 0; i < arrayOfCoords.length; i++)
@@ -48,7 +47,7 @@ public class Chess {
         System.out.print(arrayOfCoordsInts[0] + arrayOfCoordsInts[1]);
         if (playingBoard.occupied(arrayOfCoordsInts[0], arrayOfCoordsInts[1])) {
             currentPiece = playingBoard.getPiece(arrayOfCoordsInts[0], arrayOfCoordsInts[1]);
-            //currentPiece = new Pawn(1, 2, PieceCode.WHITE, playingBoard);
+            //currentPiece = new Pawn(0, 1, PieceCode.WHITE, playingBoard);
             System.out.println(currentPiece.toString());
             if (currentPiece != null) System.out.println("Truuueeeeee00");
             //}
@@ -65,7 +64,6 @@ public class Chess {
             Move currentMove = new Move(currentPiece, arrayOfCoordsInts[0], arrayOfCoordsInts[1],
                     arrayOfCoordsInts[2], arrayOfCoordsInts[3], occupiedFlag);
 
-            //System.out.println(currentPiece.toString());
             System.out.println(arrayOfCoordsInts[0]);
             //-'0' to get rid of the ASCII value of 0, making it the actual value of the char
             System.out.println(arrayOfCoordsInts[1]);
@@ -73,18 +71,12 @@ public class Chess {
             boolean legalMoveFlag = false;
             //Now iterate through move arraylist somehow
 
-            theLegalMoves = currentPiece.availableMoves(); //WHY IS THE PIECE NULL OMG ITS A2
-
-            //TESTING WITH MADE UP MOVE TO MAKE THE PIECE MOVE
-            //Move theMove = new Move(currentPiece, 1, 2, 1, 3, false);
-            //theLegalMoves.add(theMove);
-
-            if (theLegalMoves != null)
-                System.out.println(theLegalMoves.size() + "legalMovesSize");
-
+            theLegalMoves = currentPiece.availableMoves();
+            System.out.println(theLegalMoves);
 
             if (theLegalMoves != null) {
-                for (int i = 1; i < theLegalMoves.size(); i++) { //doesn't work??
+                System.out.println(theLegalMoves.size() + "legalMovesSize");
+                for (int i = 1; i < theLegalMoves.size(); i++) {
                     if (theLegalMoves.get(i).equals(currentMove)) {
                         legalMoveFlag = true;
                         break;
@@ -101,11 +93,11 @@ public class Chess {
             //Add piece in new position
             //Display again
 
-            if (currentPiece.getColour() == PieceCode.WHITE) {
+            /*if (currentPiece.getColour() == PieceCode.WHITE) {
                 PiecesW.delete(currentPiece);
                 Piece newPawn = new Pawn(arrayOfCoordsInts[2], arrayOfCoordsInts[3], PieceCode.WHITE, playingBoard);
                 //PiecesW.add(newPawn);
-            }
+            }*/
 
             one.resetFlags();
             one.displayBoard(PiecesW);

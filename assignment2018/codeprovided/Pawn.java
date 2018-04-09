@@ -46,9 +46,10 @@ public class Pawn extends Piece {
 
         // return null if the pawn is at the edge of the board, or if the
         // next move takes it out of range
-        if ((y == 7) || (getBoard().outOfRange(x, y + 1)))
+        if ((y == 7) || (getBoard().outOfRange(x, y + 1))) {
+            System.out.println("WTFFFFFF 4");
             return null;
-
+        }
         // otherwise create a new vector to store legal whiteMoves
         ArrayList<Move> whiteMoves = new ArrayList<Move>();
 
