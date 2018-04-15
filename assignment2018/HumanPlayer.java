@@ -41,9 +41,9 @@ public class HumanPlayer {
 
       int[] arrayOfCoordsInts = new int[4];
       arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
-      arrayOfCoordsInts[1] = ((int) arrayOfCoords[1] - '0')-1;
+      arrayOfCoordsInts[1] = 8-((int) arrayOfCoords[1] - '0');
       arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
-      arrayOfCoordsInts[3] = ((int) arrayOfCoords[3] - '0')-1;
+      arrayOfCoordsInts[3] = 8-((int) arrayOfCoords[3] - '0');
       return arrayOfCoordsInts;
   }
 
@@ -60,6 +60,7 @@ public class HumanPlayer {
           for (int i = 0; i < theLegalMoves.size(); i++) {
               if (theLegalMoves.get(i).equals(currentMove)) {
                   legalMoveFlag = true;
+                  System.out.println("Legal + " + theLegalMoves.get(i).toString());
                   break;
               } else
                   legalMoveFlag = false;
