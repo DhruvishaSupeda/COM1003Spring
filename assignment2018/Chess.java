@@ -30,6 +30,7 @@ public class Chess {
 
         while (!kingTaken) {
 
+            theLegalMoves = null;
             int[] arrayOfCoords = playerW.playerInput();
 
             if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
@@ -45,6 +46,7 @@ public class Chess {
                 //makes new move for current move
                 Move currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1],
                         arrayOfCoords[2], arrayOfCoords[3], occupiedFlag);
+                System.out.println(currentMove.toString());
 
                 boolean legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
 
@@ -54,10 +56,29 @@ public class Chess {
                 //Add piece in new position (use setPosition)
                 //Remove current piece
                 //Display again
-                if (!(occupiedFlag)) {
-                    playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-                    playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-                    currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+                if (legalMoveFlag){
+                    if (!(occupiedFlag)) {
+                        playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+                        playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+                        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+                    }
+
+                    if (occupiedFlag &&
+                        currentPiece.getColour() != playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour()) {
+                      if (currentPiece.getColourChar() == 'w') {
+                          System.out.println(currentPiece.getColourChar());
+                          piecesB.delete(currentPiece);
+                          piecesB.toString();
+                      }
+                      else{
+                          piecesW.delete(currentPiece);
+                          piecesW.toString();
+                      }
+                        playingBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
+                        playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+                        playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+                        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+                    }
                 }
 
             }

@@ -32,73 +32,63 @@ public class Rook extends Piece {
         Move theMove = null;
 
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
-        if (y<7) {
-            i = 1;
-            while ((!getBoard().occupied(x, y + i) || (getBoard().occupied(x, y + i)
-                    && (getBoard().getPiece(x, y + i).getColour() != this.getColour())))
-                    && (!getBoard().outOfRange(x, y + i))) {
+          i = 1;
+          System.out.println("Cheeky spoons1");
+          while ((!getBoard().outOfRange(x, y + i)) ) {
+              if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() != this.getColour())) {
+                  theMove = new Move(this, x, y, x, y + i, true);
+                  legalMoves.add(theMove);
+              }
+              if (!getBoard().occupied(x, y + i)) {
+                  theMove = new Move(this, x, y, x, y + i, false);
+                  legalMoves.add(theMove);
+              }
+              i += 1;
+          }
 
-                if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() != this.getColour())) {
-                    theMove = new Move(this, x, y, x, y + i, true);
-                    legalMoves.add(theMove);
-                } else {
-                    theMove = new Move(this, x, y, x, y + i, false);
-                    legalMoves.add(theMove);
-                }
-                i += 1;
-            }
-        }
 
-        if (y>0) {
-            i = -1;
-            while ((!getBoard().occupied(x, y + i) || (getBoard().occupied(x, y + i)
-                    && (getBoard().getPiece(x, y + i).getColour() != this.getColour())))
-                    && (!getBoard().outOfRange(x, y + i))) {
+          i = -1;
+          System.out.println("Cheeky spoons2");
+          while (!getBoard().outOfRange(x, y + i)) {
+              if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + 1).getColour() != this.getColour())) {
+                  theMove = new Move(this, x, y, x, y + i, true);
+                  legalMoves.add(theMove);
+              }
+              if (!getBoard().occupied(x, y + i)) {
+                  theMove = new Move(this, x, y, x, y + i, false);
+                  legalMoves.add(theMove);
+              }
+              i -= 1;
+          }
 
-                if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + 1).getColour() != this.getColour())) {
-                    theMove = new Move(this, x, y, x, y + i, true);
-                    legalMoves.add(theMove);
-                } else {
-                    theMove = new Move(this, x, y, x, y + i, false);
-                    legalMoves.add(theMove);
-                }
-                i -= 1;
-            }
-        }
+          i = 1;
+          System.out.println("Cheeky spoons3");
+          while (!getBoard().outOfRange(x + i, y)) {
+              if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
+                  theMove = new Move(this, x, y, x + i, y, true);
+                  legalMoves.add(theMove);
+              }
+              if (!getBoard().occupied(x + i, y)) {
+                  theMove = new Move(this, x, y, x + i, y, false);
+                  legalMoves.add(theMove);
+              }
+              i += 1;
+          }
 
-        if (x<7) {
-            i = 1;
-            while ((!getBoard().occupied(x + i, y) || (getBoard().occupied(x + i, y)
-                    && (getBoard().getPiece(x + i, y).getColour() != this.getColour())))
-                    && (!getBoard().outOfRange(x + i, y))) {
 
-                if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
-                    theMove = new Move(this, x, y, x + i, y, true);
-                    legalMoves.add(theMove);
-                } else {
-                    theMove = new Move(this, x, y, x + i, y, false);
-                    legalMoves.add(theMove);
-                }
-                i += 1;
-            }
-        }
-
-        if (x>0) {
-            i = -1;
-            while ((!getBoard().occupied(x + i, y) || (getBoard().occupied(x + i, y)
-                    && (getBoard().getPiece(x + i, y).getColour() != this.getColour())))
-                    && (!getBoard().outOfRange(x + i, y))) {
-
-                if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
-                    theMove = new Move(this, x, y, x + i, y, true);
-                    legalMoves.add(theMove);
-                } else {
-                    theMove = new Move(this, x, y, x + i, y, false);
-                    legalMoves.add(theMove);
-                }
-                i -= 1;
-            }
-        }
+          i = -1;
+          System.out.println("Cheeky spoons4");
+          while (!getBoard().outOfRange(x + i, y)) {
+              if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
+                  theMove = new Move(this, x, y, x + i, y, true);
+                  legalMoves.add(theMove);
+              }
+              if (getBoard().occupied(x + i, y)) {
+                  theMove = new Move(this, x, y, x + i, y, false);
+                  legalMoves.add(theMove);
+              }
+              i -= 1;
+          }
 
         if (legalMoves.isEmpty())
             return null;
