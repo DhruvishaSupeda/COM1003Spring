@@ -26,7 +26,7 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   }
 
   public boolean occupied(int x, int y) {
-    if (!(outOfRange(x,y)) && (playingBoard[x][y] != null))
+    if (!outOfRange(x,y) && (playingBoard[x][y] != null))
       return true;
     else
       return false;

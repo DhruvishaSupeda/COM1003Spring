@@ -29,4 +29,8 @@ public class Move {
   public String toString() {
       return (piece.toString() + " " + x + " " + y + " " + newX + " " + newY + " " + occupiedToTake);
   }
+
+  public boolean getOccupied(){
+      return occupiedToTake;
+  }
 }

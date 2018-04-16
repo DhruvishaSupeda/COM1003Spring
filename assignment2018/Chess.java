@@ -20,7 +20,8 @@ public class Chess {
         Board playingBoard = new Board();
         Pieces piecesW = new Pieces(playingBoard, PieceCode.WHITE);
         Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
-        HumanPlayer playerW = new HumanPlayer();
+        HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, playerB);
+        HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
         boolean occupiedFlag;
         ArrayList<Move> theLegalMoves = new ArrayList<Move>();
         Piece currentPiece = null;
@@ -63,21 +64,23 @@ public class Chess {
                         currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
                     }
 
-                    if (occupiedFlag &&
-                        currentPiece.getColour() != playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour()) {
-                      if (currentPiece.getColourChar() == 'w') {
-                          System.out.println(currentPiece.getColourChar());
-                          piecesB.delete(currentPiece);
-                          piecesB.toString();
-                      }
-                      else{
-                          piecesW.delete(currentPiece);
-                          piecesW.toString();
-                      }
+                    if (occupiedFlag && (currentPiece.getColour() != playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour())) {
                         playingBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
                         playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
                         playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
                         currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+
+                        System.out.println(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
+
+                        if (currentPiece.getColourChar() == 'w') {
+                            System.out.println(currentPiece.getColourChar());
+                            piecesB.delete(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
+                            piecesB.toString();
+                        }
+                        else{
+                            piecesW.delete(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
+                            piecesW.toString();
+                        }
                     }
                 }
 

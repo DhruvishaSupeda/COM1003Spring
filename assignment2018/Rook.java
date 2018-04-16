@@ -33,7 +33,6 @@ public class Rook extends Piece {
 
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
           i = 1;
-          System.out.println("Cheeky spoons1");
           while ((!getBoard().outOfRange(x, y + i)) ) {
               if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() != this.getColour())) {
                   theMove = new Move(this, x, y, x, y + i, true);
@@ -48,7 +47,6 @@ public class Rook extends Piece {
 
 
           i = -1;
-          System.out.println("Cheeky spoons2");
           while (!getBoard().outOfRange(x, y + i)) {
               if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + 1).getColour() != this.getColour())) {
                   theMove = new Move(this, x, y, x, y + i, true);
@@ -62,7 +60,6 @@ public class Rook extends Piece {
           }
 
           i = 1;
-          System.out.println("Cheeky spoons3");
           while (!getBoard().outOfRange(x + i, y)) {
               if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
                   theMove = new Move(this, x, y, x + i, y, true);
@@ -77,7 +74,6 @@ public class Rook extends Piece {
 
 
           i = -1;
-          System.out.println("Cheeky spoons4");
           while (!getBoard().outOfRange(x + i, y)) {
               if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
                   theMove = new Move(this, x, y, x + i, y, true);

@@ -7,6 +7,18 @@ import java.util.*;
 
 public class HumanPlayer {
 
+  private String name;
+  private Pieces pieces;
+  private Board playingBoard;
+  private Player opponent;
+
+  public HumanPlayer(String n, Pieces p, Board b, Player o) {
+    name = n;
+    pieces = p;
+    playingBoard = b;
+    opponent = o;
+  }
+
 
   public int checkCoords(char xCoord) {
     int equivInt = 0;
