@@ -5,7 +5,7 @@ import assignment2018.codeprovided.*;
 
 import java.util.*;
 
-public class HumanPlayer {
+public class HumanPlayer extends Player {
 
   private String name;
   private Pieces pieces;
@@ -13,12 +13,16 @@ public class HumanPlayer {
   private Player opponent;
 
   public HumanPlayer(String n, Pieces p, Board b, Player o) {
-    name = n;
-    pieces = p;
-    playingBoard = b;
-    opponent = o;
+    //name = n;
+    //pieces = p;
+    //playingBoard = b;
+    super(n,p,b,o);
+    //opponent = o;
   }
 
+  public boolean makeMove(){
+      return false;
+  }
 
   public int checkCoords(char xCoord) {
     int equivInt = 0;
@@ -47,7 +51,7 @@ public class HumanPlayer {
       Scanner scanner = new Scanner(System.in);
       System.out.print("Player 1 (white) move: ");
       //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
-      String coords = scanner.nextLine();
+      String coords = scanner.nextLine().toUpperCase();
       //Uses space as delimiter and puts from and to into 2 elements of array
       char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
 

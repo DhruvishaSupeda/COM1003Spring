@@ -20,7 +20,7 @@ public class Chess {
         Board playingBoard = new Board();
         Pieces piecesW = new Pieces(playingBoard, PieceCode.WHITE);
         Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
-        HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, playerB);
+        HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null); //change opponentn to null
         HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
         boolean occupiedFlag;
         ArrayList<Move> theLegalMoves = new ArrayList<Move>();
