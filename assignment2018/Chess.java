@@ -29,15 +29,23 @@ public class Chess {
         boolean whiteTurn = true;
         boolean blackTurn = false;
         int[] arrayOfCoords = null;
-        HumanPlayer currentPlayer = playerW;
+        //HumanPlayer currentPlayer = new playerW;
+        //currentPlayer.toString();
 
         display(piecesW, piecesB);
 
         while (!kingTaken) {
-
             theLegalMoves = null;
+            System.out.println("RESTARTING");
 
-            currentPlayer.playerInput(playerW.getPieces().getPiece(0).getColour()); //null pointer exception?
+            if (whiteTurn) {
+                System.out.print("Player 1 (white) move: ");
+                arrayOfCoords = playerW.playerInput(PieceCode.WHITE);
+            }
+            else {
+                System.out.print("Player 2 (black) move: ");
+                arrayOfCoords = playerB.playerInput(PieceCode.BLACK);
+            }
 
             if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
                 currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
@@ -55,10 +63,10 @@ public class Chess {
                 System.out.println(currentMove.toString());
 
                 if (whiteTurn) {
-                    legalMoveFlag = currentPlayer.checkMove(currentPiece, currentMove);
+                    legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
                 }
                 else {
-                    legalMoveFlag = currentPlayer.checkMove(currentPiece, currentMove);
+                    legalMoveFlag = playerB.checkMove(currentPiece, currentMove);
                 }
 
 
@@ -97,7 +105,8 @@ public class Chess {
 
             }
 
-            currentPlayer = currentPlayer.getOpponent();
+            whiteTurn = !whiteTurn;
+            blackTurn = !blackTurn;
 
             display(piecesW, piecesB);
 
