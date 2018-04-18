@@ -20,19 +20,24 @@ public class Chess {
         Board playingBoard = new Board();
         Pieces piecesW = new Pieces(playingBoard, PieceCode.WHITE);
         Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
-        HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null); //change opponentn to null
+        HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null); //change opponent to null
         HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
-        boolean occupiedFlag;
+        playerW.setOpponent(playerB);
         ArrayList<Move> theLegalMoves = new ArrayList<Move>();
         Piece currentPiece = null;
-        boolean kingTaken = false;
+        boolean kingTaken = false, occupiedFlag = false, legalMoveFlag = false;
+        boolean whiteTurn = true;
+        boolean blackTurn = false;
+        int[] arrayOfCoords = null;
+        HumanPlayer currentPlayer = playerW;
 
         display(piecesW, piecesB);
 
         while (!kingTaken) {
 
             theLegalMoves = null;
-            int[] arrayOfCoords = playerW.playerInput();
+
+            currentPlayer.playerInput(playerW.getPieces().getPiece(0).getColour()); //null pointer exception?
 
             if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
                 currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
@@ -49,7 +54,13 @@ public class Chess {
                         arrayOfCoords[2], arrayOfCoords[3], occupiedFlag);
                 System.out.println(currentMove.toString());
 
-                boolean legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
+                if (whiteTurn) {
+                    legalMoveFlag = currentPlayer.checkMove(currentPiece, currentMove);
+                }
+                else {
+                    legalMoveFlag = currentPlayer.checkMove(currentPiece, currentMove);
+                }
+
 
                 System.out.println(legalMoveFlag + "legalMoveFlag");
 
@@ -85,6 +96,8 @@ public class Chess {
                 }
 
             }
+
+            currentPlayer = currentPlayer.getOpponent();
 
             display(piecesW, piecesB);
 

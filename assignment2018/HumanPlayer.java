@@ -13,11 +13,15 @@ public class HumanPlayer extends Player {
   private Player opponent;
 
   public HumanPlayer(String n, Pieces p, Board b, Player o) {
-    //name = n;
-    //pieces = p;
-    //playingBoard = b;
     super(n,p,b,o);
-    //opponent = o;
+    name = n;
+    pieces = p;
+    playingBoard = b;
+  }
+
+
+  public HumanPlayer getOpponent() {
+      return (HumanPlayer)opponent;
   }
 
   public boolean makeMove(){
@@ -43,13 +47,19 @@ public class HumanPlayer extends Player {
                 break;
       case 'H': equivInt = 7;
                 break;
+      default:  equivInt = 8;
+                break;
     }
     return equivInt;
   }
 
-  public int[] playerInput() {
+
+  public int[] playerInput(int colour) {
       Scanner scanner = new Scanner(System.in);
-      System.out.print("Player 1 (white) move: ");
+      if (colour == PieceCode.WHITE)
+          System.out.print("Player 1 (white) move: ");
+      else
+          System.out.print("Player 2 (black) move: ");
       //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
       String coords = scanner.nextLine().toUpperCase();
       //Uses space as delimiter and puts from and to into 2 elements of array
@@ -75,9 +85,11 @@ public class HumanPlayer extends Player {
           System.out.println(theLegalMoves.size() + "legalMovesSize");
           for (int i = 0; i < theLegalMoves.size(); i++) {
               if (theLegalMoves.get(i).equals(currentMove)) {
-                  legalMoveFlag = true;
-                  System.out.println("Legal + " + theLegalMoves.get(i).toString());
-                  break;
+                  if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
+                      legalMoveFlag = true;
+                      System.out.println("Legal + " + theLegalMoves.get(i).toString());
+                      break;
+                  }
               } else
                   legalMoveFlag = false;
           }
