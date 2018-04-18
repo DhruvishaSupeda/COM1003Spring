@@ -40,7 +40,7 @@ public class Chess {
 
             theLegalMoves = null;
             System.out.println("RESTARTING");
-
+            legalMoveFlag = false;
             while (!legalMoveFlag) {
 
                 if (whiteTurn) {
@@ -126,7 +126,7 @@ public class Chess {
             blackTurn = !blackTurn;
 
 
-            kingTaken = true;
+            //kingTaken = true;
         }
     }
 }
