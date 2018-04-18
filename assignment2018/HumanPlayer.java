@@ -109,15 +109,15 @@ public class HumanPlayer extends Player {
         currentBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
         currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
         currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+        this.getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
         currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
 
         System.out.println(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
 
         System.out.println(currentPiece.getColourChar());
-        this.getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
     }
   }
 
 
-  
+
 }
