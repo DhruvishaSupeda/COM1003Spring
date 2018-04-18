@@ -96,23 +96,28 @@ public class HumanPlayer extends Player {
       }
       return legalMoveFlag;
   }
-  //Interacts with the user through the console and keyboard to move the pieces
 
 
-  /*MOVING Pieces
-  --Get input from console
-  --Chess requests new move from players in turn (supplied as to and from coordinates) e.g. A2 A3 moves from A2 to A3
-  --Check whats in there (use PieceCode?/Pieces)
-  --Or even better, getPiece or something then use pieceName.availableMoves()
-  --Iterate through ArrayList, if Move they wanna make equal to any in ArrayList, let them make the move, taking over
-  other piece if there is one there, else ask for input (while loop?)
-  --If king, declare game over and winner
+  public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard) {
+    if (!occupiedFlag) {
+        currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+        currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+    }
 
-  Methods:
-  --checkIfKing - need parameter of flag if its the king to take back to Chess or something
-  --Check if legal moves
-  --
+    if (occupiedFlag && (currentPiece.getColour() != playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour())) {
+        currentBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
+        currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+        currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+
+        System.out.println(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
+
+        System.out.println(currentPiece.getColourChar());
+        this.getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
+    }
+  }
 
 
-  */
+  
 }

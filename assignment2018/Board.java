@@ -13,7 +13,6 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   }
 
   public void setPosition(int x, int y, Piece piece){
-    piece.setPosition(x, y);
     playingBoard[x][y] = piece;
   }
 
@@ -37,6 +36,17 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
         return true;
     else
         return false;
+  }
+
+  public String toString() {
+    String arrayString = "";
+    for (int i = 0; i<8; i++) {
+      for (int j=0; j<8; j++) {
+        if (playingBoard[i][j] != null)
+            arrayString = arrayString + playingBoard[i][j].toString();
+      }
+    }
+    return arrayString;
   }
 
 }
