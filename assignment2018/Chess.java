@@ -39,13 +39,11 @@ public class Chess {
             arrayOfCoords = null;
 
             theLegalMoves = null;
-            System.out.println("RESTARTING");
             legalMoveFlag = false;
             while (!legalMoveFlag) {
 
                 if (whiteTurn) {
                     arrayOfCoords = playerW.playerInput(PieceCode.WHITE);
-                    System.out.println("111111111111111111111111111");
                 }
                 else {
                     arrayOfCoords = playerB.playerInput(PieceCode.BLACK);
@@ -85,38 +83,11 @@ public class Chess {
                     System.out.println(legalMoveFlag + "legalMoveFlag");
                 }
             }
-                //Get Pieces based on colour
-                //Add piece in new position (use setPosition)
-                //Remove current piece
-                //Display again
-                    /*if (!(occupiedFlag)) {
-                        playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-                        playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-                        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
-                    }
 
-                    if (occupiedFlag && (currentPiece.getColour() != playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour())) {
-                        playingBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
-                        playingBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-                        playingBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-                        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
-
-                        System.out.println(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-
-                        if (currentPiece.getColourChar() == 'w') {
-                            System.out.println(currentPiece.getColourChar());
-                            piecesB.delete(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-                            piecesB.toString();
-                        }
-                        else{
-                            piecesW.delete(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-                            piecesW.toString();
-                        }
-                    }*/
-                    if (whiteTurn)
-                        playerW.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
-                    else
-                        playerB.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
+            if (whiteTurn)
+                playerW.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
+            else
+                playerB.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
 
 
 
