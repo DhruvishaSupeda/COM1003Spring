@@ -29,12 +29,8 @@ public class Knight extends Piece {
         // set up m to refer to a Move object
         Move theMove = null;
 
-        if (x>1 && y<6) {
             // first legal move is to go from x,y to x-1,y+2
-            if ((!getBoard().occupied(x - 1, y + 2)) || (getBoard().occupied(x - 1, y + 2)
-                    && (getBoard().getPiece(x - 1, y + 2).getColour() != this.getColour()))
-                    && (!getBoard().outOfRange(x - 1, y + 2))) {
-
+            if (!getBoard().outOfRange(x - 1, y + 2)) {
                 if (getBoard().occupied(x - 1, y + 2) && (getBoard().getPiece(x - 1, y + 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x - 1, y + 2, true);
                     legalMoves.add(theMove);
@@ -43,13 +39,8 @@ public class Knight extends Piece {
                     legalMoves.add(theMove);
                 }
             }
-        }
 
-        if (x<7 && y<6) {
-            if ((!getBoard().occupied(x + 1, y + 2)) || (getBoard().occupied(x + 1, y + 2)
-                    && (getBoard().getPiece(x + 1, y + 2).getColour() != this.getColour()))
-                    && (!getBoard().outOfRange(x + 1, y + 2))) {
-
+            if (!getBoard().outOfRange(x + 1, y + 2)) {
                 if (getBoard().occupied(x + 1, y + 2) && (getBoard().getPiece(x + 1, y + 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x + 1, y + 2, true);
                     legalMoves.add(theMove);
@@ -58,13 +49,8 @@ public class Knight extends Piece {
                     legalMoves.add(theMove);
                 }
             }
-        }
 
-        if (x<7 && y>1) {
-            if ((!getBoard().occupied(x + 1, y - 2)) || (getBoard().occupied(x + 1, y - 2)
-                    && (getBoard().getPiece(x + 1, y - 2).getColour() != this.getColour()))
-                    && (!getBoard().outOfRange(x + 1, y - 2))) {
-
+            if (!getBoard().outOfRange(x + 1, y - 2)) {
                 if (getBoard().occupied(x + 1, y - 2) && (getBoard().getPiece(x + 1, y - 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x + 1, y - 2, true);
                     legalMoves.add(theMove);
@@ -73,13 +59,8 @@ public class Knight extends Piece {
                     legalMoves.add(theMove);
                 }
             }
-        }
 
-        if (x>0 && y>1) {
-            if ((!getBoard().occupied(x - 1, y - 2)) || (getBoard().occupied(x - 1, y - 2)
-                    && (getBoard().getPiece(x - 1, y - 2).getColour() != this.getColour()))
-                    && (!getBoard().outOfRange(x - 1, y - 2))) {
-
+            if (!getBoard().outOfRange(x - 1, y - 2)) {
                 if (getBoard().occupied(x - 1, y - 2) && (getBoard().getPiece(x - 1, y - 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x - 1, y - 2, true);
                     legalMoves.add(theMove);
@@ -88,7 +69,46 @@ public class Knight extends Piece {
                     legalMoves.add(theMove);
                 }
             }
-        }
+
+            if (!getBoard().outOfRange(x + 2, y + 1)) {
+                if (getBoard().occupied(x + 2, y + 1) && (getBoard().getPiece(x + 2, y + 1).getColour() != this.getColour())) {
+                    theMove = new Move(this, x, y, x + 2, y + 1, true);
+                    legalMoves.add(theMove);
+                } else {
+                    theMove = new Move(this, x, y, x + 2, y + 1, false);
+                    legalMoves.add(theMove);
+                }
+            }
+
+            if (!getBoard().outOfRange(x - 2, y + 1)) {
+                if (getBoard().occupied(x - 2, y + 1) && (getBoard().getPiece(x - 2, y + 1).getColour() != this.getColour())) {
+                    theMove = new Move(this, x, y, x - 2, y + 1, true);
+                    legalMoves.add(theMove);
+                } else {
+                    theMove = new Move(this, x, y, x - 2, y + 1, false);
+                    legalMoves.add(theMove);
+                }
+            }
+
+            if (!getBoard().outOfRange(x - 2, y - 1)) {
+                if (getBoard().occupied(x - 2, y - 1) && (getBoard().getPiece(x - 2, y - 1).getColour() != this.getColour())) {
+                    theMove = new Move(this, x, y, x - 2, y - 1, true);
+                    legalMoves.add(theMove);
+                } else {
+                    theMove = new Move(this, x, y, x - 2, y - 1, false);
+                    legalMoves.add(theMove);
+                }
+            }
+
+            if (!getBoard().outOfRange(x + 2, y - 1)) {
+                if (getBoard().occupied(x + 2, y - 1) && (getBoard().getPiece(x + 2, y - 1).getColour() != this.getColour())) {
+                    theMove = new Move(this, x, y, x + 2, y - 1, true);
+                    legalMoves.add(theMove);
+                } else {
+                    theMove = new Move(this, x, y, x + 2, y - 1, false);
+                    legalMoves.add(theMove);
+                }
+            }
 
         if (legalMoves.isEmpty())
             return null;
