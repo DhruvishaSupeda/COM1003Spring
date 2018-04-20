@@ -55,18 +55,21 @@ public class Chess {
                     //if black piece in new coordinate, make thing in move true, else false
                     if (playingBoard.occupied(arrayOfCoords[2], arrayOfCoords[3])) {
                         occupiedFlag = true;
-                        if (playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]).getValue() == PieceCode.charToInt('k'))
+                        if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING) {
                             kingTaken = true;
+                            if (whiteTurn)
+                                System.out.println("White player wins");
+                            else
+                                System.out.println("Black player wins");
                             break;
+                        }
                     }
                     else
                         occupiedFlag = false;
-                    System.out.println(occupiedFlag + "occupiedFlag");
 
                     //makes new move for current move
                     Move currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1],
                             arrayOfCoords[2], arrayOfCoords[3], occupiedFlag);
-                    System.out.println(currentMove.toString());
 
                     if (whiteTurn) {
                         legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
@@ -76,11 +79,8 @@ public class Chess {
                     }
 
                     if (!legalMoveFlag) {
-                        System.out.println("Illegal move");
-                        System.out.println("22222222222222222222222222");
+                        System.out.println("Illegal move. Please try a valid move:");
                     }
-
-                    System.out.println(legalMoveFlag + "legalMoveFlag");
                 }
             }
 
@@ -88,9 +88,6 @@ public class Chess {
                 playerW.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
             else
                 playerB.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
-
-
-
 
             //Make it the next players turn
             whiteTurn = !whiteTurn;

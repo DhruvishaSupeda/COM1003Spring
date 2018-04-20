@@ -17,6 +17,7 @@ public class HumanPlayer extends Player {
     name = n;
     pieces = p;
     playingBoard = b;
+    opponent = o;
   }
 
 
@@ -99,35 +100,14 @@ public class HumanPlayer extends Player {
 
 
   public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard) {
-
     if (occupiedFlag && (currentPiece.getColour() != currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour())) {
-        this.getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
+        this.getOpponent().getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
         currentBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
-        currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-        currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
-
-        System.out.println(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-
-        System.out.println(currentPiece.getColourChar());
     }
-    if (!occupiedFlag) {
-        currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-        currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
-    }
-
-    if (occupiedFlag && (currentPiece.getColour() != playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour())) {
-        currentBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
-        currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-        this.getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-        currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-        currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
-
-        System.out.println(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-
-        System.out.println(currentPiece.getColourChar());
-    }
+    
+    currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+    currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+    currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
   }
 
 
