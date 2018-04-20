@@ -33,4 +33,20 @@ public class Move {
   public boolean getOccupied(){
       return occupiedToTake;
   }
+
+  public int getOX() {
+    return x;
+  }
+
+  public int getOY() {
+    return y;
+  }
+
+  public int getNX() {
+    return newX;
+  }
+
+  public int getNY() {
+    return newY;
+  }
 }

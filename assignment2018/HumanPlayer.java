@@ -104,7 +104,7 @@ public class HumanPlayer extends Player {
         this.getOpponent().getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
         currentBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
     }
-    
+
     currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
     currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
     currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
