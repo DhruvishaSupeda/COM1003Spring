@@ -8,7 +8,7 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   public Board() {
     for (int row = 0; row < 8; row++) {
       for (int column = 0; column < 8; column++)
-          playingBoard[row][column] = null;
+      playingBoard[row][column] = null;
     }
   }
 
@@ -33,9 +33,9 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
 
   public boolean outOfRange(int x, int y) {
     if ((x > 7 || y > 7) || (x < 0 || y < 0))
-        return true;
+      return true;
     else
-        return false;
+      return false;
   }
 
   public String toString() {
@@ -43,7 +43,7 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
     for (int i = 0; i<8; i++) {
       for (int j=0; j<8; j++) {
         if (playingBoard[i][j] != null)
-            arrayString = arrayString + playingBoard[i][j].toString();
+          arrayString = arrayString + playingBoard[i][j].toString();
       }
     }
     return arrayString;
