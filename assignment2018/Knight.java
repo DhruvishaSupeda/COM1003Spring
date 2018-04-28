@@ -34,7 +34,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x - 1, y + 2) && (getBoard().getPiece(x - 1, y + 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x - 1, y + 2, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x - 1, y + 2)) {
                     theMove = new Move(this, x, y, x - 1, y + 2, false);
                     legalMoves.add(theMove);
                 }
@@ -44,7 +45,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x + 1, y + 2) && (getBoard().getPiece(x + 1, y + 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x + 1, y + 2, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x + 1, y + 2)){
                     theMove = new Move(this, x, y, x + 1, y + 2, false);
                     legalMoves.add(theMove);
                 }
@@ -54,7 +56,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x + 1, y - 2) && (getBoard().getPiece(x + 1, y - 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x + 1, y - 2, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x + 1, y - 2)){
                     theMove = new Move(this, x, y, x + 1, y - 2, false);
                     legalMoves.add(theMove);
                 }
@@ -64,7 +67,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x - 1, y - 2) && (getBoard().getPiece(x - 1, y - 2).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x - 1, y - 2, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x - 1, y - 2)){
                     theMove = new Move(this, x, y, x - 1, y - 2, false);
                     legalMoves.add(theMove);
                 }
@@ -74,7 +78,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x + 2, y + 1) && (getBoard().getPiece(x + 2, y + 1).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x + 2, y + 1, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x + 2, y + 1)){
                     theMove = new Move(this, x, y, x + 2, y + 1, false);
                     legalMoves.add(theMove);
                 }
@@ -84,7 +89,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x - 2, y + 1) && (getBoard().getPiece(x - 2, y + 1).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x - 2, y + 1, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x - 2, y + 1)){
                     theMove = new Move(this, x, y, x - 2, y + 1, false);
                     legalMoves.add(theMove);
                 }
@@ -94,7 +100,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x - 2, y - 1) && (getBoard().getPiece(x - 2, y - 1).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x - 2, y - 1, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x - 2, y - 1)) {
                     theMove = new Move(this, x, y, x - 2, y - 1, false);
                     legalMoves.add(theMove);
                 }
@@ -104,7 +111,8 @@ public class Knight extends Piece {
                 if (getBoard().occupied(x + 2, y - 1) && (getBoard().getPiece(x + 2, y - 1).getColour() != this.getColour())) {
                     theMove = new Move(this, x, y, x + 2, y - 1, true);
                     legalMoves.add(theMove);
-                } else {
+                }
+                if (!getBoard().occupied(x + 2, y - 1)){
                     theMove = new Move(this, x, y, x + 2, y - 1, false);
                     legalMoves.add(theMove);
                 }
