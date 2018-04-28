@@ -37,9 +37,12 @@ public class RandomPlayer extends Player {
   }
 
   public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
-    if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour() )) {
-      this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));
-      currentBoard.removePiece(currentMove.getNX(), currentMove.getNY());
+    System.out.println(occupiedFlag);
+    if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
+      if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
+        this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));
+        currentBoard.removePiece(currentMove.getNX(), currentMove.getNY());
+      }
     }
 
     currentBoard.removePiece(currentMove.getOX(), currentMove.getOY());

@@ -100,14 +100,16 @@ public class HumanPlayer extends Player {
 
 
   public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard) {
-    if (occupiedFlag && (currentPiece.getColour() != currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getColour())) {
-        this.getOpponent().getPieces().delete(currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-        currentBoard.removePiece(arrayOfCoords[2], arrayOfCoords[3]);
-    }
+      if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
+          if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
+              this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));
+              currentBoard.removePiece(currentMove.getNX(), currentMove.getNY());
+          }
+      }
 
-    currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
-    currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
-    currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
+      currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
+      currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
+      currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
   }
 
 
