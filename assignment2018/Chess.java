@@ -20,6 +20,20 @@ public class Chess {
     Board playingBoard = new Board();
     Pieces piecesW = new Pieces(playingBoard, PieceCode.WHITE);
     Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
+    Scanner scanner = new Scanner(System.in);
+    int player1 = 0, player2 = 0;
+
+    while (player1 != 1 && player1 != 2 && player1 != 3) {
+        System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
+        System.out.print("What type of player is Player 1? ");
+        player1 = scanner.nextInt();
+    }
+    while (player2 != 1 && player2 != 2 && player2 != 3) {
+        System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
+        System.out.print("What type of player is Player 2? ");
+        player2 = scanner.nextInt();
+    }
+
     RandomPlayer playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
     HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
@@ -30,13 +44,13 @@ public class Chess {
     boolean whiteTurn = false;
     boolean blackTurn = true;
     System.out.println(playingBoard.toString());
-    //HumanPlayer currentPlayer = new playerW;
+    Player currentPlayer = playerW;
     //currentPlayer.toString();
 
     while (!kingTaken) {
       //Display board
       display(piecesW, piecesB);
-      int[] arrayOfCoords = {0,0,0,0};
+      int[] arrayOfCoords = null;
 
       theLegalMoves = null;
       legalMoveFlag = false;
@@ -54,6 +68,7 @@ public class Chess {
           arrayOfCoords[1] = currentMove.getOY();
           arrayOfCoords[2] = currentMove.getNX();
           arrayOfCoords[3] = currentMove.getNY();
+          currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
           //IF KING WINS, IDK HOW TO PUT THIS IN YET
           occupiedFlag = true;
           if (playingBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null){
@@ -67,10 +82,10 @@ public class Chess {
             }
           }
 
-          //legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
-          legalMoveFlag = true;
+          legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
         }
         //BLACK TURN - HUMAN PLAYER ATM
+
         else {
           arrayOfCoords = playerB.playerInput(PieceCode.BLACK);
           if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
@@ -108,12 +123,6 @@ public class Chess {
       }
 
       if (whiteTurn) {
-        System.out.println("MOVING");
-        System.out.println(occupiedFlag);
-        System.out.println(currentPiece.toString());
-        System.out.println(arrayOfCoords[1]);
-        System.out.println(playingBoard.toString());
-        System.out.println(currentMove.toString());
         playerW.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard, currentMove);
       }
       else
