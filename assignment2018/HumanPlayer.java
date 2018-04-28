@@ -3,6 +3,7 @@ package assignment2018;
 import assignment2018.*;
 import assignment2018.Move;
 import assignment2018.codeprovided.*;
+import assignment2018.codeprovided.PieceCode;
 
 import java.util.*;
 
@@ -12,6 +13,7 @@ public class HumanPlayer extends Player {
   private Pieces pieces;
   private Board playingBoard;
   private Player opponent;
+  private int[] arrayOfCoords;
 
   public HumanPlayer(String n, Pieces p, Board b, Player o) {
     super(n,p,b,o);
@@ -21,14 +23,16 @@ public class HumanPlayer extends Player {
     opponent = o;
   }
 
-
-  public HumanPlayer getOpponent() {
-      return (HumanPlayer)opponent;
-  }
-
   public boolean checkKing() {
-      
-      return false;
+      if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING) {
+          if (opponent.getPieces().getPiece(1).getColour() != PieceCode.BLACK)
+              System.out.println("White player wins");
+          else
+              System.out.println("Black player wins");
+          return true;
+      }
+      else
+          return false;
   }
 
   public boolean makeMove(){
@@ -39,20 +43,13 @@ public class HumanPlayer extends Player {
       boolean whiteTurn = false;
       boolean blackTurn = true;
 
-      int[] arrayOfCoords = playerInput(PieceCode.BLACK);
+      arrayOfCoords = playerInput(PieceCode.BLACK);
       if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
           currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
           //if black piece in new coordinate, make thing in move true, else false
           if (playingBoard.occupied(arrayOfCoords[2], arrayOfCoords[3])) {
               occupiedFlag = true;
-              if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING) {
-                  kingTaken = true;
-                  if (whiteTurn)
-                      System.out.println("White player wins");
-                  else
-                      System.out.println("Black player wins");
-              }
           } else
               occupiedFlag = false;
 
@@ -62,7 +59,6 @@ public class HumanPlayer extends Player {
 
           legalMoveFlag = checkMove(currentPiece, currentMove);
       }
-      System.out.println("HLEEEGGGAAAALLLLLL" + legalMoveFlag);
       if (!legalMoveFlag)
           return false;
       else
@@ -121,15 +117,12 @@ public class HumanPlayer extends Player {
 
       ArrayList<Move> theLegalMoves = new ArrayList<Move>();
       theLegalMoves = currentPiece.availableMoves();
-      System.out.println(theLegalMoves);
 
       if (theLegalMoves != null) {
-          System.out.println(theLegalMoves.size() + "legalMovesSize");
           for (int i = 0; i < theLegalMoves.size(); i++) {
               if (theLegalMoves.get(i).equals(currentMove)) {
                   if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
                       legalMoveFlag = true;
-                      System.out.println("Legal + " + theLegalMoves.get(i).toString());
                       break;
                   }
               } else
