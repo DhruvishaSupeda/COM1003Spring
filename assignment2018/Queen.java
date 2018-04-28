@@ -86,8 +86,8 @@ public class Queen extends Piece {
         }
 
         //COPIED FROM BISHOP TO GO DIAGONAL
-        int i = 1;
-        int j = 1;
+        i = 1;
+        j = 1;
         while (!getBoard().occupied(x+i, y+j) && (!getBoard().outOfRange(x+i, y+j)) ) {
             if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x+i, y+j, true);

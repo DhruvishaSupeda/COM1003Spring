@@ -32,7 +32,7 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   }
 
   public boolean outOfRange(int x, int y) {
-    if ((x > 7 || y > 7) || (x < 0 || y < 0))
+    if (x > 7 || y > 7 || x < 0 || y < 0)
       return true;
     else
       return false;

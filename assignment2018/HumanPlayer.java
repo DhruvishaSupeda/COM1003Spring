@@ -1,6 +1,7 @@
 package assignment2018;
 
 import assignment2018.*;
+import assignment2018.Move;
 import assignment2018.codeprovided.*;
 
 import java.util.*;
@@ -25,8 +26,48 @@ public class HumanPlayer extends Player {
       return (HumanPlayer)opponent;
   }
 
-  public boolean makeMove(){
+  public boolean checkKing() {
+      
       return false;
+  }
+
+  public boolean makeMove(){
+
+      Piece currentPiece = null;
+      Move currentMove = null;
+      boolean occupiedFlag = false, legalMoveFlag = false, kingTaken = false;
+      boolean whiteTurn = false;
+      boolean blackTurn = true;
+
+      int[] arrayOfCoords = playerInput(PieceCode.BLACK);
+      if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
+          currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
+
+          //if black piece in new coordinate, make thing in move true, else false
+          if (playingBoard.occupied(arrayOfCoords[2], arrayOfCoords[3])) {
+              occupiedFlag = true;
+              if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING) {
+                  kingTaken = true;
+                  if (whiteTurn)
+                      System.out.println("White player wins");
+                  else
+                      System.out.println("Black player wins");
+              }
+          } else
+              occupiedFlag = false;
+
+          //makes new move for current move
+          currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1],
+                  arrayOfCoords[2], arrayOfCoords[3], occupiedFlag);
+
+          legalMoveFlag = checkMove(currentPiece, currentMove);
+      }
+      System.out.println("HLEEEGGGAAAALLLLLL" + legalMoveFlag);
+      if (!legalMoveFlag)
+          return false;
+      else
+          movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
+      return legalMoveFlag;
   }
 
   public int checkCoords(char xCoord) {
