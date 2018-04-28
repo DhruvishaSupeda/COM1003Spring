@@ -22,21 +22,15 @@ public class RandomPlayer extends Player {
     opponent = o;
   }
 
-  public boolean checkKing() {
-    System.out.println(arrayOfCoords[2]);
-    System.out.println(arrayOfCoords[3]);
-    System.out.println(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]));
-    if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) {
-      if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING) {
-        if (opponent.getPieces().getPiece(1).getColour() != PieceCode.BLACK)
+  public boolean checkKing(boolean whiteTurn) {
+    if (/*(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) && */
+    (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
+        if (whiteTurn)
           System.out.println("White player wins");
         else
           System.out.println("Black player wins");
         return true;
       }
-      else
-        return false;
-    }
     else
       return false;
   }

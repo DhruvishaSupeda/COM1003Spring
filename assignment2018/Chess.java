@@ -37,44 +37,34 @@ public class Chess {
     RandomPlayer playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
     HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
-    ArrayList<Move> theLegalMoves = new ArrayList<Move>();
-    Piece currentPiece = null;
-    Move currentMove = null;
     boolean whiteTurn = false;
     boolean blackTurn = true;
+    boolean kingTaken = false,
+      legalMoveFlag= false;
     //Player currentPlayer = playerW;
     //currentPlayer.toString();
 
     while (!kingTaken) {
       //Display board
       display(piecesW, piecesB);
-      arrayOfCoords[0] = 0;
-      arrayOfCoords[1] = 0;
-      arrayOfCoords[2] = 0;
-      arrayOfCoords[3] = 0;
-
-      theLegalMoves = null;
       legalMoveFlag = false;
       while (!legalMoveFlag) {
-
-
         //RANDOM PLAYER
         if (whiteTurn) {
             legalMoveFlag = playerW.makeMove();
-
-          kingTaken = playerW.checkKing();
+            kingTaken = playerW.checkKing(whiteTurn);
         }
+
         //BLACK TURN - HUMAN PLAYER ATM
-
         else {
-          legalMoveFlag = playerB.makeMove();
-          kingTaken = playerB.checkKing();
+            legalMoveFlag = playerB.makeMove();
+            kingTaken = playerB.checkKing(whiteTurn);
 
-            if (!legalMoveFlag) {
+          if (!legalMoveFlag) {
               System.out.println("Illegal move. Please try a valid move:");
-            }
           }
         }
+      }
 
 
       //Make it the next players turn
@@ -82,7 +72,6 @@ public class Chess {
       blackTurn = !blackTurn;
 
 
-      //kingTaken = true;
     } //end of while loop
   }
 

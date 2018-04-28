@@ -35,8 +35,8 @@ public class TextDisplay implements Display {
         newPiece = myPieces.getPiece(i);
         pieceChar = newPiece.getChar();
         pieceColour = newPiece.getColour();
-        pieceArray[newPiece.getX()][newPiece.getY()] = pieceChar;
-        if (pieceColour == PieceCode.BLACK)
+        pieceArray[newPiece.getX()][newPiece.getY()] = newPiece.getChar();
+        if (newPiece.getColour() == PieceCode.BLACK)
             bFlag = true;
         else
             wFlag = true;
@@ -45,8 +45,8 @@ public class TextDisplay implements Display {
     if ((bFlag==true) && (wFlag==true)) {
       System.out.println(" |A B C D E F G H");
       System.out.println("- - - - - - - - -");
-      for (int i = 0; i < 8; i++) { //MAKE BOARD_WIDTH AND HEUGHT CONSTANTS
-          //8-i becAause it goes 8 downto 1 but can't change loop
+      for (int i = 0; i < 8; i++) { //MAKE BOARD_WIDTH AND HEIGHT CONSTANTS
+          //8-i because it goes 8 downto 1 but can't change loop
           System.out.print(8-i + "|");
           for (int j = 0; j < 8; j++) {
               System.out.print(pieceArray[j][i] + " ");

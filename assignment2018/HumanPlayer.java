@@ -23,17 +23,18 @@ public class HumanPlayer extends Player {
     opponent = o;
   }
 
-  public boolean checkKing() {
-      if (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING) {
-          if (opponent.getPieces().getPiece(1).getColour() != PieceCode.BLACK)
-              System.out.println("White player wins");
-          else
-              System.out.println("Black player wins");
-          return true;
-      }
-      else
-          return false;
-  }
+    public boolean checkKing(boolean whiteTurn) {
+        if (/*(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) &&*/
+        (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
+            if (whiteTurn)
+                System.out.println("White player wins");
+            else
+                System.out.println("Black player wins");
+            return true;
+        }
+        else
+            return false;
+    }
 
   public boolean makeMove(){
 
