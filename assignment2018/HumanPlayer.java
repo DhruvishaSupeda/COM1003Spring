@@ -95,10 +95,7 @@ public class HumanPlayer extends Player {
 
   public int[] playerInput(int colour) {
       Scanner scanner = new Scanner(System.in);
-      if (colour == PieceCode.WHITE)
-          System.out.print("Player 1 (white) move: ");
-      else
-          System.out.print("Player 2 (black) move: ");
+      System.out.print("Please enter your move: ");
       //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
       String coords = scanner.nextLine().toUpperCase();
       //Uses space as delimiter and puts from and to into 2 elements of array
