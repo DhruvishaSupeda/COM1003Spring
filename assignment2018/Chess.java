@@ -40,65 +40,41 @@ public class Chess {
     ArrayList<Move> theLegalMoves = new ArrayList<Move>();
     Piece currentPiece = null;
     Move currentMove = null;
-    boolean kingTaken = false, occupiedFlag = false, legalMoveFlag = false;
     boolean whiteTurn = false;
     boolean blackTurn = true;
-    int[] arrayOfCoords = null;
     //Player currentPlayer = playerW;
     //currentPlayer.toString();
 
     while (!kingTaken) {
       //Display board
       display(piecesW, piecesB);
-      arrayOfCoords = null;
+      arrayOfCoords[0] = 0;
+      arrayOfCoords[1] = 0;
+      arrayOfCoords[2] = 0;
+      arrayOfCoords[3] = 0;
 
       theLegalMoves = null;
       legalMoveFlag = false;
       while (!legalMoveFlag) {
 
+
         //RANDOM PLAYER
         if (whiteTurn) {
-          ArrayList<Move> allMoves = new ArrayList<Move>();
-          allMoves = playerW.getMoves();
-          Random rand = new Random();
-          int randomMove = rand.nextInt(allMoves.size()) + 1;
-          currentMove = allMoves.get(randomMove);
-          System.out.println(currentMove);
-          arrayOfCoords[0] = currentMove.getOX();
-          arrayOfCoords[1] = currentMove.getOY();
-          arrayOfCoords[2] = currentMove.getNX();
-          arrayOfCoords[3] = currentMove.getNY();
-          currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
-          //IF KING WINS, IDK HOW TO PUT THIS IN YET
-          occupiedFlag = true;
-          if (playingBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null){
-            if (playingBoard.getPiece(currentMove.getNX(), currentMove.getNY()).getValue() == PieceCode.KING) {
-              kingTaken = true;
-              if (whiteTurn)
-                System.out.println("White player wins");
-              else
-                System.out.println("Black player wins");
-              break;
-            }
-          }
+            legalMoveFlag = playerW.makeMove();
 
-          legalMoveFlag = playerW.checkMove(currentPiece, currentMove);
+          kingTaken = playerW.checkKing();
         }
         //BLACK TURN - HUMAN PLAYER ATM
 
         else {
           legalMoveFlag = playerB.makeMove();
+          kingTaken = playerB.checkKing();
 
             if (!legalMoveFlag) {
               System.out.println("Illegal move. Please try a valid move:");
             }
           }
         }
-
-
-      if (whiteTurn) {
-        playerW.movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard, currentMove);
-      }
 
 
       //Make it the next players turn
