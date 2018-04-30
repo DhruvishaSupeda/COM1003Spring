@@ -22,7 +22,7 @@ public class Chess {
     Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
     Scanner scanner = new Scanner(System.in);
     int player1 = 0, player2 = 0;
-    //Player playerW, playerB;
+   // Player playerW, playerB;
 
     while (player1 != 1 && player1 != 2 && player1 != 3) {
         System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
@@ -35,7 +35,7 @@ public class Chess {
         player2 = scanner.nextInt();
     }
 
-    if (player1 == 1)
+    /*if (player1 == 1)
         playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
     if (player1 == 2)
         playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
@@ -44,7 +44,7 @@ public class Chess {
     if (player2 == 2)
         playerB = new RandomPlayer("Black Player", piecesB, playingBoard, null);
 
-    /*switch (player1) {
+    switch (player1) {
         case 1: HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
                 break;
         case 2: RandomPlayer playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
@@ -63,8 +63,8 @@ public class Chess {
      }*/
 
 
-    //RandomPlayer playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
-    //HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
+    AggressivePlayer playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
+    HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
     playerB.setOpponent(playerW);
     boolean whiteTurn = false;
@@ -79,7 +79,6 @@ public class Chess {
       display(piecesW, piecesB);
       legalMoveFlag = false;
       while (!legalMoveFlag) {
-        //RANDOM PLAYER
         if (whiteTurn) {
             System.out.println("Player 1 (white player)'s turn:");
             legalMoveFlag = playerW.makeMove();

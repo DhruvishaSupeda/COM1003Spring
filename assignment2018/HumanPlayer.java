@@ -23,7 +23,7 @@ public class HumanPlayer extends Player {
     opponent = o;
   }
 
-    public boolean checkKing(boolean whiteTurn) {
+    public boolean checkKing(boolean whiteTurn) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
         if (/*(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) &&*/
         (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
             if (whiteTurn)

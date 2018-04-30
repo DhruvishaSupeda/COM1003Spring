@@ -38,39 +38,60 @@ public class AggressivePlayer extends Player {
     public Move chooseMove(ArrayList<Move> allMoves) {
         ArrayList<Move> trueMoves = new ArrayList<Move>();
         ArrayList<Move> bigMoves = new ArrayList<Move>();
+        //bigMoves = null;
         Move move = null;
         int newX = 0, newY = 0;
         int biggestValue = 0;
         for (int i = 0; i<allMoves.size(); i++) {
-            if (allMoves.get(i).getOccupied()){
+            System.out.println(allMoves.get(i).toString());
+            if (allMoves.get(i).getOccupied() == true){
                 trueMoves.add(allMoves.get(i));
             }
         }
+
         if (trueMoves != null) {
-            while (bigMoves != null) {
-                for (int i = 0; i < trueMoves.size(); i++) {
-                    move = trueMoves.get(i);
-                    newX = move.getNX();
-                    newY = move.getNY();
-                    if (playingBoard.getPiece(newX, newY).getValue() > biggestValue) { //GET NEWX AND NEWY
-                        biggestValue = playingBoard.getPiece(newX, newY).getValue();
-                    }
+            for (int i = 0; i < trueMoves.size(); i++) {
+                move = trueMoves.get(i);
+                System.out.print(trueMoves.get(i));
+                newX = move.getNX();
+                newY = move.getNY();
+                if (playingBoard.getPiece(newX, newY).getValue() > biggestValue) { //GET NEWX AND NEWY
+                    System.out.println("RUNNING");
+                    biggestValue = playingBoard.getPiece(newX, newY).getValue();
                 }
+            }
+            while (bigMoves == null && biggestValue >=0) {
                 System.out.println(biggestValue + "BIGGEST VALUE");
                 for (int i = 0; i < trueMoves.size(); i++) {
                     move = trueMoves.get(i);
+                    System.out.println("TRUEMOVES THING " + trueMoves.get(i));
                     newX = move.getNX();
                     newY = move.getNY();
+                    System.out.println(playingBoard.getPiece(newX, newY).getValue());
                     if (playingBoard.getPiece(newX, newY).getValue() == biggestValue) { //GET NEWX AND NEWY
                         bigMoves.add(trueMoves.get(i));
                     }
                 }
+                if (bigMoves == null) {
+                    biggestValue -= 1;
+                }
+                else
+                    break;
+
             }
-            Random rand = new Random();
-            int randomMove = rand.nextInt(bigMoves.size());
-            //Move currentMove = null;
-            Move currentMove = bigMoves.get(randomMove);
-            return currentMove;
+            if (bigMoves != null) {
+                Random rand = new Random();
+                int randomMove = rand.nextInt(bigMoves.size());
+                //Move currentMove = null;
+                Move currentMove = bigMoves.get(randomMove);
+                return currentMove;
+            }
+            else {
+                Random rand = new Random();
+                int randomMove = rand.nextInt(allMoves.size());
+                Move currentMove = allMoves.get(randomMove);
+                return currentMove;
+            }
         }
         else {
             Random rand = new Random();
@@ -89,6 +110,9 @@ public class AggressivePlayer extends Player {
         boolean whiteTurn = false;
         boolean blackTurn = true;
         ArrayList<Move> allMoves = new ArrayList<Move>();
+        if (allMoves == null) {
+            System.out.println("AAAAAAAAAALLLLLLLLLLLLLLLL NUUUUUUUUUULLLLLLLLLLLLLLLL");
+        }
         allMoves = getMoves();
         Random rand = new Random();
 
