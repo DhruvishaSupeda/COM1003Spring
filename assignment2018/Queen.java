@@ -41,6 +41,9 @@ public class Queen extends Piece {
                 theMove = new Move(this, x, y, x, y + i, false);
                 legalMoves.add(theMove);
             }
+            if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() == this.getColour())) {
+                break;
+            }
             i += 1;
         }
 
@@ -57,6 +60,9 @@ public class Queen extends Piece {
                 theMove = new Move(this, x, y, x, y - i, false);
                 legalMoves.add(theMove);
             }
+            if (getBoard().occupied(x, y - i) && (getBoard().getPiece(x, y - 1).getColour() == this.getColour())) {
+                break;
+            }
             i += 1;
         }
 
@@ -70,6 +76,9 @@ public class Queen extends Piece {
             if (!getBoard().occupied(x + i, y)) {
                 theMove = new Move(this, x, y, x + i, y, false);
                 legalMoves.add(theMove);
+            }
+            if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() == this.getColour())) {
+                break;
             }
             i += 1;
         }
@@ -86,21 +95,27 @@ public class Queen extends Piece {
                 theMove = new Move(this, x, y, x - i, y, false);
                 legalMoves.add(theMove);
             }
+            if (getBoard().occupied(x - i, y) && (getBoard().getPiece(x - i, y).getColour() == this.getColour())) {
+                break;
+            }
             i += 1;
         }
 
         //COPIED FROM BISHOP TO GO DIAGONAL
         i = 1;
         j = 1;
-        while (!getBoard().occupied(x+i, y+j) ) {
+        while (!getBoard().outOfRange(x+i, y+j)) {
             if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x+i, y+j, true);
                 legalMoves.add(theMove);
                 break;
             }
-            else {
+            if (!getBoard().occupied(x+1, y+j)){
                 theMove = new Move(this, x, y, x+i, y+j, false);
                 legalMoves.add(theMove);
+            }
+            if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() == this.getColour())) {
+                break;
             }
             i+=1;
             j+=1;
@@ -108,15 +123,17 @@ public class Queen extends Piece {
 
         i=-1;
         j=1;
-        while (!getBoard().occupied(x+i, y+j) ) {
+        while (!getBoard().outOfRange(x+i, y+j))  {
             if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x+i, y+j, true);
                 legalMoves.add(theMove);
-                break;
             }
-            else {
+            if (!getBoard().occupied(x+i, y+j)){
                 theMove = new Move(this, x, y, x+i, y+j, false);
                 legalMoves.add(theMove);
+            }
+            if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() == this.getColour())) {
+                break;
             }
             i-=1;
             j+=1;
@@ -124,15 +141,18 @@ public class Queen extends Piece {
 
         i=-1;
         j=-1;
-        while (!getBoard().occupied(x+i, y+j) ) {
+        while (!getBoard().outOfRange(x+i, y+j)) {
+
             if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x+i, y+j, true);
                 legalMoves.add(theMove);
-                break;
             }
-            else {
+            if (!getBoard().occupied(x+i, y+j)) {
                 theMove = new Move(this, x, y, x+i, y+j, false);
                 legalMoves.add(theMove);
+            }
+            if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() == this.getColour())) {
+                break;
             }
             i-=1;
             j-=1;
@@ -140,13 +160,13 @@ public class Queen extends Piece {
 
         i=1;
         j=-1;
-        while (!getBoard().occupied(x+i, y+j)) {
+        while (!getBoard().outOfRange(x+i, y+j)) {
+
             if (getBoard().occupied(x+i, y+j) && (getBoard().getPiece(x+i, y+j).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x+i, y+j, true);
                 legalMoves.add(theMove);
-                break;
             }
-            else {
+            if(!getBoard().occupied(x+i, y+j)) {
                 theMove = new Move(this, x, y, x+i, y+j, false);
                 legalMoves.add(theMove);
             }
