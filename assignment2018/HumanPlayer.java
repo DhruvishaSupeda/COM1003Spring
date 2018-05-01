@@ -24,7 +24,7 @@ public class HumanPlayer extends Player {
   }
 
     public boolean checkKing(boolean whiteTurn) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
-        if (/*(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) &&*/
+        /*if ((playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) &&
         (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
             if (whiteTurn)
                 System.out.println("White player wins");
@@ -33,7 +33,15 @@ public class HumanPlayer extends Player {
             return true;
         }
         else
-            return false;
+            return false;*/
+
+        for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
+            if (this.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
+                return false;
+            }
+        }
+        System.out.println(name + " wins!");
+        return true;
     }
 
   public boolean makeMove(){

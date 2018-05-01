@@ -23,16 +23,13 @@ public class RandomPlayer extends Player {
   }
 
   public boolean checkKing(boolean whiteTurn) {
-    if (/*(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) && */
-    (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
-        if (whiteTurn)
-          System.out.println("White player wins");
-        else
-          System.out.println("Black player wins");
-        return true;
+      for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
+          if (this.getOpponent().getPieces().getPiece(i).getValue() == assignment2018.codeprovided.PieceCode.KING) {
+              return false;
+          }
       }
-    else
-      return false;
+      System.out.println(name + " wins!");
+      return true;
   }
 
   public boolean makeMove() {

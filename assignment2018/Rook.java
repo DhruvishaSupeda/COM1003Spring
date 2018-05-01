@@ -34,6 +34,7 @@ public class Rook extends Piece {
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
           i = 1;
         while (!(getBoard().outOfRange(x, y + i)))  {
+            System.out.println((x+1) + "AND" + (7-(y+i)));
             if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x, y + i, true);
                 legalMoves.add(theMove);
@@ -52,7 +53,11 @@ public class Rook extends Piece {
 
         i = 1;
         while (!getBoard().outOfRange(x, y - i)) {
-            System.out.println(x + "AND" + (y-i));
+            System.out.println((x+1) + "AND" + (7-(y-i)));
+            System.out.println(getBoard().getPiece(x, y-i).toString());
+            if (getBoard().occupied(x, y - i) && (getBoard().getPiece(x, y - 1).getColour() == this.getColour())) {
+                break;
+            }
             if (getBoard().occupied(x, y - i) && (getBoard().getPiece(x, y - 1).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x, y - i, true);
                 legalMoves.add(theMove);
@@ -62,14 +67,12 @@ public class Rook extends Piece {
                 theMove = new Move(this, x, y, x, y - i, false);
                 legalMoves.add(theMove);
             }
-            if (getBoard().occupied(x, y - i) && (getBoard().getPiece(x, y - 1).getColour() == this.getColour())) {
-                break;
-            }
             i += 1;
         }
 
         i = 1;
         while (!getBoard().outOfRange(x + i, y)) {
+            System.out.println((x+1+i) + "AND" + (7-(y)));
             if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x + i, y, true);
                 legalMoves.add(theMove);
@@ -88,6 +91,7 @@ public class Rook extends Piece {
 
         i = 1;
         while (!(getBoard().outOfRange(x - i, y))) {
+            System.out.println((x+1-i) + "AND" + (7-(y)));
             if (getBoard().occupied(x - i, y) && (getBoard().getPiece(x - i, y).getColour() != this.getColour())) {
                 theMove = new Move(this, x, y, x - i, y, true);
                 legalMoves.add(theMove);

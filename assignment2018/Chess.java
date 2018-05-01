@@ -85,7 +85,7 @@ public class Chess {
             kingTaken = playerW.checkKing(whiteTurn);
         }
 
-        //BLACK TURN - HUMAN PLAYER ATM
+
         else {
             System.out.println("Player 2 (black player)'s turn:");
             legalMoveFlag = playerB.makeMove();

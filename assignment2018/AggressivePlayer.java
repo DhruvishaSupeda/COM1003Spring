@@ -23,16 +23,13 @@ public class AggressivePlayer extends Player {
     }
 
     public boolean checkKing(boolean whiteTurn) {
-        if (/*(playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) && */
-                (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
-            if (whiteTurn)
-                System.out.println("White player wins");
-            else
-                System.out.println("Black player wins");
-            return true;
+        for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
+            if (this.getOpponent().getPieces().getPiece(i).getValue() == assignment2018.codeprovided.PieceCode.KING) {
+                return false;
+            }
         }
-        else
-            return false;
+        System.out.println(name + " wins!");
+        return true;
     }
 
     public Move chooseMove(ArrayList<Move> allMoves) {
@@ -43,28 +40,25 @@ public class AggressivePlayer extends Player {
         int newX = 0, newY = 0;
         int biggestValue = 0;
         for (int i = 0; i<allMoves.size(); i++) {
-            System.out.println(allMoves.get(i).toString());
-            if (allMoves.get(i).getOccupied() == true){
+            if (allMoves.get(i).getOccupied()){
                 trueMoves.add(allMoves.get(i));
             }
         }
 
         if (trueMoves != null) {
+            //Gets everything where occupied is true
             for (int i = 0; i < trueMoves.size(); i++) {
                 move = trueMoves.get(i);
-                System.out.print(trueMoves.get(i));
+                System.out.print(trueMoves.get(i).toString());
                 newX = move.getNX();
                 newY = move.getNY();
                 if (playingBoard.getPiece(newX, newY).getValue() > biggestValue) { //GET NEWX AND NEWY
-                    System.out.println("RUNNING");
                     biggestValue = playingBoard.getPiece(newX, newY).getValue();
                 }
             }
-            while (bigMoves == null && biggestValue >=0) {
-                System.out.println(biggestValue + "BIGGEST VALUE");
+            while (bigMoves.size() == 0 && biggestValue >=0) {
                 for (int i = 0; i < trueMoves.size(); i++) {
                     move = trueMoves.get(i);
-                    System.out.println("TRUEMOVES THING " + trueMoves.get(i));
                     newX = move.getNX();
                     newY = move.getNY();
                     System.out.println(playingBoard.getPiece(newX, newY).getValue());
@@ -79,7 +73,7 @@ public class AggressivePlayer extends Player {
                     break;
 
             }
-            if (bigMoves != null) {
+            if (bigMoves.size() > 0) {
                 Random rand = new Random();
                 int randomMove = rand.nextInt(bigMoves.size());
                 //Move currentMove = null;
@@ -110,13 +104,12 @@ public class AggressivePlayer extends Player {
         boolean whiteTurn = false;
         boolean blackTurn = true;
         ArrayList<Move> allMoves = new ArrayList<Move>();
-        if (allMoves == null) {
-            System.out.println("AAAAAAAAAALLLLLLLLLLLLLLLL NUUUUUUUUUULLLLLLLLLLLLLLLL");
-        }
         allMoves = getMoves();
         Random rand = new Random();
 
+
         currentMove = chooseMove(allMoves);
+        System.out.println(currentMove.toString());
 
         //int randomMove = rand.nextInt(allMoves.size());
         //currentMove = allMoves.get(randomMove);
@@ -128,7 +121,6 @@ public class AggressivePlayer extends Player {
         currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
         movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard, currentMove);
-
         return true;
     }
 
@@ -164,7 +156,6 @@ public class AggressivePlayer extends Player {
 
         ArrayList<Move> theLegalMoves = new ArrayList<Move>();
         theLegalMoves = currentPiece.availableMoves();
-        System.out.println(theLegalMoves);
 
         if (theLegalMoves != null) {
             System.out.println(theLegalMoves.size() + "legalMovesSize");
