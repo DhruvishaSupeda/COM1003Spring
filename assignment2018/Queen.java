@@ -32,17 +32,20 @@ public class Queen extends Piece {
         //GOING UP AS ROOK - while not occupied, or occupied by black AND in range
         i = 1;
         while (!(getBoard().outOfRange(x, y + i)))  {
-            if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() != this.getColour())) {
-                theMove = new Move(this, x, y, x, y + i, true);
-                legalMoves.add(theMove);
-                break;
+            if (getBoard().occupied(x, y+i)) {
+                if (getBoard().getPiece(x, y+i).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x , y+i, true);
+                    System.out.println(theMove.toString());
+                    legalMoves.add(theMove);
+                    break;
+                }
+                else
+                    break;
             }
-            if (!getBoard().occupied(x, y + i)) {
-                theMove = new Move(this, x, y, x, y + i, false);
+            else {
+                theMove = new Move(this, x, y, x, y+i, false);
+                System.out.println(theMove.toString());
                 legalMoves.add(theMove);
-            }
-            if (getBoard().occupied(x, y + i) && (getBoard().getPiece(x, y + i).getColour() == this.getColour())) {
-                break;
             }
             i += 1;
         }
@@ -50,35 +53,40 @@ public class Queen extends Piece {
 
         i = 1;
         while (!getBoard().outOfRange(x, y - i)) {
-            System.out.println(x + "AND" + (y-i));
-            if (getBoard().occupied(x, y - i) && (getBoard().getPiece(x, y - 1).getColour() != this.getColour())) {
-                theMove = new Move(this, x, y, x, y - i, true);
-                legalMoves.add(theMove);
-                break;
+            if (getBoard().occupied(x, y-i)) {
+                if (getBoard().getPiece(x, y-i).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x , y-i, true);
+                    System.out.println(theMove.toString());
+                    legalMoves.add(theMove);
+                    break;
+                }
+                else
+                    break;
             }
-            if (!getBoard().occupied(x, y - i)) {
-                theMove = new Move(this, x, y, x, y - i, false);
+            else {
+                theMove = new Move(this, x, y, x , y-i, false);
+                System.out.println(theMove.toString());
                 legalMoves.add(theMove);
-            }
-            if (getBoard().occupied(x, y - i) && (getBoard().getPiece(x, y - 1).getColour() == this.getColour())) {
-                break;
             }
             i += 1;
         }
 
         i = 1;
         while (!getBoard().outOfRange(x + i, y)) {
-            if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() != this.getColour())) {
-                theMove = new Move(this, x, y, x + i, y, true);
-                legalMoves.add(theMove);
-                break;
+            if (getBoard().occupied(x+i, y)) {
+                if (getBoard().getPiece(x + i, y).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x + i, y, true);
+                    System.out.println(theMove.toString());
+                    legalMoves.add(theMove);
+                    break;
+                }
+                else
+                    break;
             }
-            if (!getBoard().occupied(x + i, y)) {
+            else {
                 theMove = new Move(this, x, y, x + i, y, false);
+                System.out.println(theMove.toString());
                 legalMoves.add(theMove);
-            }
-            if (getBoard().occupied(x + i, y) && (getBoard().getPiece(x + i, y).getColour() == this.getColour())) {
-                break;
             }
             i += 1;
         }
@@ -86,17 +94,20 @@ public class Queen extends Piece {
 
         i = 1;
         while (!(getBoard().outOfRange(x - i, y))) {
-            if (getBoard().occupied(x - i, y) && (getBoard().getPiece(x - i, y).getColour() != this.getColour())) {
-                theMove = new Move(this, x, y, x - i, y, true);
-                legalMoves.add(theMove);
-                break;
+            if (getBoard().occupied(x-i, y)) {
+                if (getBoard().getPiece(x - i, y).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x - i, y, true);
+                    System.out.println(theMove.toString());
+                    legalMoves.add(theMove);
+                    break;
+                }
+                else
+                    break;
             }
-            if (!getBoard().occupied(x - i, y)) {
+            else {
                 theMove = new Move(this, x, y, x - i, y, false);
+                System.out.println(theMove.toString());
                 legalMoves.add(theMove);
-            }
-            if (getBoard().occupied(x - i, y) && (getBoard().getPiece(x - i, y).getColour() == this.getColour())) {
-                break;
             }
             i += 1;
         }
