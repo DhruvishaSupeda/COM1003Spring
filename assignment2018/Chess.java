@@ -22,7 +22,7 @@ public class Chess {
     Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
     Scanner scanner = new Scanner(System.in);
     int player1 = 0, player2 = 0;
-   // Player playerW, playerB;
+    //Player playerW = null, playerB = null;
 
     while (player1 != 1 && player1 != 2 && player1 != 3) {
         System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
