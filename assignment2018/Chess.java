@@ -79,6 +79,7 @@ public class Chess {
     while (!kingTaken) {
       //Display board
       display(piecesW, piecesB);
+      two.displayBoard(piecesW);
       legalMoveFlag = false;
       while (!legalMoveFlag) {
         if (whiteTurn) {
