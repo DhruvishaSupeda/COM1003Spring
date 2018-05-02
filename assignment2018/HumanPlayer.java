@@ -24,17 +24,6 @@ public class HumanPlayer extends Player {
   }
 
     public boolean checkKing(boolean whiteTurn) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
-        /*if ((playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) &&
-        (playingBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]).getValue() == PieceCode.KING))  {
-            if (whiteTurn)
-                System.out.println("White player wins");
-            else
-                System.out.println("Black player wins");
-            return true;
-        }
-        else
-            return false;*/
-
         for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
             if (this.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
                 return false;
@@ -108,12 +97,25 @@ public class HumanPlayer extends Player {
       String coords = scanner.nextLine().toUpperCase();
       //Uses space as delimiter and puts from and to into 2 elements of array
       char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
-
       int[] arrayOfCoordsInts = new int[4];
       arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
-      arrayOfCoordsInts[1] = 8-((int) arrayOfCoords[1] - '0');
+      arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
       arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
-      arrayOfCoordsInts[3] = 8-((int) arrayOfCoords[3] - '0');
+      arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
+
+      while (!((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H') && (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8') &&
+              (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H') && (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8'))) {
+          System.out.println("Incorrect input. Please try again: ");
+          coords = scanner.nextLine().toUpperCase();
+          //Uses space as delimiter and puts from and to into 2 elements of array
+          arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
+
+          //arrayOfCoordsInts = new int[4];
+          arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
+          arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
+          arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
+          arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
+      }
       return arrayOfCoordsInts;
   }
 

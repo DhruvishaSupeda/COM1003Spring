@@ -24,7 +24,7 @@ public class Chess {
     int player1 = 0, player2 = 0;
     GraphicalDisplay two = new GraphicalDisplay();
     two.displayBoard(piecesW);
-    //Player playerW = null, playerB = null;
+    Player playerW = null, playerB = null;
 
     while (player1 != 1 && player1 != 2 && player1 != 3) {
         System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
@@ -37,7 +37,7 @@ public class Chess {
         player2 = scanner.nextInt();
     }
 
-    /*if (player1 == 1)
+    if (player1 == 1)
         playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
     if (player1 == 2)
         playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
@@ -46,7 +46,7 @@ public class Chess {
     if (player2 == 2)
         playerB = new RandomPlayer("Black Player", piecesB, playingBoard, null);
 
-    switch (player1) {
+    /*switch (player1) {
         case 1: HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
                 break;
         case 2: RandomPlayer playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
@@ -65,8 +65,8 @@ public class Chess {
      }*/
 
 
-    AggressivePlayer playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
-    AggressivePlayer playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, playerW);
+    //AggressivePlayer playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
+    //AggressivePlayer playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
     playerB.setOpponent(playerW);
     boolean whiteTurn = false;
