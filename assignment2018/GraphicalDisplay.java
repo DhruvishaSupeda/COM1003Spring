@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class GraphicalDisplay extends JFrame implements Display {
 
-    private JButton[][] boardButtons = new JButton[8][8];
+    private JButton[][] boardButtons = new JButton[9][9];
     private Container contentPane = getContentPane();
 
     public GraphicalDisplay() {
@@ -19,16 +19,16 @@ public class GraphicalDisplay extends JFrame implements Display {
 
         //setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
 
         //Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(0, 8));
+        contentPane.setLayout(new GridLayout(0, 9));
 
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
                 boardButtons[x][y] = new JButton();
             }
         }
+        setVisible(true);
     }
 
     public void displayBoard(Pieces myPieces) {
@@ -47,10 +47,18 @@ public class GraphicalDisplay extends JFrame implements Display {
         ImageIcon w_queen = new ImageIcon("images/w_queen.png");
         ImageIcon w_rook = new ImageIcon("images/w_rook.png");
 
-        for (int y = 0; y<8; y++) {
-            for (int x = 0; x<8; x++) {
-                if (playingBoard.getPiece(x,y) != null) {
-                    switch (playingBoard.getPiece(x, y).getChar()) {
+        boardButtons[0][0].setIcon(null);
+        contentPane.add(boardButtons[0][0]);
+        for (int x = 1; x < 9; x++) {
+            boardButtons[x - 1][0].setText(Integer.toString(9-x));
+            contentPane.add(boardButtons[x - 1][0]);
+        }
+        for (int y = 1; y<9; y++) {
+            boardButtons[0][y-1].setText(Integer.toString(9-y));
+            contentPane.add(boardButtons[0][y-1]);
+            for (int x = 1; x<9; x++) {
+                if (playingBoard.getPiece(x-1,y-1) != null) {
+                    switch (playingBoard.getPiece(x-1, y-1).getChar()) {
                         case PieceCode.PAWNWHITE:
                             boardButtons[x][y].setIcon(w_pawn);
                             break;
@@ -98,7 +106,7 @@ public class GraphicalDisplay extends JFrame implements Display {
 
                 contentPane.add(boardButtons[x][y]);
             } //end of x for
-        }
+        } //end of y for
 
     }
 
