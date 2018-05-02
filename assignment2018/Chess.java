@@ -22,6 +22,8 @@ public class Chess {
     Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
     Scanner scanner = new Scanner(System.in);
     int player1 = 0, player2 = 0;
+    GraphicalDisplay two = new GraphicalDisplay();
+    two.displayBoard(piecesW);
     //Player playerW = null, playerB = null;
 
     while (player1 != 1 && player1 != 2 && player1 != 3) {
@@ -64,7 +66,7 @@ public class Chess {
 
 
     AggressivePlayer playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
-    HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, playerW);
+    AggressivePlayer playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
     playerB.setOpponent(playerW);
     boolean whiteTurn = false;

@@ -23,7 +23,7 @@ public class AggressivePlayer extends Player {
     }
 
     public boolean checkKing(boolean whiteTurn) {
-        for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
+        for (int i=1; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
             if (this.getOpponent().getPieces().getPiece(i).getValue() == assignment2018.codeprovided.PieceCode.KING) {
                 return false;
             }
@@ -35,7 +35,6 @@ public class AggressivePlayer extends Player {
     public Move chooseMove(ArrayList<Move> allMoves) {
         ArrayList<Move> trueMoves = new ArrayList<Move>();
         ArrayList<Move> bigMoves = new ArrayList<Move>();
-        //bigMoves = null;
         Move move = null;
         int newX = 0, newY = 0;
         int biggestValue = 0;
@@ -61,7 +60,6 @@ public class AggressivePlayer extends Player {
                     move = trueMoves.get(i);
                     newX = move.getNX();
                     newY = move.getNY();
-                    System.out.println(playingBoard.getPiece(newX, newY).getValue());
                     if (playingBoard.getPiece(newX, newY).getValue() == biggestValue) { //GET NEWX AND NEWY
                         bigMoves.add(trueMoves.get(i));
                     }
@@ -111,8 +109,6 @@ public class AggressivePlayer extends Player {
         currentMove = chooseMove(allMoves);
         System.out.println(currentMove.toString());
 
-        //int randomMove = rand.nextInt(allMoves.size());
-        //currentMove = allMoves.get(randomMove);
         arrayOfCoords[0] = currentMove.getOX();
         arrayOfCoords[1] = currentMove.getOY();
         arrayOfCoords[2] = currentMove.getNX();
@@ -158,12 +154,10 @@ public class AggressivePlayer extends Player {
         theLegalMoves = currentPiece.availableMoves();
 
         if (theLegalMoves != null) {
-            System.out.println(theLegalMoves.size() + "legalMovesSize");
             for (int i = 0; i < theLegalMoves.size(); i++) {
                 if (theLegalMoves.get(i).equals(currentMove)) {
                     if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
                         legalMoveFlag = true;
-                        System.out.println("Legal + " + theLegalMoves.get(i).toString());
                         break;
                     }
                 } else
