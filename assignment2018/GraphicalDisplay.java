@@ -15,7 +15,7 @@ public class GraphicalDisplay extends JFrame implements Display {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenDimensions = toolkit.getScreenSize();
-        setSize(screenDimensions.width, screenDimensions.height);
+        setSize(screenDimensions.width/2, screenDimensions.height/2);
 
         //setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +33,6 @@ public class GraphicalDisplay extends JFrame implements Display {
 
     public void displayBoard(Pieces myPieces) {
         Board playingBoard = myPieces.getPiece(1).getBoard();
-        System.out.println(playingBoard.toString());
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         ImageIcon b_bishop = new ImageIcon("images/b_bishop.png");
         ImageIcon b_rook = new ImageIcon("images/b_rook.png");
@@ -51,7 +50,6 @@ public class GraphicalDisplay extends JFrame implements Display {
         for (int y = 0; y<8; y++) {
             for (int x = 0; x<8; x++) {
                 if (playingBoard.getPiece(x,y) != null) {
-                    System.out.println(playingBoard.getPiece(x,y).getChar());
                     switch (playingBoard.getPiece(x, y).getChar()) {
                         case PieceCode.PAWNWHITE:
                             boardButtons[x][y].setIcon(w_pawn);
