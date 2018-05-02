@@ -69,8 +69,8 @@ public class Chess {
     //AggressivePlayer playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
     playerB.setOpponent(playerW);
-    boolean whiteTurn = false;
-    boolean blackTurn = true;
+    boolean whiteTurn = true;
+    boolean blackTurn = false;
     boolean kingTaken = false,
     legalMoveFlag= false;
     //Player currentPlayer = playerW;
