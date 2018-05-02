@@ -41,7 +41,7 @@ public class HumanPlayer extends Player {
       boolean whiteTurn = false;
       boolean blackTurn = true;
 
-      arrayOfCoords = playerInput(PieceCode.BLACK);
+      arrayOfCoords = playerInput();
       if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
           currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
@@ -90,31 +90,33 @@ public class HumanPlayer extends Player {
   }
 
 
-  public int[] playerInput(int colour) {
+  public int[] playerInput() {
       Scanner scanner = new Scanner(System.in);
+      boolean correct = false;
       System.out.print("Please enter your move: ");
       //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
       String coords = scanner.nextLine().toUpperCase();
       //Uses space as delimiter and puts from and to into 2 elements of array
       char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
       int[] arrayOfCoordsInts = new int[4];
-      arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
-      arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
-      arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
-      arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
 
-      while (!((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H') && (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8') &&
-              (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H') && (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8'))) {
-          System.out.println("Incorrect input. Please try again: ");
-          coords = scanner.nextLine().toUpperCase();
-          //Uses space as delimiter and puts from and to into 2 elements of array
-          arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
-
-          //arrayOfCoordsInts = new int[4];
-          arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
-          arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
-          arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
-          arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
+      while (!correct) {
+          if ((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H') && (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8') &&
+                  (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H') && (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8')) {
+              arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
+              arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
+              arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
+              arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
+              correct = true;
+          }
+          else {
+              System.out.println("Incorrect input. Please try again: ");
+              //for (int i = 0; i < 4; i++)
+               //   arrayOfCoords[i] = 'A';
+              coords = scanner.nextLine().toUpperCase();
+              //Uses space as delimiter and puts from and to into 2 elements of array
+              arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
+          }
       }
       return arrayOfCoordsInts;
   }

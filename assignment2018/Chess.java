@@ -15,6 +15,15 @@ public class Chess {
     one.displayBoard(piecesW);
     one.displayBoard(piecesB);
   }
+  public static boolean checkKing(Player player) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
+      for (int i=0; i<player.getOpponent().getPieces().getNumPieces(); i++ ) {
+          if (player.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
+              return false;
+          }
+      }
+      System.out.println(player.toString() + " wins!");
+      return true;
+  }
 
   public static void main(String[] args) {
     Board playingBoard = new Board();
@@ -85,14 +94,14 @@ public class Chess {
         if (whiteTurn) {
             System.out.println("Player 1 (white player)'s turn:");
             legalMoveFlag = playerW.makeMove();
-            kingTaken = playingBoard.checkKing(playerW);
+            kingTaken = checkKing(playerW);
         }
 
 
         else {
             System.out.println("Player 2 (black player)'s turn:");
             legalMoveFlag = playerB.makeMove();
-            kingTaken = playingBoard.checkKing(playerB);
+            kingTaken = checkKing(playerB);
         }
         if (!legalMoveFlag)
             System.out.println("Illegal move. Please try a valid move:");
