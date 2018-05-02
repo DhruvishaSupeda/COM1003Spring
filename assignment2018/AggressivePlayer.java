@@ -144,6 +144,7 @@ public class AggressivePlayer extends Player {
         currentBoard.removePiece(currentMove.getOX(), currentMove.getOY());
         currentBoard.setPosition(currentMove.getNX(), currentMove.getNY(), currentPiece);
         currentPiece.setPosition(currentMove.getNX(), currentMove.getNY());
+        System.out.println("MAKE MOOOOOOOOOOOOOOOVVVVVVVVVVVVVVVVEEEEEEEEEEEE");
     }
 
     public boolean checkMove(Piece currentPiece, Move currentMove) {
@@ -166,8 +167,6 @@ public class AggressivePlayer extends Player {
         }
         return legalMoveFlag;
     }
-
-
 
 
 

@@ -85,18 +85,17 @@ public class Chess {
         if (whiteTurn) {
             System.out.println("Player 1 (white player)'s turn:");
             legalMoveFlag = playerW.makeMove();
-            kingTaken = playerW.checkKing(whiteTurn);
+            kingTaken = playingBoard.checkKing(playerW);
         }
 
 
         else {
             System.out.println("Player 2 (black player)'s turn:");
             legalMoveFlag = playerB.makeMove();
-            kingTaken = playerB.checkKing(whiteTurn);
-
-          if (!legalMoveFlag)
-              System.out.println("Illegal move. Please try a valid move:");
+            kingTaken = playingBoard.checkKing(playerB);
         }
+        if (!legalMoveFlag)
+            System.out.println("Illegal move. Please try a valid move:");
       }//end of while!legal
 
 
@@ -106,6 +105,9 @@ public class Chess {
 
 
     } //end of while loop
+    display(piecesW, piecesB);
+    two.displayBoard(piecesW);
+    System.exit(0);
   } //end ofmain
 
 }//end of class

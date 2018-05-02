@@ -37,6 +37,16 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
     else
       return false;
   }
+  public boolean checkKing(Player player) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
+    for (int i=0; i<player.getOpponent().getPieces().getNumPieces(); i++ ) {
+      if (player.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
+        return false;
+      }
+    }
+    System.out.println(player.toString() + " wins!");
+    return true;
+  }
+
 
   public String toString() {
     String arrayString = "";
