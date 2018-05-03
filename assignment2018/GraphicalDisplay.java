@@ -15,7 +15,7 @@ public class GraphicalDisplay extends JFrame implements Display {
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenDimensions = toolkit.getScreenSize();
-        setSize(screenDimensions.width/2, screenDimensions.height/2);
+        setSize(screenDimensions.width / 2, screenDimensions.height / 2);
 
         //setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,15 +50,13 @@ public class GraphicalDisplay extends JFrame implements Display {
         boardButtons[0][0].setIcon(null);
         contentPane.add(boardButtons[0][0]);
         for (int x = 1; x < 9; x++) {
-            boardButtons[x - 1][0].setText(Integer.toString(9-x));
-            contentPane.add(boardButtons[x - 1][0]);
+            boardButtons[0][x].setText(Integer.toString(9 - x));
         }
-        for (int y = 1; y<9; y++) {
-            boardButtons[0][y-1].setText(Integer.toString(9-y));
-            contentPane.add(boardButtons[0][y-1]);
-            for (int x = 1; x<9; x++) {
-                if (playingBoard.getPiece(x-1,y-1) != null) {
-                    switch (playingBoard.getPiece(x-1, y-1).getChar()) {
+        for (int y = 1; y < 9; y++) {
+            for (int x = 1; x < 9; x++) {
+                boardButtons[x][0].setText(Integer.toString(999));
+                if (playingBoard.getPiece(x - 1, y - 1) != null) {
+                    switch (playingBoard.getPiece(x - 1, y - 1).getChar()) {
                         case PieceCode.PAWNWHITE:
                             boardButtons[x][y].setIcon(w_pawn);
                             break;
@@ -103,17 +101,23 @@ public class GraphicalDisplay extends JFrame implements Display {
                 } //end of if
                 else
                     boardButtons[x][y].setIcon(null);
-
-                contentPane.add(boardButtons[x][y]);
             } //end of x for
         } //end of y for
-
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                contentPane.add(boardButtons[x][y]);
+            }
+        }
     }
 
 
 
 
-
-
-
 }
+
+
+
+
+
+
+
