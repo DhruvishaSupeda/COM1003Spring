@@ -88,7 +88,6 @@ public class RandomPlayer extends Player {
 
     ArrayList<Move> theLegalMoves = new ArrayList<Move>();
     theLegalMoves = currentPiece.availableMoves();
-    System.out.println(theLegalMoves);
 
     if (theLegalMoves != null) {
       System.out.println(theLegalMoves.size() + "legalMovesSize");
@@ -96,7 +95,6 @@ public class RandomPlayer extends Player {
         if (theLegalMoves.get(i).equals(currentMove)) {
           if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
             legalMoveFlag = true;
-            System.out.println("Legal + " + theLegalMoves.get(i).toString());
             break;
           }
         } else

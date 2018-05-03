@@ -46,32 +46,27 @@ public class Chess {
         player2 = scanner.nextInt();
     }
 
-    if (player1 == 1)
-        playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
-    if (player1 == 2)
-        playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
-    if (player2 == 1)
-        playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
-    if (player2 == 2)
-        playerB = new RandomPlayer("Black Player", piecesB, playingBoard, null);
-
-    /*switch (player1) {
-        case 1: HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
+    switch (player1) {
+        case 1: playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
                 break;
-        case 2: RandomPlayer playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
+        case 2: playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
                 break;
-        default:HumanPlayer playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
+        case 3: playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
+                break;
+        default:playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
                 break;
     }
 
-    switch (player2) {
-        case 1: HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
-                break;
-        case 2: RandomPlayer playerB = new RandomPlayer("Black Player", piecesB, playingBoard, null);
-                break;
-        default:HumanPlayer playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
-                break;
-     }*/
+      switch (player2) {
+          case 1: playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
+              break;
+          case 2: playerB = new RandomPlayer("Black Player", piecesB, playingBoard, null);
+              break;
+          case 3: playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, null);
+              break;
+          default:playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
+              break;
+      }
 
 
     //AggressivePlayer playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);

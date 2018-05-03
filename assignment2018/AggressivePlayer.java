@@ -48,7 +48,6 @@ public class AggressivePlayer extends Player {
             //Gets everything where occupied is true
             for (int i = 0; i < trueMoves.size(); i++) {
                 move = trueMoves.get(i);
-                System.out.print(trueMoves.get(i).toString());
                 newX = move.getNX();
                 newY = move.getNY();
                 if (playingBoard.getPiece(newX, newY).getValue() > biggestValue) { //GET NEWX AND NEWY

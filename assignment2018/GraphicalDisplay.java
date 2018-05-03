@@ -54,7 +54,7 @@ public class GraphicalDisplay extends JFrame implements Display {
         }
         for (int y = 1; y < 9; y++) {
             for (int x = 1; x < 9; x++) {
-                boardButtons[x][0].setText(Integer.toString(999));
+                boardButtons[x][0].setText(Integer.toString((char)64+x));
                 if (playingBoard.getPiece(x - 1, y - 1) != null) {
                     switch (playingBoard.getPiece(x - 1, y - 1).getChar()) {
                         case PieceCode.PAWNWHITE:
