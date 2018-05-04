@@ -35,8 +35,9 @@ public class AggressivePlayer extends Player {
     public Move chooseMove(ArrayList<Move> allMoves) {
         ArrayList<Move> trueMoves = new ArrayList<Move>();
         ArrayList<Move> bigMoves = new ArrayList<Move>();
-        Move move = null;
-        int newX = 0, newY = 0;
+        Random rand = new Random();
+        Move move = null, currentMove = null;
+        int newX = 0, newY = 0, randomMove = 0;
         int biggestValue = 0;
         for (int i = 0; i<allMoves.size(); i++) {
             if (allMoves.get(i).getOccupied()){
@@ -71,26 +72,19 @@ public class AggressivePlayer extends Player {
 
             }
             if (bigMoves.size() > 0) {
-                Random rand = new Random();
-                int randomMove = rand.nextInt(bigMoves.size());
-                //Move currentMove = null;
-                Move currentMove = bigMoves.get(randomMove);
-                return currentMove;
+                randomMove = rand.nextInt(bigMoves.size());
+                currentMove = bigMoves.get(randomMove);
             }
             else {
-                Random rand = new Random();
-                int randomMove = rand.nextInt(allMoves.size());
-                Move currentMove = allMoves.get(randomMove);
-                return currentMove;
+                randomMove = rand.nextInt(allMoves.size());
+                currentMove = allMoves.get(randomMove);
             }
         }
         else {
-            Random rand = new Random();
-            int randomMove = rand.nextInt(allMoves.size());
-            Move currentMove = allMoves.get(randomMove);
-            return currentMove;
+            randomMove = rand.nextInt(allMoves.size());
+            currentMove = allMoves.get(randomMove);
         }
-
+        return currentMove;
     }
 
     public boolean makeMove() {
@@ -143,7 +137,6 @@ public class AggressivePlayer extends Player {
         currentBoard.removePiece(currentMove.getOX(), currentMove.getOY());
         currentBoard.setPosition(currentMove.getNX(), currentMove.getNY(), currentPiece);
         currentPiece.setPosition(currentMove.getNX(), currentMove.getNY());
-        System.out.println("MAKE MOOOOOOOOOOOOOOOVVVVVVVVVVVVVVVVEEEEEEEEEEEE");
     }
 
 
