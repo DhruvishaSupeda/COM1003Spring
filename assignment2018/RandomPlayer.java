@@ -59,8 +59,8 @@ public class RandomPlayer extends Player {
   public ArrayList<Move> getMoves() {
     Piece currentPiece = null;
     ArrayList<Move> allMoves = new ArrayList<Move>();
-    for (int i = 0; i<getPieces().getNumPieces(); i++) {
-      currentPiece = getPieces().getPiece(i);
+    for (int i = 0; i<this.getPieces().getNumPieces(); i++) {
+      currentPiece = this.getPieces().getPiece(i);
       if (currentPiece.availableMoves() != null) {
         allMoves.addAll(currentPiece.availableMoves());
       }
@@ -69,7 +69,6 @@ public class RandomPlayer extends Player {
   }
 
   public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
-    System.out.println(occupiedFlag);
     if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
       if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
         this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));

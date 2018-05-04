@@ -7,8 +7,11 @@ import java.awt.*;
 
 public class GraphicalDisplay extends JFrame implements Display {
 
-    private JButton[][] boardButtons = new JButton[9][9];
+    private JButton[][] boardButtons = new JButton[8][8];
     private Container contentPane = getContentPane();
+    private JPanel letterPanel = new JPanel();
+    JPanel numberPanel = new JPanel();
+    JPanel boardPanel = new JPanel();
 
     public GraphicalDisplay() {
         setTitle("Chess");
@@ -21,13 +24,27 @@ public class GraphicalDisplay extends JFrame implements Display {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Container contentPane = getContentPane();
-        contentPane.setLayout(new GridLayout(0, 9));
+        //contentPane.setLayout(new GridLayout(0, 9));
+        contentPane.setLayout(new BorderLayout());
+        letterPanel.setLayout(new GridLayout(1,0));
+        numberPanel.setLayout(new GridLayout(0,1));
+        boardPanel.setLayout(new GridLayout(0,8));
 
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
+
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
                 boardButtons[x][y] = new JButton();
+                boardPanel.add(boardButtons[x][y]);
             }
         }
+
+        for (int i = 0; i<8; i++) {
+            numberPanel.add(new JButton(Integer.toString(i)));
+            letterPanel.add(new JButton("A"));
+        }
+        contentPane.add(letterPanel, BorderLayout.NORTH);
+        contentPane.add(numberPanel, BorderLayout.WEST);
+        contentPane.add(boardPanel, BorderLayout.CENTER);
         setVisible(true);
     }
 
@@ -47,16 +64,11 @@ public class GraphicalDisplay extends JFrame implements Display {
         ImageIcon w_queen = new ImageIcon("images/w_queen.png");
         ImageIcon w_rook = new ImageIcon("images/w_rook.png");
 
-        boardButtons[0][0].setIcon(null);
-        contentPane.add(boardButtons[0][0]);
-        for (int x = 1; x < 9; x++) {
-            boardButtons[0][x].setText(Integer.toString(9 - x));
-        }
-        for (int y = 1; y < 9; y++) {
-            for (int x = 1; x < 9; x++) {
-                boardButtons[x][0].setText(Integer.toString((char)64+x));
-                if (playingBoard.getPiece(x - 1, y - 1) != null) {
-                    switch (playingBoard.getPiece(x - 1, y - 1).getChar()) {
+        for (int y = 0; y < 8; y++) {
+            for (int x = 0; x < 8; x++) {
+                //boardButtons[x][0].setText(Integer.toString((char)64+x));
+                if (playingBoard.getPiece(x , y) != null) {
+                    switch (playingBoard.getPiece(x, y).getChar()) {
                         case PieceCode.PAWNWHITE:
                             boardButtons[x][y].setIcon(w_pawn);
                             break;
@@ -103,14 +115,8 @@ public class GraphicalDisplay extends JFrame implements Display {
                     boardButtons[x][y].setIcon(null);
             } //end of x for
         } //end of y for
-        for (int y = 0; y < 9; y++) {
-            for (int x = 0; x < 9; x++) {
-                contentPane.add(boardButtons[x][y]);
-            }
-        }
+
     }
-
-
 
 
 }
