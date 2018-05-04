@@ -44,6 +44,7 @@ public class RandomPlayer extends Player {
     Random rand = new Random();
     int randomMove = rand.nextInt(allMoves.size());
     currentMove = allMoves.get(randomMove);
+    System.out.println(currentMove.toString());
     arrayOfCoords[0] = currentMove.getOX();
     arrayOfCoords[1] = currentMove.getOY();
     arrayOfCoords[2] = currentMove.getNX();
@@ -69,6 +70,7 @@ public class RandomPlayer extends Player {
   }
 
   public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
+    System.out.println(currentPiece.toString());
     if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
       if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
         this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));
@@ -81,27 +83,6 @@ public class RandomPlayer extends Player {
     currentPiece.setPosition(currentMove.getNX(), currentMove.getNY());
   }
 
-  public boolean checkMove(Piece currentPiece, Move currentMove) {
-    boolean legalMoveFlag = false;
-    //Now iterate through move arraylist somehow
-
-    ArrayList<Move> theLegalMoves = new ArrayList<Move>();
-    theLegalMoves = currentPiece.availableMoves();
-
-    if (theLegalMoves != null) {
-      System.out.println(theLegalMoves.size() + "legalMovesSize");
-      for (int i = 0; i < theLegalMoves.size(); i++) {
-        if (theLegalMoves.get(i).equals(currentMove)) {
-          if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
-            legalMoveFlag = true;
-            break;
-          }
-        } else
-        legalMoveFlag = false;
-      }
-    }
-    return legalMoveFlag;
-  }
 
 
 

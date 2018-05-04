@@ -146,28 +146,6 @@ public class AggressivePlayer extends Player {
         System.out.println("MAKE MOOOOOOOOOOOOOOOVVVVVVVVVVVVVVVVEEEEEEEEEEEE");
     }
 
-    public boolean checkMove(Piece currentPiece, Move currentMove) {
-        boolean legalMoveFlag = false;
-        //Now iterate through move arraylist somehow
-
-        ArrayList<Move> theLegalMoves = new ArrayList<Move>();
-        theLegalMoves = currentPiece.availableMoves();
-
-        if (theLegalMoves != null) {
-            for (int i = 0; i < theLegalMoves.size(); i++) {
-                if (theLegalMoves.get(i).equals(currentMove)) {
-                    if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
-                        legalMoveFlag = true;
-                        break;
-                    }
-                } else
-                    legalMoveFlag = false;
-            }
-        }
-        return legalMoveFlag;
-    }
-
-
 
 
 

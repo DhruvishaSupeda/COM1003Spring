@@ -37,7 +37,7 @@ public class Rook extends Piece {
             if (getBoard().occupied(x, y+i)) {
                 if (getBoard().getPiece(x, y+i).getColour() != this.getColour()) {
                     theMove = new Move(this, x, y, x , y+i, true);
-                    System.out.println(theMove.toString());
+                    //System.out.println(theMove.toString());
                     legalMoves.add(theMove);
                     break;
                 }
@@ -46,7 +46,7 @@ public class Rook extends Piece {
             }
             else {
                 theMove = new Move(this, x, y, x, y+i, false);
-                System.out.println(theMove.toString());
+                //System.out.println(theMove.toString());
                 legalMoves.add(theMove);
             }
             i += 1;
@@ -58,7 +58,7 @@ public class Rook extends Piece {
             if (getBoard().occupied(x, y-i)) {
                 if (getBoard().getPiece(x, y-i).getColour() != this.getColour()) {
                     theMove = new Move(this, x, y, x , y-i, true);
-                    System.out.println(theMove.toString());
+                    //System.out.println(theMove.toString());
                     legalMoves.add(theMove);
                     break;
                 }
@@ -67,7 +67,7 @@ public class Rook extends Piece {
             }
             else {
                 theMove = new Move(this, x, y, x , y-i, false);
-                System.out.println(theMove.toString());
+                //System.out.println(theMove.toString());
                 legalMoves.add(theMove);
             }
             i += 1;
@@ -78,7 +78,7 @@ public class Rook extends Piece {
             if (getBoard().occupied(x+i, y)) {
                 if (getBoard().getPiece(x + i, y).getColour() != this.getColour()) {
                     theMove = new Move(this, x, y, x + i, y, true);
-                    System.out.println(theMove.toString());
+                    //System.out.println(theMove.toString());
                     legalMoves.add(theMove);
                     break;
                 }
@@ -87,7 +87,7 @@ public class Rook extends Piece {
             }
             else {
                 theMove = new Move(this, x, y, x + i, y, false);
-                System.out.println(theMove.toString());
+                //System.out.println(theMove.toString());
                 legalMoves.add(theMove);
             }
             i += 1;
@@ -99,7 +99,7 @@ public class Rook extends Piece {
             if (getBoard().occupied(x-i, y)) {
                 if (getBoard().getPiece(x - i, y).getColour() != this.getColour()) {
                     theMove = new Move(this, x, y, x - i, y, true);
-                    System.out.println(theMove.toString());
+                   // System.out.println(theMove.toString());
                     legalMoves.add(theMove);
                     break;
                 }
@@ -108,7 +108,7 @@ public class Rook extends Piece {
             }
             else {
                 theMove = new Move(this, x, y, x - i, y, false);
-                System.out.println(theMove.toString());
+               // System.out.println(theMove.toString());
                 legalMoves.add(theMove);
             }
             i += 1;

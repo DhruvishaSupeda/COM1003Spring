@@ -31,8 +31,9 @@ public class Chess {
     Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
     Scanner scanner = new Scanner(System.in);
     int player1 = 0, player2 = 0;
-    GraphicalDisplay two = new GraphicalDisplay();
-    two.displayBoard(piecesW);
+    GraphicalDisplay gDisplay = new GraphicalDisplay();
+    TextDisplay tDisplay = new TextDisplay();
+    gDisplay.displayBoard(piecesW);
     Player playerW = null, playerB = null;
 
     while (player1 != 1 && player1 != 2 && player1 != 3) {
@@ -68,31 +69,25 @@ public class Chess {
               break;
       }
 
-
-    //AggressivePlayer playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
-    //AggressivePlayer playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, playerW);
     playerW.setOpponent(playerB);
     playerB.setOpponent(playerW);
     boolean whiteTurn = true;
-    boolean blackTurn = false;
     boolean kingTaken = false,
     legalMoveFlag= false;
-    //Player currentPlayer = playerW;
-    //currentPlayer.toString();
 
     while (!kingTaken) {
       //Display board
-      display(piecesW, piecesB);
-      two.displayBoard(piecesW);
+
+      tDisplay.displayBoard(piecesW);
+      gDisplay.displayBoard(piecesW);
       legalMoveFlag = false;
       while (!legalMoveFlag) {
+        System.out.println();
         if (whiteTurn) {
             System.out.println("Player 1 (white player)'s turn:");
             legalMoveFlag = playerW.makeMove();
             kingTaken = checkKing(playerW);
         }
-
-
         else {
             System.out.println("Player 2 (black player)'s turn:");
             legalMoveFlag = playerB.makeMove();
@@ -105,12 +100,11 @@ public class Chess {
 
       //Make it the next players turn
       whiteTurn = !whiteTurn;
-      blackTurn = !blackTurn;
 
 
     } //end of while loop
-    display(piecesW, piecesB);
-    two.displayBoard(piecesW);
+      tDisplay.displayBoard(piecesW);
+      gDisplay.displayBoard(piecesW);
     System.exit(0);
   } //end ofmain
 
