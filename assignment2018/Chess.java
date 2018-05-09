@@ -92,6 +92,7 @@ public class Chess {
 
     playerW.setOpponent(playerB);
     playerB.setOpponent(playerW);
+    Player currentPlayer = playerW;
     boolean whiteTurn = true;
     boolean kingTaken = false,
     legalMoveFlag= false;
@@ -101,7 +102,7 @@ public class Chess {
       //IF THEY DO, DO ANOTHER WHILE LOOK WHICH HAS LIKE GDISPLAY.WHATEVER TO MAKE THE MOVES?
       //USE GETARRAYOFCOORDS TO GET AND SET IT IN GDISPLAY?
 
-    if (tDisplay.getDisplayNeeded() == true) {
+    if (tDisplay.getDisplayNeeded()) {
           while (!kingTaken) {
               //Display board
               tDisplay.displayBoard(piecesW);
@@ -110,13 +111,11 @@ public class Chess {
                   System.out.println();
                   if (whiteTurn) {
                       System.out.println("Player 1 (white player)'s turn:");
-                      legalMoveFlag = playerW.makeMove();
-                      kingTaken = checkKing(playerW);
                   } else {
                       System.out.println("Player 2 (black player)'s turn:");
-                      legalMoveFlag = playerB.makeMove();
-                      kingTaken = checkKing(playerB);
                   }
+                  legalMoveFlag = currentPlayer.makeMove();
+                  kingTaken = checkKing(currentPlayer);
                   if (!legalMoveFlag)
                       System.out.println("Illegal move. Please try a valid move:");
               }//end of while!legal
@@ -124,6 +123,10 @@ public class Chess {
 
               //Make it the next players turn
               whiteTurn = !whiteTurn;
+              if (whiteTurn)
+                  currentPlayer = playerW;
+              else
+                  currentPlayer = playerB;
 
 
           } //end of while loop
@@ -136,17 +139,16 @@ public class Chess {
         while (!kingTaken) {
             legalMoveFlag = false;
             if (gDisplay.getButtonPressed()) {
+                legalMoveFlag = currentPlayer.makeMove();
+                kingTaken = checkKing(currentPlayer);
                 gDisplay.displayBoard(piecesW);
-                if (whiteTurn) {
-                    legalMoveFlag = playerW.makeMove();
-                    kingTaken = checkKing(playerW);
-                } else {
-                    legalMoveFlag = playerB.makeMove();
-                    kingTaken = checkKing(playerB);
-                }
-                gDisplay.displayBoard(piecesW);
-                if (legalMoveFlag)
+                if (legalMoveFlag) {
                     whiteTurn = !whiteTurn;
+                    if (whiteTurn)
+                        currentPlayer = playerW;
+                    else
+                        currentPlayer = playerB;
+                }
                 gDisplay.setButtonPressed(false);
             } //end of if button pressed
         } //end of !kingtaken
