@@ -138,7 +138,22 @@ public class Chess {
         gDisplay.displayBoard(piecesW);
         while (!kingTaken) {
             legalMoveFlag = false;
-            if (gDisplay.getButtonPressed()) {
+            if (currentPlayer instanceof HumanPlayer) {
+                if (gDisplay.getButtonPressed()) {
+                    legalMoveFlag = currentPlayer.makeMove();
+                    kingTaken = checkKing(currentPlayer);
+                    gDisplay.displayBoard(piecesW);
+                    if (legalMoveFlag) {
+                        whiteTurn = !whiteTurn;
+                        if (whiteTurn)
+                            currentPlayer = playerW;
+                        else
+                            currentPlayer = playerB;
+                    }
+                    gDisplay.setButtonPressed(false);
+                }
+            }//end of if button pressed
+            else {
                 legalMoveFlag = currentPlayer.makeMove();
                 kingTaken = checkKing(currentPlayer);
                 gDisplay.displayBoard(piecesW);
@@ -150,7 +165,8 @@ public class Chess {
                         currentPlayer = playerB;
                 }
                 gDisplay.setButtonPressed(false);
-            } //end of if button pressed
+            }
+
         } //end of !kingtaken
         gDisplay.displayBoard(piecesW);
       } //end of else
