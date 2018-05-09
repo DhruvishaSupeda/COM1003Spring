@@ -3,12 +3,11 @@ import assignment2018.codeprovided.*;
 import assignment2018.codeprovided.PieceCode;
 
 public class TextDisplay implements Display {
+    private final int BOARD_HEIGHT = 8;
+    private final int BOARD_WIDTH = 8;
 
   private char[][] pieceArray = new char[BOARD_WIDTH][BOARD_HEIGHT];
   private boolean displayNeeded;
-
-  private final int BOARD_HEIGHT = 8;
-  private final int BOARD_WIDTH = 8;
 
   public TextDisplay() {
       for (int x = 0; x < BOARD_WIDTH; x++) {
