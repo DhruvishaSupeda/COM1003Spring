@@ -13,7 +13,10 @@ public class HumanPlayer extends Player {
   private Pieces pieces;
   private Board playingBoard;
   private Player opponent;
-  private int[] arrayOfCoords;
+  private int[] arrayOfCoords = new int[4];
+
+  private GraphicalDisplay gDisplay;
+  private TextDisplay tDisplay;
 
   public HumanPlayer(String n, Pieces p, Board b, Player o) {
     super(n,p,b,o);
@@ -23,25 +26,90 @@ public class HumanPlayer extends Player {
     opponent = o;
   }
 
-    public boolean checkKing(boolean whiteTurn) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
-        for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
-            if (this.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
-                return false;
+    /**
+     * Converts the letters from the input from the player to numbers to be used as coordinates
+     * @param xCoord the coordinate being converted to a number
+     * @return returns the number equivalent of the letter given
+     */
+    public static int checkCoords(char xCoord) {
+        int equivInt = 0;
+        switch (xCoord) {
+            case 'A': equivInt = 0;
+                break;
+            case 'B': equivInt = 1;
+                break;
+            case 'C': equivInt = 2;
+                break;
+            case 'D': equivInt = 3;
+                break;
+            case 'E': equivInt = 4;
+                break;
+            case 'F': equivInt = 5;
+                break;
+            case 'G': equivInt = 6;
+                break;
+            case 'H': equivInt = 7;
+                break;
+            default:  equivInt = 8;
+                break;
+        }
+        return equivInt;
+    }
+
+    /**
+     * Asks the user for input if the player is a HumanPlayer
+     * @param player
+     * @return
+     */
+    public static int[] playerInput() {
+        Scanner scanner = new Scanner(System.in);
+        boolean correct = false;
+        System.out.print("Please enter your move: ");
+        String coords = scanner.nextLine().toUpperCase();
+        //Uses space as delimiter and puts from and to into 2 elements of array
+        char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
+        int[] arrayOfCoordsInts = new int[4];
+
+        while (!correct) {
+            if ((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H') && (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8') &&
+                    (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H') && (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8')) {
+                arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
+                arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
+                arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
+                arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
+                correct = true;
+            }
+            else {
+                System.out.println("Incorrect input. Please try again: ");
+                //for (int i = 0; i < 4; i++)
+                //   arrayOfCoords[i] = 'A';
+                coords = scanner.nextLine().toUpperCase();
+                //Uses space as delimiter and puts from and to into 2 elements of array
+                arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
             }
         }
-        System.out.println(name + " wins!");
-        return true;
+        return arrayOfCoordsInts;
     }
 
   public boolean makeMove(){
-
       Piece currentPiece = null;
       Move currentMove = null;
       boolean occupiedFlag = false, legalMoveFlag = false, kingTaken = false;
-      boolean whiteTurn = false;
-      boolean blackTurn = true;
+      char[] coordsInput = new char[4];
 
-      arrayOfCoords = playerInput();
+      if (tDisplay.getDisplayNeeded())
+          arrayOfCoords = playerInput();
+      else {
+          System.out.println("makeMove be running");
+          coordsInput = gDisplay.getInput();
+          System.out.println(coordsInput[0]);
+          arrayOfCoords[0] = checkCoords(coordsInput[0]);
+          System.out.println("arrraayyyy   ");
+          arrayOfCoords[1] = 8 - ((int) coordsInput[1] - '0');
+          arrayOfCoords[2] = checkCoords(coordsInput[2]);
+          arrayOfCoords[3] = 8 - ((int) coordsInput[3] - '0');
+      }
+
       if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
           currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
@@ -57,6 +125,7 @@ public class HumanPlayer extends Player {
 
           legalMoveFlag = checkMove(currentPiece, currentMove);
       }
+      gDisplay.setButtonPressed(false);
       if (!legalMoveFlag)
           return false;
       else
@@ -64,62 +133,6 @@ public class HumanPlayer extends Player {
       return legalMoveFlag;
   }
 
-  public int checkCoords(char xCoord) {
-    int equivInt = 0;
-    switch (xCoord) {
-      case 'A': equivInt = 0;
-                break;
-      case 'B': equivInt = 1;
-                break;
-      case 'C': equivInt = 2;
-                break;
-      case 'D': equivInt = 3;
-                break;
-      case 'E': equivInt = 4;
-                break;
-      case 'F': equivInt = 5;
-                break;
-      case 'G': equivInt = 6;
-                break;
-      case 'H': equivInt = 7;
-                break;
-      default:  equivInt = 8;
-                break;
-    }
-    return equivInt;
-  }
-
-
-  public int[] playerInput() {
-      Scanner scanner = new Scanner(System.in);
-      boolean correct = false;
-      System.out.print("Please enter your move: ");
-      //Takes input - NEED EXCEPTION ERROR IF NOT IN CORRECT FORMAT/PUT NOTHING IN
-      String coords = scanner.nextLine().toUpperCase();
-      //Uses space as delimiter and puts from and to into 2 elements of array
-      char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
-      int[] arrayOfCoordsInts = new int[4];
-
-      while (!correct) {
-          if ((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H') && (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8') &&
-                  (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H') && (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8')) {
-              arrayOfCoordsInts[0] = checkCoords(arrayOfCoords[0]);
-              arrayOfCoordsInts[1] = 8 - ((int) arrayOfCoords[1] - '0');
-              arrayOfCoordsInts[2] = checkCoords(arrayOfCoords[2]);
-              arrayOfCoordsInts[3] = 8 - ((int) arrayOfCoords[3] - '0');
-              correct = true;
-          }
-          else {
-              System.out.println("Incorrect input. Please try again: ");
-              //for (int i = 0; i < 4; i++)
-               //   arrayOfCoords[i] = 'A';
-              coords = scanner.nextLine().toUpperCase();
-              //Uses space as delimiter and puts from and to into 2 elements of array
-              arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
-          }
-      }
-      return arrayOfCoordsInts;
-  }
 
   public boolean checkMove(Piece currentPiece, Move currentMove) {
       boolean legalMoveFlag = false;
@@ -156,5 +169,16 @@ public class HumanPlayer extends Player {
       currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
   }
 
+  public void setArrayOfCoords(int[] array) {
+      arrayOfCoords = array;
+  }
+
+  public void setGDisplay(GraphicalDisplay gui) {
+        gDisplay = gui;
+  }
+
+  public void setTDisplay(TextDisplay text) {
+      tDisplay = text;
+  }
 
 }

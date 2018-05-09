@@ -9,12 +9,11 @@ import java.util.*;
 
 public class Chess {
 
-  public static void display(Pieces piecesW, Pieces piecesB) {
-    TextDisplay one = new TextDisplay();
-    one.resetFlags();
-    one.displayBoard(piecesW);
-    one.displayBoard(piecesB);
-  }
+    /**
+     * Checks the player passed in to see if it still has a king piece in its pieces, to check if either play has taken a king
+     * @param player the player being checked to see if it has a king
+     * @return returns false if the player still has a king, otherwise returns true
+     */
   public static boolean checkKing(Player player) { //GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
       for (int i=0; i<player.getOpponent().getPieces().getNumPieces(); i++ ) {
           if (player.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
@@ -24,6 +23,7 @@ public class Chess {
       System.out.println(player.toString() + " wins!");
       return true;
   }
+
 
   public static void main(String[] args) {
     Board playingBoard = new Board();
@@ -36,6 +36,21 @@ public class Chess {
     gDisplay.displayBoard(piecesW);
     Player playerW = null, playerB = null;
 
+    //Chooses which kind of display to have
+    System.out.print("Would you like a GUI or text display? (1 or 0)");
+    int displayType = scanner.nextInt();
+    while (displayType != 1 && displayType != 0) {
+        System.out.println("Incorrect input.");
+        System.out.print("Would you like a GUI or text display? (1 or 0)");
+        displayType = scanner.nextInt();
+    }
+    if (displayType == 1) {
+       gDisplay.setDisplayNeeded(true);
+    }
+    else
+        tDisplay.setDisplayNeeded(true);
+
+    //Input for types of player
     while (player1 != 1 && player1 != 2 && player1 != 3) {
         System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
         System.out.print("What type of player is Player 1? ");
@@ -47,25 +62,32 @@ public class Chess {
         player2 = scanner.nextInt();
     }
 
+    //Makes appropriate player type for each player based on input
     switch (player1) {
         case 1: playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
+                ((HumanPlayer)playerW).setGDisplay(gDisplay);
+                ((HumanPlayer)playerW).setTDisplay(tDisplay);
                 break;
         case 2: playerW = new RandomPlayer("White Player", piecesW, playingBoard, null);
                 break;
         case 3: playerW = new AggressivePlayer("White Player", piecesW, playingBoard, null);
                 break;
         default:playerW = new HumanPlayer("White Player", piecesW, playingBoard, null);
+                ((HumanPlayer)playerW).setGDisplay(gDisplay);
                 break;
     }
 
       switch (player2) {
           case 1: playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
+              ((HumanPlayer)playerB).setGDisplay(gDisplay);
+              ((HumanPlayer)playerB).setTDisplay(tDisplay);
               break;
           case 2: playerB = new RandomPlayer("Black Player", piecesB, playingBoard, null);
               break;
           case 3: playerB = new AggressivePlayer("Black Player", piecesB, playingBoard, null);
               break;
           default:playerB = new HumanPlayer("Black Player", piecesB, playingBoard, null);
+              ((HumanPlayer)playerB).setGDisplay(gDisplay);
               break;
       }
 
@@ -75,37 +97,61 @@ public class Chess {
     boolean kingTaken = false,
     legalMoveFlag= false;
 
-    while (!kingTaken) {
-      //Display board
+    //ASK IF WANTS GUI OR NOT
+      //IF THEY DON'T, DO BELOW WHILE LOOP
+      //IF THEY DO, DO ANOTHER WHILE LOOK WHICH HAS LIKE GDISPLAY.WHATEVER TO MAKE THE MOVES?
+      //USE GETARRAYOFCOORDS TO GET AND SET IT IN GDISPLAY?
 
-      tDisplay.displayBoard(piecesW);
-      gDisplay.displayBoard(piecesW);
-      legalMoveFlag = false;
-      while (!legalMoveFlag) {
-        System.out.println();
-        if (whiteTurn) {
-            System.out.println("Player 1 (white player)'s turn:");
-            legalMoveFlag = playerW.makeMove();
-            kingTaken = checkKing(playerW);
-        }
-        else {
-            System.out.println("Player 2 (black player)'s turn:");
-            legalMoveFlag = playerB.makeMove();
-            kingTaken = checkKing(playerB);
-        }
-        if (!legalMoveFlag)
-            System.out.println("Illegal move. Please try a valid move:");
-      }//end of while!legal
+    if (tDisplay.getDisplayNeeded() == true) {
+          while (!kingTaken) {
+              //Display board
+              tDisplay.displayBoard(piecesW);
+              legalMoveFlag = false;
+              while (!legalMoveFlag) {
+                  System.out.println();
+                  if (whiteTurn) {
+                      System.out.println("Player 1 (white player)'s turn:");
+                      legalMoveFlag = playerW.makeMove();
+                      kingTaken = checkKing(playerW);
+                  } else {
+                      System.out.println("Player 2 (black player)'s turn:");
+                      legalMoveFlag = playerB.makeMove();
+                      kingTaken = checkKing(playerB);
+                  }
+                  if (!legalMoveFlag)
+                      System.out.println("Illegal move. Please try a valid move:");
+              }//end of while!legal
 
 
-      //Make it the next players turn
-      whiteTurn = !whiteTurn;
+              //Make it the next players turn
+              whiteTurn = !whiteTurn;
 
 
-    } //end of while loop
+          } //end of while loop
+      } //end of if text
+      else {
+        while (!kingTaken) {
+            System.out.print("HELP");
+            legalMoveFlag = false;
+            if (gDisplay.getButtonPressed()) {
+                System.out.println("You ever running?");
+                if (whiteTurn) {
+                    legalMoveFlag = playerW.makeMove();
+                    kingTaken = checkKing(playerW);
+                } else {
+                    legalMoveFlag = playerB.makeMove();
+                    kingTaken = checkKing(playerB);
+                }
+                gDisplay.displayBoard(piecesW);
+                whiteTurn = !whiteTurn;
+                gDisplay.setButtonPressed(false);
+            } //end of if button pressed
+        } //end of !kingtaken
+      } //end of else
+
       tDisplay.displayBoard(piecesW);
       gDisplay.displayBoard(piecesW);
     System.exit(0);
-  } //end ofmain
+  } //end of main
 
 }//end of class

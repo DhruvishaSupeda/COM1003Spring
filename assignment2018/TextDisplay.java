@@ -5,14 +5,15 @@ import assignment2018.codeprovided.PieceCode;
 public class TextDisplay implements Display {
 
   private char[][] pieceArray = new char[8][8];
+  private boolean displayNeeded;
 
   public TextDisplay() {
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-          pieceArray[i][j] = '.';
+      for (int i = 0; i < 8; i++) {
+          for (int j = 0; j < 8; j++) {
+              pieceArray[i][j] = '.';
+          }
       }
-    }
-
+  }
 
   public void displayBoard(Pieces myPieces) {
       Board playingBoard = myPieces.getPiece(1).getBoard();
@@ -29,6 +30,14 @@ public class TextDisplay implements Display {
           }
           System.out.println();
       }
+    }
+
+    public void setDisplayNeeded(boolean needed) {
+        displayNeeded = needed;
+    }
+
+    public boolean getDisplayNeeded() {
+        return displayNeeded;
     }
 
 

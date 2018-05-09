@@ -83,6 +83,10 @@ public class RandomPlayer extends Player {
     currentPiece.setPosition(currentMove.getNX(), currentMove.getNY());
   }
 
+  public void setArrayOfCoords(int[] array) {
+
+  }
+
 
 
 

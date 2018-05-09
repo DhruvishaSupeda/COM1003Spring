@@ -4,16 +4,17 @@ import assignment2018.codeprovided.PieceCode;
 import assignment2018.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class GraphicalDisplay extends JFrame implements Display {
+public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     private JLabel[][] boardButtons = new JLabel[8][8];
     private JLabel[] inputArray = new JLabel[8];
-    private Container contentPane = getContentPane();
-    private JPanel letterPanel = new JPanel();
-    private JPanel numberPanel = new JPanel();
-    private JPanel boardPanel = new JPanel();
-    private JPanel inputPanel = new JPanel();
+    private boolean displayNeeded, buttonPressed;
+    private JComboBox letterOne = new JComboBox();
+    private JComboBox letterTwo = new JComboBox();
+    private JComboBox numberOne = new JComboBox();
+    private JComboBox numberTwo = new JComboBox();
 
     public GraphicalDisplay() {
         setTitle("Chess");
@@ -25,13 +26,19 @@ public class GraphicalDisplay extends JFrame implements Display {
         //setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        Container contentPane = getContentPane();
+        JPanel letterPanel = new JPanel();
+        JPanel numberPanel = new JPanel();
+        JPanel boardPanel = new JPanel();
+        JPanel inputPanel = new JPanel();
+
         //Container contentPane = getContentPane();
         //contentPane.setLayout(new GridLayout(0, 9));
         contentPane.setLayout(new BorderLayout());
         letterPanel.setLayout(new GridLayout(1,0));
         numberPanel.setLayout(new GridLayout(0,1));
         boardPanel.setLayout(new GridLayout(0,8));
-        inputPanel.setLayout(new GridLayout(0,2));
+        inputPanel.setLayout(new GridLayout(0,3));
 
 
         for (int y = 0; y < 8; y++) {
@@ -48,24 +55,34 @@ public class GraphicalDisplay extends JFrame implements Display {
         for (int i = 0; i<8; i++)
             inputArray[i] = new JLabel();
 
-        inputArray[0].setText("Input:");
+        JLabel playerLabel = new JLabel("Input:");
+        inputPanel.add(playerLabel);
+
+        for (int i=0; i<2; i++)
+            inputPanel.add(new JLabel());
+
         inputArray[1].setText(null);
-        JComboBox letterOne = new JComboBox();
-        JComboBox letterTwo = new JComboBox();
-        JComboBox numberOne = new JComboBox();
-        JComboBox numberTwo = new JComboBox();
         for (int i = 1; i<9; i++) {
-            letterOne.addItem(('A' + i));
-            letterOne.addItem(('A' + i));
+            letterOne.addItem((char)('A' + i-1));
+            letterTwo.addItem((char)('A' + i-1));
             numberOne.addItem(i);
             numberTwo.addItem(i);
         }
 
-        //inputPanel.setSize(screenDimensions.width/6, screenDimensions.height);
-        inputArray[2] = letterOne; //add to JLAbel array somehow idk
-        inputArray[3] = numberOne;
-        inputArray[4] = letterOne;
-        inputArray[5] = letterOne;
+        inputPanel.setSize(screenDimensions.width/6, screenDimensions.height);
+        inputPanel.add(new JLabel("Current position:"));
+        inputPanel.add(letterOne);
+        inputPanel.add(numberOne);
+        inputPanel.add(new JLabel("New position: "));
+        inputPanel.add(letterTwo);
+        inputPanel.add(numberTwo);
+
+        for (int i=0; i<2; i++)
+            inputPanel.add(new JLabel());
+
+        JButton submit = new JButton("Submit");
+        submit.addActionListener(this);
+        inputPanel.add(submit);
 
         contentPane.add(letterPanel, BorderLayout.NORTH);
         contentPane.add(numberPanel, BorderLayout.WEST);
@@ -75,6 +92,7 @@ public class GraphicalDisplay extends JFrame implements Display {
     }
 
     public void displayBoard(Pieces myPieces) {
+        buttonPressed = false;
         Board playingBoard = myPieces.getPiece(1).getBoard();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         ImageIcon b_bishop = new ImageIcon("images/b_bishop.png");
@@ -144,6 +162,39 @@ public class GraphicalDisplay extends JFrame implements Display {
 
     }
 
+
+    public void actionPerformed(ActionEvent e) {
+        buttonPressed = true;
+        System.out.println("Button pressed yar");
+    }
+
+    public char[] getInput() {
+        char[] arrayOfCoords = new char[4];
+        arrayOfCoords[0] = (char)letterOne.getSelectedItem();
+        System.out.println(arrayOfCoords[0]);
+        arrayOfCoords[1] = numberOne.getSelectedItem().toString().charAt(0);
+        arrayOfCoords[2] = (char)letterTwo.getSelectedItem();
+        arrayOfCoords[3] = numberTwo.getSelectedItem().toString().charAt(0);
+        System.out.println("Getting input apparently");
+        return arrayOfCoords;
+    }
+
+    public void setDisplayNeeded(boolean needed) {
+        displayNeeded = needed;
+    }
+
+    public boolean getButtonPressed() {
+        System.out.println(buttonPressed);
+        return buttonPressed;
+    }
+
+    public void setButtonPressed(boolean pressed) {
+        buttonPressed = pressed;
+    }
+
+    public boolean getDisplayNeeded() {
+        return displayNeeded;
+    }
 
 }
 

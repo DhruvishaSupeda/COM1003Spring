@@ -140,6 +140,10 @@ public class AggressivePlayer extends Player {
     }
 
 
+    public void setArrayOfCoords(int[] array) {
+
+    }
+
 
 
 }

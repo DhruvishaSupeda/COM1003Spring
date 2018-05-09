@@ -4,6 +4,7 @@ import assignment2018.codeprovided.*;
 
 public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
   private Piece playingBoard[][] = new Piece[8][8];
+  private int[] arrayOfCoords = new int[4];
 
   public Board() {
     for (int row = 0; row < 8; row++) {
@@ -36,6 +37,10 @@ public class Board { //MAKE BOARD WIDTH AND HEIGHT CONSTANTS
       return true;
     else
       return false;
+  }
+
+  public void setArrayOfCoords() {
+
   }
 
   public String toString() {
