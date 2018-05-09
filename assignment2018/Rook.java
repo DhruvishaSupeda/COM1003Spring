@@ -12,11 +12,55 @@ public class Rook extends Piece {
 		super(PieceCode.ROOK, ix, iy, c, b);
 	}
 
-	// HIS CODE
 	// method implements abstract availableMoves method in Piece class
+	// returns the legal moves
 	public ArrayList<Move> availableMoves() {
 		return legalRook();
 	}
+
+	public ArrayList<Move> getYMove(int x, int y, int i, int sign) {
+	    Move theMove = null;
+        ArrayList<Move> theMoves = new ArrayList<Move>();
+        while (!(getBoard().outOfRange(x, y + i))) {
+            if (getBoard().occupied(x, y + i)) {
+                if (getBoard().getPiece(x, y + i).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x, y + i, true);
+                    // System.out.println(theMove.toString());
+                    theMoves.add(theMove);
+                    break;
+                } else
+                    break;
+            } else {
+                theMove = new Move(this, x, y, x, y + i, false);
+                // System.out.println(theMove.toString());
+                theMoves.add(theMove);
+            }
+            i += sign;
+        }
+        return theMoves;
+    }
+
+    public ArrayList<Move> getXMove(int x, int y, int i, int sign) {
+	    Move theMove = null;
+        ArrayList<Move> theMoves = new ArrayList<Move>();
+        while (!getBoard().outOfRange(x + i, y)) {
+            if (getBoard().occupied(x + i, y)) {
+                if (getBoard().getPiece(x + i, y).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x + i, y, true);
+                     System.out.println(theMove.toString());
+                    theMoves.add(theMove);
+                    break;
+                } else
+                    break;
+            } else {
+                theMove = new Move(this, x, y, x + i, y, false);
+                 System.out.println(theMove.toString());
+                theMoves.add(theMove);
+            }
+            i += sign;
+        }
+        return theMoves;
+    }
 
 	// method to return list of legal moves for a white rook
 	private ArrayList<Move> legalRook() {
@@ -29,80 +73,23 @@ public class Rook extends Piece {
 		ArrayList<Move> legalMoves = new ArrayList<Move>();
 
 		// set up m to refer to a Move object
-		Move theMove = null;
-
-		// GOING UP AS ROOK - while not occupied, or occupied by black AND in range
-		i = 1;
-		while (!(getBoard().outOfRange(x, y + i))) {
-			if (getBoard().occupied(x, y + i)) {
-				if (getBoard().getPiece(x, y + i).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x, y + i, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x, y + i, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i += 1;
-		}
+		ArrayList<Move> theMoves = new ArrayList<Move>();
 
 		i = 1;
-		while (!getBoard().outOfRange(x, y - i)) {
-			if (getBoard().occupied(x, y - i)) {
-				if (getBoard().getPiece(x, y - i).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x, y - i, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x, y - i, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i += 1;
-		}
+		theMoves = getYMove(x, y, i, 1);
+		legalMoves.addAll(theMoves);
+
+		i = -1;
+        theMoves = getYMove(x, y, i, -1);
+        legalMoves.addAll(theMoves);
 
 		i = 1;
-		while (!getBoard().outOfRange(x + i, y)) {
-			if (getBoard().occupied(x + i, y)) {
-				if (getBoard().getPiece(x + i, y).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x + i, y, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x + i, y, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i += 1;
-		}
+        theMoves = getXMove(x, y, i, 1);
+        legalMoves.addAll(theMoves);
 
-		i = 1;
-		while (!(getBoard().outOfRange(x - i, y))) {
-			if (getBoard().occupied(x - i, y)) {
-				if (getBoard().getPiece(x - i, y).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x - i, y, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x - i, y, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i += 1;
-		}
+        i = -1;
+        theMoves = getXMove(x, y, i, -1);
+        legalMoves.addAll(theMoves);
 
 		if (legalMoves.isEmpty())
 			return null;

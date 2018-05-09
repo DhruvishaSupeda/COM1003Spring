@@ -72,10 +72,8 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
             }
         }
 
-
-        //Adds the input label
-        inputPanel.add(new JLabel("Input:"));
         inputPanel.add(playerLabel);
+        inputPanel.add(new JLabel());
         inputPanel.add(correctness);
 
         //Adds the items to the dropdowns for the user input
@@ -102,6 +100,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         //Adds the submit button to submit the input with an action listener to the input panel
         JButton submit = new JButton("Submit");
         submit.addActionListener(this);
+        submit.setPreferredSize(new Dimension(100, 20));
         inputPanel.add(submit);
 
         //Adds the containers to the display panel or content pane as appropriate
