@@ -88,7 +88,8 @@ public class HumanPlayer extends Player {
 		// arrayOfCoords[0] and arrayOfCoords[1] are the current x and y coordinates
 		// arrayOfCoords[2] and arrayOfCoords[3] are the x and y coordinates to be moved to
 		while (!correct) {
-			if ((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H')
+			if ((arrayOfCoords.length == 4)
+                    && (arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H')
 					&& (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8')
 					&& (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H')
 					&& (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8')) {

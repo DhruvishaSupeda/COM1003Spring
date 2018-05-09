@@ -17,6 +17,29 @@ public class Bishop extends Piece {
 		return legalBishop();
 	}
 
+	public ArrayList<Move> getMoves(int x, int y, int i, int j, int isign, int jsign) {
+	    Move theMove = null;
+	    ArrayList<Move> theMoves = new ArrayList<Move>();
+        while (!getBoard().outOfRange(x + i, y + j)) {
+            if (getBoard().occupied(x + i, y + j)) {
+                if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
+                    theMove = new Move(this, x, y, x + i, y + j, true);
+                    // System.out.println(theMove.toString());
+                    theMoves.add(theMove);
+                    break;
+                } else
+                    break;
+            } else {
+                theMove = new Move(this, x, y, x + i, y + j, false);
+                // System.out.println(theMove.toString());
+                theMoves.add(theMove);
+            }
+            i += isign;
+            j += jsign;
+        }
+        return theMoves;
+    }
+
 	private ArrayList<Move> legalBishop() {
 		// obtain current co-ordinates
 		int x = this.getX();
@@ -30,86 +53,25 @@ public class Bishop extends Piece {
 
 		int i = 1;
 		int j = 1;
-		while (!getBoard().outOfRange(x + i, y + j)) {
-			if (getBoard().occupied(x + i, y + j)) {
-				if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x + i, y + j, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x + i, y + j, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i += 1;
-			j += 1;
-		}
+		legalMoves.addAll(getMoves(x, y, i, j, i, j));
 
 		i = -1;
 		j = 1;
-		while (!(getBoard().outOfRange(x + i, y + i))) {
-			if (getBoard().occupied(x + i, y + i)) {
-				if (getBoard().getPiece(x + i, y + i).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x + i, y + i, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x + i, y + i, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i -= 1;
-			j += 1;
-		}
+        legalMoves.addAll(getMoves(x, y, i, j, i, j));
 
 		i = -1;
 		j = -1;
-		while (!getBoard().outOfRange(x + i, y + j)) {
-			if (getBoard().occupied(x + i, y + j)) {
-				if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x + i, y + j, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x + i, y + j, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i -= 1;
-			j -= 1;
-		}
+        legalMoves.addAll(getMoves(x, y, i, j, i, j));
 
 		i = 1;
 		j = -1;
-		while (!getBoard().outOfRange(x + i, y + j)) {
-			if (getBoard().occupied(x + i, y + j)) {
-				if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
-					theMove = new Move(this, x, y, x + i, y + j, true);
-					// System.out.println(theMove.toString());
-					legalMoves.add(theMove);
-					break;
-				} else
-					break;
-			} else {
-				theMove = new Move(this, x, y, x + i, y + j, false);
-				// System.out.println(theMove.toString());
-				legalMoves.add(theMove);
-			}
-			i += 1;
-			j -= 1;
-		}
+        legalMoves.addAll(getMoves(x, y, i, j, i, j));
+
 
 		if (legalMoves.isEmpty())
 			return null;
 		return legalMoves;
 	}
+
+
 }

@@ -87,6 +87,7 @@ public class AggressivePlayer extends Player {
         allMoves = getMoves();
         //Chooses a move out of them using the chooseMove method
         Move currentMove = chooseMove(allMoves);
+        System.out.println(currentMove.toString());
 
         boolean occupiedFlag = currentMove.getOccupied();
         Piece currentPiece = playingBoard.getPiece(currentMove.getOX(), currentMove.getOY());
