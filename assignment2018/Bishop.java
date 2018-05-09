@@ -8,116 +8,108 @@ import assignment2018.codeprovided.PieceCode;
 
 public class Bishop extends Piece {
 
-    public Bishop(int ix, int iy, int c, Board b) {
-        super(PieceCode.BISHOP, ix, iy, c, b);
-    }
+	public Bishop(int ix, int iy, int c, Board b) {
+		super(PieceCode.BISHOP, ix, iy, c, b);
+	}
 
-    // method implements abstract availableMoves method in Piece class
-    public ArrayList<Move> availableMoves() {
-        return legalBishop();
-    }
+	// method implements abstract availableMoves method in Piece class
+	public ArrayList<Move> availableMoves() {
+		return legalBishop();
+	}
 
-    private ArrayList<Move> legalBishop() {
-        // obtain current co-ordinates
-        int x = this.getX();
-        int y = this.getY();
+	private ArrayList<Move> legalBishop() {
+		// obtain current co-ordinates
+		int x = this.getX();
+		int y = this.getY();
 
-        // Create a new vector to store legal legalMoves
-        ArrayList<Move> legalMoves = new ArrayList<Move>();
+		// Create a new vector to store legal legalMoves
+		ArrayList<Move> legalMoves = new ArrayList<Move>();
 
-        // set up m to refer to a Move object
-        Move theMove = null;
+		// set up m to refer to a Move object
+		Move theMove = null;
 
-        int i = 1;
-        int j = 1;
-        while (!getBoard().outOfRange(x+i, y+j)) {
-            if (getBoard().occupied(x+i, y+j)) {
-                if (getBoard().getPiece(x+i, y+j).getColour() != this.getColour()) {
-                    theMove = new Move(this, x, y, x+i , y+j, true);
-                    //System.out.println(theMove.toString());
-                    legalMoves.add(theMove);
-                    break;
-                }
-                else
-                    break;
-            }
-            else {
-                theMove = new Move(this, x, y, x+i, y+j, false);
-               // System.out.println(theMove.toString());
-                legalMoves.add(theMove);
-            }
-            i += 1;
-            j+=1;
-        }
+		int i = 1;
+		int j = 1;
+		while (!getBoard().outOfRange(x + i, y + j)) {
+			if (getBoard().occupied(x + i, y + j)) {
+				if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
+					theMove = new Move(this, x, y, x + i, y + j, true);
+					// System.out.println(theMove.toString());
+					legalMoves.add(theMove);
+					break;
+				} else
+					break;
+			} else {
+				theMove = new Move(this, x, y, x + i, y + j, false);
+				// System.out.println(theMove.toString());
+				legalMoves.add(theMove);
+			}
+			i += 1;
+			j += 1;
+		}
 
-        i=-1;
-        j=1;
-        while (!(getBoard().outOfRange(x+i, y + i)))  {
-            if (getBoard().occupied(x+i, y+i)) {
-                if (getBoard().getPiece(x+i, y+i).getColour() != this.getColour()) {
-                    theMove = new Move(this, x, y, x+i , y+i, true);
-                    //System.out.println(theMove.toString());
-                    legalMoves.add(theMove);
-                    break;
-                }
-                else
-                    break;
-            }
-            else {
-                theMove = new Move(this, x, y, x+i, y+i, false);
-               // System.out.println(theMove.toString());
-                legalMoves.add(theMove);
-            }
-            i -= 1;
-            j+=1;
-        }
+		i = -1;
+		j = 1;
+		while (!(getBoard().outOfRange(x + i, y + i))) {
+			if (getBoard().occupied(x + i, y + i)) {
+				if (getBoard().getPiece(x + i, y + i).getColour() != this.getColour()) {
+					theMove = new Move(this, x, y, x + i, y + i, true);
+					// System.out.println(theMove.toString());
+					legalMoves.add(theMove);
+					break;
+				} else
+					break;
+			} else {
+				theMove = new Move(this, x, y, x + i, y + i, false);
+				// System.out.println(theMove.toString());
+				legalMoves.add(theMove);
+			}
+			i -= 1;
+			j += 1;
+		}
 
-        i=-1;
-        j=-1;
-        while (!getBoard().outOfRange(x+i, y+j)) {
-            if (getBoard().occupied(x+i, y+j)) {
-                if (getBoard().getPiece(x+i, y+j).getColour() != this.getColour()) {
-                    theMove = new Move(this, x, y, x+i , y+j, true);
-                 //   System.out.println(theMove.toString());
-                    legalMoves.add(theMove);
-                    break;
-                }
-                else
-                    break;
-            }
-            else {
-                theMove = new Move(this, x, y, x+i, y+j, false);
-               // System.out.println(theMove.toString());
-                legalMoves.add(theMove);
-            }
-            i-=1;
-            j-=1;
-        }
+		i = -1;
+		j = -1;
+		while (!getBoard().outOfRange(x + i, y + j)) {
+			if (getBoard().occupied(x + i, y + j)) {
+				if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
+					theMove = new Move(this, x, y, x + i, y + j, true);
+					// System.out.println(theMove.toString());
+					legalMoves.add(theMove);
+					break;
+				} else
+					break;
+			} else {
+				theMove = new Move(this, x, y, x + i, y + j, false);
+				// System.out.println(theMove.toString());
+				legalMoves.add(theMove);
+			}
+			i -= 1;
+			j -= 1;
+		}
 
-        i=1;
-        j=-1;
-        while (!getBoard().outOfRange(x+i, y+j)) {
-            if (getBoard().occupied(x+i, y+j)) {
-                if (getBoard().getPiece(x+i, y+j).getColour() != this.getColour()) {
-                    theMove = new Move(this, x, y, x+i , y+j, true);
-                  //  System.out.println(theMove.toString());
-                    legalMoves.add(theMove);
-                    break;
-                }
-                else
-                    break;
-            }
-            else {
-                theMove = new Move(this, x, y, x+i, y+j, false);
-               // System.out.println(theMove.toString());
-                legalMoves.add(theMove);
-            }
-            i+=1;
-            j-=1;
-        }
+		i = 1;
+		j = -1;
+		while (!getBoard().outOfRange(x + i, y + j)) {
+			if (getBoard().occupied(x + i, y + j)) {
+				if (getBoard().getPiece(x + i, y + j).getColour() != this.getColour()) {
+					theMove = new Move(this, x, y, x + i, y + j, true);
+					// System.out.println(theMove.toString());
+					legalMoves.add(theMove);
+					break;
+				} else
+					break;
+			} else {
+				theMove = new Move(this, x, y, x + i, y + j, false);
+				// System.out.println(theMove.toString());
+				legalMoves.add(theMove);
+			}
+			i += 1;
+			j -= 1;
+		}
 
-        if (legalMoves.isEmpty())
-            return null;
-        return legalMoves;
-    }
+		if (legalMoves.isEmpty())
+			return null;
+		return legalMoves;
+	}
 }
