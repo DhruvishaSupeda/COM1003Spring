@@ -29,7 +29,7 @@ public class HumanPlayer extends Player {
 	/**
 	 * Converts the letters from the input from the player to numbers to be used as
 	 * coordinates
-	 * 
+	 *
 	 * @param xCoord
 	 *            the coordinate being converted to a number
 	 * @return returns the number equivalent of the letter given
@@ -70,7 +70,8 @@ public class HumanPlayer extends Player {
 
 	/**
 	 * Asks the user for input if the player is a HumanPlayer
-	 * 
+	 * Checks if in the input is correct, and if it is converts it to 4 integers to be used by the rest of
+	 * the program
 	 * @param player
 	 * @return
 	 */
@@ -79,10 +80,13 @@ public class HumanPlayer extends Player {
 		boolean correct = false;
 		System.out.print("Please enter your move: ");
 		String coords = scanner.nextLine().toUpperCase();
-		// Uses space as delimiter and puts from and to into 2 elements of array
+		// Uses space as delimiter and puts from and to coordinates into the array as 4 elements
 		char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
+		//the array to store the integer equivalent
 		int[] arrayOfCoordsInts = new int[4];
 
+		// arrayOfCoords[0] and arrayOfCoords[1] are the current x and y coordinates
+		// arrayOfCoords[2] and arrayOfCoords[3] are the x and y coordinates to be moved to
 		while (!correct) {
 			if ((arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H')
 					&& (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8')
@@ -103,6 +107,11 @@ public class HumanPlayer extends Player {
 		return arrayOfCoordsInts;
 	}
 
+	/**
+	 * gets the input from the user from both graphical or text displayed
+	 * makes the move if valid
+	 * @return [description]
+	 */
 	public boolean makeMove() {
 		Piece currentPiece = null;
 		Move currentMove = null;
@@ -145,6 +154,12 @@ public class HumanPlayer extends Player {
 		return legalMoveFlag;
 	}
 
+	/**
+	 * checks the user input against all of the available moves to see if it is valid
+	 * @param  currentPiece the piece to be moved
+	 * @param  currentMove  the move given by the user
+	 * @return              returns whether the move is legal or not
+	 */
 	public boolean checkMove(Piece currentPiece, Move currentMove) {
 		boolean legalMoveFlag = false;
 		// Now iterate through move arraylist somehow
@@ -166,6 +181,13 @@ public class HumanPlayer extends Player {
 		return legalMoveFlag;
 	}
 
+	/**
+	 * makes the move by moving the pieces and deleting if necessary
+	 * @param occupiedFlag  boolean to show whether the piece to move into is occupied
+	 * @param currentPiece  the piece being moved
+	 * @param arrayOfCoords the array of coordinates of the current piece and where it is moving to
+	 * @param currentBoard  the board being used in the game
+	 */
 	public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard) {
 		if (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) {
 			if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]))

@@ -8,15 +8,19 @@ import java.awt.event.*;
 
 public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
+    //Array storing all of the labels used in the game
     private JLabel[][] boardButtons = new JLabel[8][8];
     private boolean displayNeeded, buttonPressed;
+    //Four combo boxes for the user inputs
     private JComboBox letterOne = new JComboBox();
     private JComboBox letterTwo = new JComboBox();
     private JComboBox numberOne = new JComboBox();
     private JComboBox numberTwo = new JComboBox();
+    //Labels that change depending on if the user input is correct or not, and which player is currently moving
     private JLabel correctness = new JLabel();
     private JLabel playerLabel = new JLabel();
 
+    //Constants for the height and width of the board
     private final int BOARD_HEIGHT = 8;
     private final int BOARD_WIDTH = 8;
 
@@ -24,13 +28,14 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     public GraphicalDisplay() {
         setTitle("Chess");
 
+        //Sets the size of the display to be half the screen size
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screenDimensions = toolkit.getScreenSize();
         setSize(screenDimensions.width/2, screenDimensions.height);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Adds all the containers
+        //Creates the containers used for the different components
         Container contentPane = getContentPane();
         JPanel letterPanel = new JPanel();
         JPanel numberPanel = new JPanel();
@@ -38,7 +43,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         JPanel inputPanel = new JPanel();
         JPanel displayPanel = new JPanel();
 
-        //sets layouts of all containers
+        //Sets layouts of all of the containers
         contentPane.setLayout(new BorderLayout());
         letterPanel.setLayout(new GridLayout(1,0));
         numberPanel.setLayout(new GridLayout(0,1));
@@ -73,7 +78,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         inputPanel.add(playerLabel);
         inputPanel.add(correctness);
 
-        //Adds each item to all of the dropdowns
+        //Adds the items to the dropdowns for the user input
         for (int i = 1; i<9; i++) {
             letterOne.addItem((char)('A' + i-1));
             letterTwo.addItem((char)('A' + i-1));
@@ -91,13 +96,15 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         inputPanel.add(numberTwo);
 
         //Adds empty labels to fill in gaps and the submit button
-        for (int i=0; i<2; i++)
-            inputPanel.add(new JLabel());
+        inputPanel.add(new JLabel());
+        inputPanel.add(new JLabel());
 
+        //Adds the submit button to submit the input with an action listener to the input panel
         JButton submit = new JButton("Submit");
         submit.addActionListener(this);
         inputPanel.add(submit);
 
+        //Adds the containers to the display panel or content pane as appropriate
         displayPanel.add(letterPanel, BorderLayout.NORTH);
         displayPanel.add(numberPanel, BorderLayout.WEST);
         displayPanel.add(boardPanel, BorderLayout.CENTER);
@@ -106,11 +113,16 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         setVisible(true);
     }
 
+    /**
+     * Updates the state of the display to the current board used in the game
+     * @param myPieces the pieces of one of the players, which is used to get the current board
+     */
     public void displayBoard(Pieces myPieces) {
         buttonPressed = false;
         playerLabel.setText("White player");
-
+        //Gets the board of the pieces to be displayed
         Board playingBoard = myPieces.getPiece(1).getBoard();
+        //Initialises the icons used to show the board
         ImageIcon b_bishop = new ImageIcon("images/b_bishop.png");
         ImageIcon b_rook = new ImageIcon("images/b_rook.png");
         ImageIcon b_king = new ImageIcon("images/b_king.png");
@@ -124,6 +136,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         ImageIcon w_queen = new ImageIcon("images/w_queen.png");
         ImageIcon w_rook = new ImageIcon("images/w_rook.png");
 
+        //for each label in the array, checks the piece and sets the icon of the piece accordingly if not null
         for (int y = 0; y < BOARD_HEIGHT; y++) {
             for (int x = 0; x < BOARD_WIDTH; x++) {
                 if (playingBoard.getPiece(x , y) != null) {
@@ -170,6 +183,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
                     } //end of switch
                 } //end of if
+                //If the coordinate does not have a piece, shows a blank label
                 else
                     boardButtons[x][y].setIcon(null);
             } //end of x for
@@ -182,6 +196,10 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         buttonPressed = true;
     }
 
+    /**
+     * Takes the input from the user and puts it into an array of characters to be used by the human player
+     * @return the array of characters that stores the user input from the dropdowns
+     */
     public char[] getInput() {
         char[] arrayOfCoords = new char[4];
         arrayOfCoords[0] = (char)letterOne.getSelectedItem();
@@ -207,19 +225,18 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         return displayNeeded;
     }
 
+    /**
+     * changes the text in the correctness label to show the user has entered an incorrect input
+     */
     public void incorrectInput() {
         correctness.setText("Incorrect input!");
     }
 
+    /**
+     * removes any text from the correctness label
+     */
     public void correctInput() {
         correctness.setText(null);
     }
 
 }
-
-
-
-
-
-
-

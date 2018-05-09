@@ -18,6 +18,10 @@ public class TextDisplay implements Display {
 		}
 	}
 
+	/**
+	 * Displays the board in the console using the board object
+	 * @param myPieces Pieces arraylist used to get the current board
+	 */
 	public void displayBoard(Pieces myPieces) {
 		Board playingBoard = myPieces.getPiece(1).getBoard();
 		System.out.println(" |A B C D E F G H");

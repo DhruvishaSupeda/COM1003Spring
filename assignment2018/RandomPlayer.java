@@ -7,7 +7,7 @@ import assignment2018.codeprovided.*;
 import java.util.*;
 
 public class RandomPlayer extends Player {
-  
+
   private String name;
   private Pieces pieces;
   private Board playingBoard;
@@ -22,16 +22,10 @@ public class RandomPlayer extends Player {
     opponent = o;
   }
 
-  public boolean checkKing(boolean whiteTurn) {
-      for (int i=0; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
-          if (this.getOpponent().getPieces().getPiece(i).getValue() == assignment2018.codeprovided.PieceCode.KING) {
-              return false;
-          }
-      }
-      System.out.println(name + " wins!");
-      return true;
-  }
-
+  /**
+   * Randomly chooses the moves out of all moves possible, and makes that move
+   * @return returns true to show that the move taken was legal
+   */
   public boolean makeMove() {
     Piece currentPiece = null;
     Move currentMove = null;
@@ -54,6 +48,10 @@ public class RandomPlayer extends Player {
     return true;
   }
 
+  /**
+   * Gets all of the available moves for all of the pieces belonging to the player
+   * @return the ArrayList of all of the moves available
+   */
   public ArrayList<Move> getMoves() {
     Piece currentPiece = null;
     ArrayList<Move> allMoves = new ArrayList<Move>();
@@ -66,6 +64,14 @@ public class RandomPlayer extends Player {
     return allMoves;
   }
 
+  /**
+   * Using the move chosen, moves the pieces in the board
+   * @param occupiedFlag  boolean to show whether the piece to move into is occupied
+   * @param currentPiece  the piece being moved
+   * @param arrayOfCoords the array of coordinates of the current piece and where it is moving to
+   * @param currentBoard  the board being used in the game
+   * @param currentMove   the move object of the move being used
+   */
   public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
     if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
       if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {

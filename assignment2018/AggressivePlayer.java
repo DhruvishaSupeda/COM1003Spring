@@ -22,28 +22,22 @@ public class AggressivePlayer extends Player {
         opponent = o;
     }
 
-    public boolean checkKing(boolean whiteTurn) {
-        for (int i=1; i<this.getOpponent().getPieces().getNumPieces(); i++ ) {
-            if (this.getOpponent().getPieces().getPiece(i).getValue() == assignment2018.codeprovided.PieceCode.KING) {
-                return false;
-            }
-        }
-        System.out.println(name + " wins!");
-        return true;
-    }
-
+    /**
+     * Chooses which move to use, based on which moves take a piece and the value of the piece taken
+     * The highest value piece is taken, but if none can be taken, a random move is selected
+     * @param  allMoves all of the moves possible using all of the pieces for that player
+     * @return the move chosen to be used
+     */
     public Move chooseMove(ArrayList<Move> allMoves) {
         ArrayList<Move> trueMoves = new ArrayList<Move>();
         ArrayList<Move> bigMoves = new ArrayList<Move>();
         Random rand = new Random();
         Move move = null, currentMove = null;
-        int newX = 0, newY = 0, randomMove = 0;
-        int biggestValue = 0;
+        int newX = 0, newY = 0, randomMove = 0, biggestValue = 0;
 
         for (int i = 0; i<allMoves.size(); i++) {
-            if (allMoves.get(i).getOccupied()){
+            if (allMoves.get(i).getOccupied())
                 trueMoves.add(allMoves.get(i));
-            }
         }
 
         if (trueMoves != null) {
@@ -88,26 +82,31 @@ public class AggressivePlayer extends Player {
         return currentMove;
     }
 
+    /**
+     * Chooses the moves out of all moves possible, and makes that move
+     * @return returns true to show that the move taken was legal
+     */
     public boolean makeMove() {
-        Piece currentPiece = null;
-        Move currentMove = null;
-        boolean occupiedFlag = false;
         ArrayList<Move> allMoves = new ArrayList<Move>();
 
         allMoves = getMoves();
-        currentMove = chooseMove(allMoves);
+        Move currentMove = chooseMove(allMoves);
 
         arrayOfCoords[0] = currentMove.getOX();
         arrayOfCoords[1] = currentMove.getOY();
         arrayOfCoords[2] = currentMove.getNX();
         arrayOfCoords[3] = currentMove.getNY();
-        occupiedFlag = currentMove.getOccupied();
-        currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
+        boolean occupiedFlag = currentMove.getOccupied();
+        Piece currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
         movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard, currentMove);
         return true;
     }
 
+    /**
+     * Gets all of the available moves from all of the pieces for the player
+     * @return an ArrayList of all of the possible moves for the player
+     */
     public ArrayList<Move> getMoves() {
         Piece currentPiece = null;
         ArrayList<Move> allMoves = new ArrayList<Move>();
@@ -120,6 +119,14 @@ public class AggressivePlayer extends Player {
         return allMoves;
     }
 
+    /**
+     * Using the move chosen, moves the pieces in the board
+     * @param occupiedFlag  boolean to show whether the piece to move into is occupied
+     * @param currentPiece  the piece being moved
+     * @param arrayOfCoords the array of coordinates of the current piece and where it is moving to
+     * @param currentBoard  the board being used in the game
+     * @param currentMove   the move object of the move being used
+     */
     public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
         if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
             if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {

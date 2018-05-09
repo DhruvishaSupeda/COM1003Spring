@@ -12,9 +12,7 @@ public class Chess {
 	/**
 	 * Checks the player passed in to see if it still has a king piece in its
 	 * pieces, to check if either play has taken a king
-	 * 
-	 * @param player
-	 *            the player being checked to see if it has a king
+	 * @param player the player being checked to see if it has a king
 	 * @return returns false if the player still has a king, otherwise returns true
 	 */
 	public static boolean checkKing(Player player) { // GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
