@@ -9,12 +9,12 @@ import java.awt.event.*;
 public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     private JLabel[][] boardButtons = new JLabel[8][8];
-    private JLabel[] inputArray = new JLabel[8];
     private boolean displayNeeded, buttonPressed;
     private JComboBox letterOne = new JComboBox();
     private JComboBox letterTwo = new JComboBox();
     private JComboBox numberOne = new JComboBox();
     private JComboBox numberTwo = new JComboBox();
+    private JLabel correctness = new JLabel();
 
     public GraphicalDisplay() {
         setTitle("Chess");
@@ -26,42 +26,48 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         //setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //Adds all the containers
         Container contentPane = getContentPane();
         JPanel letterPanel = new JPanel();
         JPanel numberPanel = new JPanel();
         JPanel boardPanel = new JPanel();
         JPanel inputPanel = new JPanel();
 
-        //Container contentPane = getContentPane();
-        //contentPane.setLayout(new GridLayout(0, 9));
+        //sets layouts of all containers
         contentPane.setLayout(new BorderLayout());
         letterPanel.setLayout(new GridLayout(1,0));
         numberPanel.setLayout(new GridLayout(0,1));
         boardPanel.setLayout(new GridLayout(0,8));
         inputPanel.setLayout(new GridLayout(0,3));
 
+        boolean grey=true;
 
+        //Makes number and letter panels, sets borders to board labels and adds them
         for (int y = 0; y < 8; y++) {
             numberPanel.add(new JLabel(Integer.toString(y+1, JLabel.CENTER)));
             letterPanel.add(new JLabel("A"));
+            grey=!grey;
             for (int x = 0; x < 8; x++) {
                 boardButtons[x][y] = new JLabel();
+                //boardButtons[x][y].setOpaque(true);
+                if (grey)
+                    boardButtons[x][y].setBackground(Color.lightGray);
                 boardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
                 boardButtons[x][y].setHorizontalAlignment(JLabel.CENTER);
+                boardButtons[x][y].setOpaque(true);
                 boardPanel.add(boardButtons[x][y]);
+                grey = !grey;
             }
         }
 
-        for (int i = 0; i<8; i++)
-            inputArray[i] = new JLabel();
 
+        //Adds the input label
         JLabel playerLabel = new JLabel("Input:");
         inputPanel.add(playerLabel);
+        //Adds blank label for inbetween
+        inputPanel.add(new JLabel());
+        inputPanel.add(correctness);
 
-        for (int i=0; i<2; i++)
-            inputPanel.add(new JLabel());
-
-        inputArray[1].setText(null);
         for (int i = 1; i<9; i++) {
             letterOne.addItem((char)('A' + i-1));
             letterTwo.addItem((char)('A' + i-1));
@@ -110,7 +116,6 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                //boardButtons[x][0].setText(Integer.toString((char)64+x));
                 if (playingBoard.getPiece(x , y) != null) {
                     switch (playingBoard.getPiece(x, y).getChar()) {
                         case PieceCode.PAWNWHITE:
@@ -182,7 +187,6 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     }
 
     public boolean getButtonPressed() {
-        System.out.println(buttonPressed);
         return buttonPressed;
     }
 
@@ -195,11 +199,11 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     }
 
     public void incorrectInput() {
-
+        correctness.setText("Incorrect input!");
     }
 
     public void correctInput() {
-
+        correctness.setText(null);
     }
 
 }

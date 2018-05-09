@@ -33,7 +33,6 @@ public class Chess {
     int player1 = 0, player2 = 0;
     GraphicalDisplay gDisplay = new GraphicalDisplay();
     TextDisplay tDisplay = new TextDisplay();
-    gDisplay.displayBoard(piecesW);
     Player playerW = null, playerB = null;
 
     //Chooses which kind of display to have
@@ -128,11 +127,16 @@ public class Chess {
 
 
           } //end of while loop
-      } //end of if text
+        tDisplay.displayBoard(piecesW);
+      } //end of if text display
+
+
       else {
+        gDisplay.displayBoard(piecesW);
         while (!kingTaken) {
             legalMoveFlag = false;
             if (gDisplay.getButtonPressed()) {
+                gDisplay.displayBoard(piecesW);
                 if (whiteTurn) {
                     legalMoveFlag = playerW.makeMove();
                     kingTaken = checkKing(playerW);
@@ -146,10 +150,9 @@ public class Chess {
                 gDisplay.setButtonPressed(false);
             } //end of if button pressed
         } //end of !kingtaken
+        gDisplay.displayBoard(piecesW);
       } //end of else
 
-      tDisplay.displayBoard(piecesW);
-      gDisplay.displayBoard(piecesW);
     System.exit(0);
   } //end of main
 
