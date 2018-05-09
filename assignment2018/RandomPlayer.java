@@ -12,7 +12,6 @@ public class RandomPlayer extends Player {
   private Pieces pieces;
   private Board playingBoard;
   private Player opponent;
-  private int[] arrayOfCoords = new int[4];
 
   public RandomPlayer(String n, Pieces p, Board b, Player o) {
     super(n,p,b,o);
@@ -27,23 +26,17 @@ public class RandomPlayer extends Player {
    * @return returns true to show that the move taken was legal
    */
   public boolean makeMove() {
-    Piece currentPiece = null;
-    Move currentMove = null;
-    boolean occupiedFlag = false;
     ArrayList<Move> allMoves = new ArrayList<Move>();
     allMoves = getMoves();
+
     Random rand = new Random();
     int randomMove = rand.nextInt(allMoves.size());
 
-    currentMove = allMoves.get(randomMove);
-    arrayOfCoords[0] = currentMove.getOX();
-    arrayOfCoords[1] = currentMove.getOY();
-    arrayOfCoords[2] = currentMove.getNX();
-    arrayOfCoords[3] = currentMove.getNY();
-    occupiedFlag = currentMove.getOccupied();
-    currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
+    Move currentMove = allMoves.get(randomMove);
+    boolean occupiedFlag = currentMove.getOccupied();
+    Piece currentPiece = playingBoard.getPiece(currentMove.getOX(), currentMove.getOY());
 
-    movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard, currentMove);
+    movePieces(occupiedFlag, currentPiece, playingBoard, currentMove);
 
     return true;
   }
@@ -68,11 +61,10 @@ public class RandomPlayer extends Player {
    * Using the move chosen, moves the pieces in the board
    * @param occupiedFlag  boolean to show whether the piece to move into is occupied
    * @param currentPiece  the piece being moved
-   * @param arrayOfCoords the array of coordinates of the current piece and where it is moving to
-   * @param currentBoard  the board being used in the game
+   * @param currentBoard  the board being useds in the game
    * @param currentMove   the move object of the move being used
    */
-  public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
+  public void movePieces(boolean occupiedFlag, Piece currentPiece, Board currentBoard, Move currentMove) {
     if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
       if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
         this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));

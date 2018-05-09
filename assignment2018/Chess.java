@@ -32,7 +32,6 @@ public class Chess {
 		Pieces piecesW = new Pieces(playingBoard, PieceCode.WHITE);
 		Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
 		Scanner scanner = new Scanner(System.in);
-		int player1 = 0, player2 = 0;
 		GraphicalDisplay gDisplay = new GraphicalDisplay();
 		TextDisplay tDisplay = new TextDisplay();
 		Player playerW = null, playerB = null;
@@ -52,20 +51,20 @@ public class Chess {
 			tDisplay.setDisplayNeeded(true);
 
 		// Input for types of player
+        int player1 = 0, player2 = 0;
 		while (player1 != 1 && player1 != 2 && player1 != 3) {
 			System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
-			System.out.print("What type of player is Player 1? ");
+			System.out.print("What type of player is Player 1? (White)");
 			player1 = scanner.nextInt();
 		}
 		while (player2 != 1 && player2 != 2 && player2 != 3) {
 			System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
-			System.out.print("What type of player is Player 2? ");
+			System.out.print("What type of player is Player 2? (Black)");
 			player2 = scanner.nextInt();
 		}
 
 		// Makes appropriate player type for each player based on input
-		// If the player is human, the display boolean in the humanplayer class is set
-		// to know which type of input is needed
+		// If the player is human, the display variable in the HumanPlayer class is set to know which type of input is needed
 		// from the user in makeMove()
 		switch (player1) {
 		case 1:
@@ -113,7 +112,7 @@ public class Chess {
 		boolean whiteTurn = true;
 		boolean kingTaken = false, legalMoveFlag = false;
 
-		if (tDisplay.getDisplayNeeded()) {
+		if (displayType == 0) {
 			while (!kingTaken) {
 				// Display board
 				tDisplay.displayBoard(piecesW);
@@ -144,8 +143,10 @@ public class Chess {
 
 		else {
 			gDisplay.displayBoard(piecesW);
+            gDisplay.changePlayerLabel(currentPlayer);
 			while (!kingTaken) {
 				legalMoveFlag = false;
+				System.out.print("");
 				if (currentPlayer instanceof HumanPlayer) {
 					if (gDisplay.getButtonPressed()) {
 						legalMoveFlag = currentPlayer.makeMove();
@@ -157,6 +158,7 @@ public class Chess {
 								currentPlayer = playerW;
 							else
 								currentPlayer = playerB;
+							gDisplay.changePlayerLabel(currentPlayer);
 						}
 					}
 				} // end of if button pressed
@@ -170,13 +172,14 @@ public class Chess {
 							currentPlayer = playerW;
 						else
 							currentPlayer = playerB;
+                        gDisplay.changePlayerLabel(currentPlayer);
 					}
 				}
 				gDisplay.setButtonPressed(false);
 			} // end of !kingtaken
 			gDisplay.displayBoard(piecesW);
 		} // end of else
-
+        tDisplay.displayBoard(piecesW);
 		System.exit(0);
 	} // end of main
 

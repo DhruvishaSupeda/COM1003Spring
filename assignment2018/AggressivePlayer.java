@@ -12,7 +12,6 @@ public class AggressivePlayer extends Player {
     private Pieces pieces;
     private Board playingBoard;
     private Player opponent;
-    private int[] arrayOfCoords = new int[4];
 
     public AggressivePlayer(String n, Pieces p, Board b, Player o) {
         super(n,p,b,o);
@@ -33,7 +32,7 @@ public class AggressivePlayer extends Player {
         ArrayList<Move> bigMoves = new ArrayList<Move>();
         Random rand = new Random();
         Move move = null, currentMove = null;
-        int newX = 0, newY = 0, randomMove = 0, biggestValue = 0;
+        int randomMove = 0, biggestValue = 0;
 
         for (int i = 0; i<allMoves.size(); i++) {
             if (allMoves.get(i).getOccupied())
@@ -44,29 +43,24 @@ public class AggressivePlayer extends Player {
             //Gets everything where occupied is true
             for (int i = 0; i < trueMoves.size(); i++) {
                 move = trueMoves.get(i);
-                newX = move.getNX();
-                newY = move.getNY();
-                if (playingBoard.getPiece(newX, newY).getValue() > biggestValue) { //GET NEWX AND NEWY
-                    biggestValue = playingBoard.getPiece(newX, newY).getValue();
+                if (playingBoard.getPiece(move.getNX(), move.getNY()).getValue() > biggestValue) {
+                    biggestValue = playingBoard.getPiece(move.getNX(), move.getNY()).getValue();
                 }
             }
             while (bigMoves.size() == 0 && biggestValue >=0) {
                 for (int i = 0; i < trueMoves.size(); i++) {
                     move = trueMoves.get(i);
-                    newX = move.getNX();
-                    newY = move.getNY();
-                    if (playingBoard.getPiece(newX, newY).getValue() == biggestValue) { //GET NEWX AND NEWY
+                    if (playingBoard.getPiece(move.getNX(), move.getNY()).getValue() == biggestValue)
                         bigMoves.add(trueMoves.get(i));
-                    }
                 }
                 if (bigMoves == null) {
                     biggestValue -= 1;
                 }
                 else
                     break;
-
             }
-            if (bigMoves.size() > 0) {
+
+            if (bigMoves.size() != 0) {
                 randomMove = rand.nextInt(bigMoves.size());
                 currentMove = bigMoves.get(randomMove);
             }
@@ -89,17 +83,16 @@ public class AggressivePlayer extends Player {
     public boolean makeMove() {
         ArrayList<Move> allMoves = new ArrayList<Move>();
 
+        //Gets all of the possible moves for the player
         allMoves = getMoves();
+        //Chooses a move out of them using the chooseMove method
         Move currentMove = chooseMove(allMoves);
 
-        arrayOfCoords[0] = currentMove.getOX();
-        arrayOfCoords[1] = currentMove.getOY();
-        arrayOfCoords[2] = currentMove.getNX();
-        arrayOfCoords[3] = currentMove.getNY();
         boolean occupiedFlag = currentMove.getOccupied();
-        Piece currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
+        Piece currentPiece = playingBoard.getPiece(currentMove.getOX(), currentMove.getOY());
 
-        movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard, currentMove);
+        //Moves the current piece
+        movePieces(occupiedFlag, currentPiece, playingBoard, currentMove);
         return true;
     }
 
@@ -110,6 +103,7 @@ public class AggressivePlayer extends Player {
     public ArrayList<Move> getMoves() {
         Piece currentPiece = null;
         ArrayList<Move> allMoves = new ArrayList<Move>();
+        //Iterates through each piece in the pieces for the player, and adds all of the moves available
         for (int i = 0; i<getPieces().getNumPieces(); i++) {
             currentPiece = getPieces().getPiece(i);
             if (currentPiece.availableMoves() != null) {
@@ -123,11 +117,10 @@ public class AggressivePlayer extends Player {
      * Using the move chosen, moves the pieces in the board
      * @param occupiedFlag  boolean to show whether the piece to move into is occupied
      * @param currentPiece  the piece being moved
-     * @param arrayOfCoords the array of coordinates of the current piece and where it is moving to
      * @param currentBoard  the board being used in the game
      * @param currentMove   the move object of the move being used
      */
-    public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
+    public void movePieces(boolean occupiedFlag, Piece currentPiece, Board currentBoard, Move currentMove) {
         if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
             if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
                 this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));

@@ -110,7 +110,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         displayPanel.add(boardPanel, BorderLayout.CENTER);
         contentPane.add(displayPanel, BorderLayout.CENTER);
         contentPane.add(inputPanel, BorderLayout.EAST);
-        setVisible(true);
+        //setVisible(true);
     }
 
     /**
@@ -118,8 +118,8 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
      * @param myPieces the pieces of one of the players, which is used to get the current board
      */
     public void displayBoard(Pieces myPieces) {
+        setVisible(true);
         buttonPressed = false;
-        playerLabel.setText("White player");
         //Gets the board of the pieces to be displayed
         Board playingBoard = myPieces.getPiece(1).getBoard();
         //Initialises the icons used to show the board
@@ -237,6 +237,14 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
      */
     public void correctInput() {
         correctness.setText(null);
+    }
+
+    public void changePlayerLabel(Player player) {
+        if (player.getPieces().getPiece(1).getColour()  == PieceCode.WHITE)
+            playerLabel.setText("White Player's Turn");
+        else
+            playerLabel.setText("Black Player's Turn");
+
     }
 
 }

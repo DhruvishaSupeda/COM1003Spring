@@ -149,7 +149,7 @@ public class HumanPlayer extends Player {
 			return false;
 		} else {
 			gDisplay.correctInput();
-			movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
+			movePieces(occupiedFlag, currentPiece, playingBoard);
 		}
 		return legalMoveFlag;
 	}
@@ -185,10 +185,9 @@ public class HumanPlayer extends Player {
 	 * makes the move by moving the pieces and deleting if necessary
 	 * @param occupiedFlag  boolean to show whether the piece to move into is occupied
 	 * @param currentPiece  the piece being moved
-	 * @param arrayOfCoords the array of coordinates of the current piece and where it is moving to
 	 * @param currentBoard  the board being used in the game
 	 */
-	public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard) {
+	public void movePieces(boolean occupiedFlag, Piece currentPiece, Board currentBoard) {
 		if (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) {
 			if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]))
 					.getColour())) {
