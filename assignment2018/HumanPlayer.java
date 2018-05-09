@@ -100,11 +100,8 @@ public class HumanPlayer extends Player {
       if (tDisplay.getDisplayNeeded())
           arrayOfCoords = playerInput();
       else {
-          System.out.println("makeMove be running");
           coordsInput = gDisplay.getInput();
-          System.out.println(coordsInput[0]);
           arrayOfCoords[0] = checkCoords(coordsInput[0]);
-          System.out.println("arrraayyyy   ");
           arrayOfCoords[1] = 8 - ((int) coordsInput[1] - '0');
           arrayOfCoords[2] = checkCoords(coordsInput[2]);
           arrayOfCoords[3] = 8 - ((int) coordsInput[3] - '0');
@@ -126,10 +123,14 @@ public class HumanPlayer extends Player {
           legalMoveFlag = checkMove(currentPiece, currentMove);
       }
       gDisplay.setButtonPressed(false);
-      if (!legalMoveFlag)
+      if (!legalMoveFlag) {
+          gDisplay.incorrectInput();
           return false;
-      else
+      }
+      else {
+          gDisplay.correctInput();
           movePieces(occupiedFlag, currentPiece, arrayOfCoords, playingBoard);
+      }
       return legalMoveFlag;
   }
 

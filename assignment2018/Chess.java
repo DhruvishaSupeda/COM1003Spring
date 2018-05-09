@@ -131,10 +131,8 @@ public class Chess {
       } //end of if text
       else {
         while (!kingTaken) {
-            System.out.print("HELP");
             legalMoveFlag = false;
             if (gDisplay.getButtonPressed()) {
-                System.out.println("You ever running?");
                 if (whiteTurn) {
                     legalMoveFlag = playerW.makeMove();
                     kingTaken = checkKing(playerW);
@@ -143,7 +141,8 @@ public class Chess {
                     kingTaken = checkKing(playerB);
                 }
                 gDisplay.displayBoard(piecesW);
-                whiteTurn = !whiteTurn;
+                if (legalMoveFlag)
+                    whiteTurn = !whiteTurn;
                 gDisplay.setButtonPressed(false);
             } //end of if button pressed
         } //end of !kingtaken

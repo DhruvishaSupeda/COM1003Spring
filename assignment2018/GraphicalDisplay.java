@@ -171,11 +171,9 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     public char[] getInput() {
         char[] arrayOfCoords = new char[4];
         arrayOfCoords[0] = (char)letterOne.getSelectedItem();
-        System.out.println(arrayOfCoords[0]);
         arrayOfCoords[1] = numberOne.getSelectedItem().toString().charAt(0);
         arrayOfCoords[2] = (char)letterTwo.getSelectedItem();
         arrayOfCoords[3] = numberTwo.getSelectedItem().toString().charAt(0);
-        System.out.println("Getting input apparently");
         return arrayOfCoords;
     }
 
@@ -194,6 +192,14 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     public boolean getDisplayNeeded() {
         return displayNeeded;
+    }
+
+    public void incorrectInput() {
+
+    }
+
+    public void correctInput() {
+
     }
 
 }
