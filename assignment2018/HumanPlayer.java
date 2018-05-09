@@ -81,8 +81,6 @@ public class HumanPlayer extends Player {
             }
             else {
                 System.out.println("Incorrect input. Please try again: ");
-                //for (int i = 0; i < 4; i++)
-                //   arrayOfCoords[i] = 'A';
                 coords = scanner.nextLine().toUpperCase();
                 //Uses space as delimiter and puts from and to into 2 elements of array
                 arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();

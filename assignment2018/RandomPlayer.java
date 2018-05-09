@@ -33,18 +33,15 @@ public class RandomPlayer extends Player {
   }
 
   public boolean makeMove() {
-    ArrayList<Move> theLegalMoves = new ArrayList<Move>();
     Piece currentPiece = null;
     Move currentMove = null;
-    boolean kingTaken = false, occupiedFlag = false, legalMoveFlag = false;
-    boolean whiteTurn = false;
-    boolean blackTurn = true;
+    boolean occupiedFlag = false;
     ArrayList<Move> allMoves = new ArrayList<Move>();
     allMoves = getMoves();
     Random rand = new Random();
     int randomMove = rand.nextInt(allMoves.size());
+
     currentMove = allMoves.get(randomMove);
-    System.out.println(currentMove.toString());
     arrayOfCoords[0] = currentMove.getOX();
     arrayOfCoords[1] = currentMove.getOY();
     arrayOfCoords[2] = currentMove.getNX();

@@ -39,6 +39,7 @@ public class AggressivePlayer extends Player {
         Move move = null, currentMove = null;
         int newX = 0, newY = 0, randomMove = 0;
         int biggestValue = 0;
+
         for (int i = 0; i<allMoves.size(); i++) {
             if (allMoves.get(i).getOccupied()){
                 trueMoves.add(allMoves.get(i));
@@ -88,16 +89,12 @@ public class AggressivePlayer extends Player {
     }
 
     public boolean makeMove() {
-        ArrayList<Move> theLegalMoves = new ArrayList<Move>();
         Piece currentPiece = null;
         Move currentMove = null;
-        boolean kingTaken = false, occupiedFlag = false, legalMoveFlag = false;
-        boolean whiteTurn = false;
-        boolean blackTurn = true;
+        boolean occupiedFlag = false;
         ArrayList<Move> allMoves = new ArrayList<Move>();
-        allMoves = getMoves();
-        Random rand = new Random();
 
+        allMoves = getMoves();
         currentMove = chooseMove(allMoves);
 
         arrayOfCoords[0] = currentMove.getOX();

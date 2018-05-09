@@ -15,6 +15,11 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     private JComboBox numberOne = new JComboBox();
     private JComboBox numberTwo = new JComboBox();
     private JLabel correctness = new JLabel();
+    private JLabel playerLabel = new JLabel();
+
+    private final int BOARD_HEIGHT = 8;
+    private final int BOARD_WIDTH = 8;
+
 
     public GraphicalDisplay() {
         setTitle("Chess");
@@ -37,23 +42,24 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         contentPane.setLayout(new BorderLayout());
         letterPanel.setLayout(new GridLayout(1,0));
         numberPanel.setLayout(new GridLayout(0,1));
-        boardPanel.setLayout(new GridLayout(0,8));
+        boardPanel.setLayout(new GridLayout(0,BOARD_WIDTH));
         inputPanel.setLayout(new GridLayout(0,3));
         displayPanel.setLayout(new BorderLayout());
 
+        //Boolean variable to say whether each square should be grey or white
         boolean grey=true;
 
-        //Makes number and letter panels, sets borders to board labels and adds them
-        for (int y = 0; y < 8; y++) {
-            numberPanel.add(new JLabel(Integer.toString(8-y, JLabel.CENTER)));
-            letterPanel.add(new JLabel(String.valueOf((char)('A' + y))));
+        //Makes number and letter panels, sets borders to board labels and adds them (makes grey if necessary)
+        for (int y = 0; y < BOARD_HEIGHT; y++) {
+            numberPanel.add(new JLabel(Integer.toString(BOARD_WIDTH-y)));
+            letterPanel.add(new JLabel(String.valueOf((char)('A' + y)), SwingConstants.CENTER));
             grey=!grey;
-            for (int x = 0; x < 8; x++) {
+            for (int x = 0; x < BOARD_WIDTH; x++) {
                 boardButtons[x][y] = new JLabel();
                 if (grey)
                     boardButtons[x][y].setBackground(Color.lightGray);
 
-                boardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
+                //boardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
                 boardButtons[x][y].setHorizontalAlignment(JLabel.CENTER);
                 boardButtons[x][y].setOpaque(true);
                 boardPanel.add(boardButtons[x][y]);
@@ -63,12 +69,11 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
 
         //Adds the input label
-        JLabel playerLabel = new JLabel("Input:");
+        inputPanel.add(new JLabel("Input:"));
         inputPanel.add(playerLabel);
-        //Adds blank label for inbetween
-        inputPanel.add(new JLabel());
         inputPanel.add(correctness);
 
+        //Adds each item to all of the dropdowns
         for (int i = 1; i<9; i++) {
             letterOne.addItem((char)('A' + i-1));
             letterTwo.addItem((char)('A' + i-1));
@@ -76,6 +81,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
             numberTwo.addItem(i);
         }
 
+        //Adds combo boxes and labels to the input panel
         inputPanel.setSize(screenDimensions.width/6, screenDimensions.height);
         inputPanel.add(new JLabel("Current position:"));
         inputPanel.add(letterOne);
@@ -84,6 +90,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         inputPanel.add(letterTwo);
         inputPanel.add(numberTwo);
 
+        //Adds empty labels to fill in gaps and the submit button
         for (int i=0; i<2; i++)
             inputPanel.add(new JLabel());
 
@@ -101,6 +108,8 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     public void displayBoard(Pieces myPieces) {
         buttonPressed = false;
+        playerLabel.setText("White player");
+
         Board playingBoard = myPieces.getPiece(1).getBoard();
         ImageIcon b_bishop = new ImageIcon("images/b_bishop.png");
         ImageIcon b_rook = new ImageIcon("images/b_rook.png");
@@ -115,8 +124,8 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         ImageIcon w_queen = new ImageIcon("images/w_queen.png");
         ImageIcon w_rook = new ImageIcon("images/w_rook.png");
 
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
+        for (int y = 0; y < BOARD_HEIGHT; y++) {
+            for (int x = 0; x < BOARD_WIDTH; x++) {
                 if (playingBoard.getPiece(x , y) != null) {
                     switch (playingBoard.getPiece(x, y).getChar()) {
                         case PieceCode.PAWNWHITE:

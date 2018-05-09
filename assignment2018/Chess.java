@@ -97,11 +97,6 @@ public class Chess {
     boolean kingTaken = false,
     legalMoveFlag= false;
 
-    //ASK IF WANTS GUI OR NOT
-      //IF THEY DON'T, DO BELOW WHILE LOOP
-      //IF THEY DO, DO ANOTHER WHILE LOOK WHICH HAS LIKE GDISPLAY.WHATEVER TO MAKE THE MOVES?
-      //USE GETARRAYOFCOORDS TO GET AND SET IT IN GDISPLAY?
-
     if (tDisplay.getDisplayNeeded()) {
           while (!kingTaken) {
               //Display board
