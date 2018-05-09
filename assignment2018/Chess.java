@@ -150,7 +150,6 @@ public class Chess {
                         else
                             currentPlayer = playerB;
                     }
-                    gDisplay.setButtonPressed(false);
                 }
             }//end of if button pressed
             else {
@@ -164,9 +163,8 @@ public class Chess {
                     else
                         currentPlayer = playerB;
                 }
-                gDisplay.setButtonPressed(false);
             }
-
+            gDisplay.setButtonPressed(false);
         } //end of !kingtaken
         gDisplay.displayBoard(piecesW);
       } //end of else

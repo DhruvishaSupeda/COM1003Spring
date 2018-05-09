@@ -23,7 +23,6 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         Dimension screenDimensions = toolkit.getScreenSize();
         setSize(screenDimensions.width/2, screenDimensions.height);
 
-        //setSize(1000, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Adds all the containers
@@ -32,6 +31,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         JPanel numberPanel = new JPanel();
         JPanel boardPanel = new JPanel();
         JPanel inputPanel = new JPanel();
+        JPanel displayPanel = new JPanel();
 
         //sets layouts of all containers
         contentPane.setLayout(new BorderLayout());
@@ -39,19 +39,20 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         numberPanel.setLayout(new GridLayout(0,1));
         boardPanel.setLayout(new GridLayout(0,8));
         inputPanel.setLayout(new GridLayout(0,3));
+        displayPanel.setLayout(new BorderLayout());
 
         boolean grey=true;
 
         //Makes number and letter panels, sets borders to board labels and adds them
         for (int y = 0; y < 8; y++) {
-            numberPanel.add(new JLabel(Integer.toString(y+1, JLabel.CENTER)));
-            letterPanel.add(new JLabel("A"));
+            numberPanel.add(new JLabel(Integer.toString(8-y, JLabel.CENTER)));
+            letterPanel.add(new JLabel(String.valueOf((char)('A' + y))));
             grey=!grey;
             for (int x = 0; x < 8; x++) {
                 boardButtons[x][y] = new JLabel();
-                //boardButtons[x][y].setOpaque(true);
                 if (grey)
                     boardButtons[x][y].setBackground(Color.lightGray);
+
                 boardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
                 boardButtons[x][y].setHorizontalAlignment(JLabel.CENTER);
                 boardButtons[x][y].setOpaque(true);
@@ -90,9 +91,10 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         submit.addActionListener(this);
         inputPanel.add(submit);
 
-        contentPane.add(letterPanel, BorderLayout.NORTH);
-        contentPane.add(numberPanel, BorderLayout.WEST);
-        contentPane.add(boardPanel, BorderLayout.CENTER);
+        displayPanel.add(letterPanel, BorderLayout.NORTH);
+        displayPanel.add(numberPanel, BorderLayout.WEST);
+        displayPanel.add(boardPanel, BorderLayout.CENTER);
+        contentPane.add(displayPanel, BorderLayout.CENTER);
         contentPane.add(inputPanel, BorderLayout.EAST);
         setVisible(true);
     }
@@ -100,7 +102,6 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     public void displayBoard(Pieces myPieces) {
         buttonPressed = false;
         Board playingBoard = myPieces.getPiece(1).getBoard();
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
         ImageIcon b_bishop = new ImageIcon("images/b_bishop.png");
         ImageIcon b_rook = new ImageIcon("images/b_rook.png");
         ImageIcon b_king = new ImageIcon("images/b_king.png");
@@ -170,7 +171,6 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     public void actionPerformed(ActionEvent e) {
         buttonPressed = true;
-        System.out.println("Button pressed yar");
     }
 
     public char[] getInput() {

@@ -98,9 +98,7 @@ public class AggressivePlayer extends Player {
         allMoves = getMoves();
         Random rand = new Random();
 
-
         currentMove = chooseMove(allMoves);
-        System.out.println(currentMove.toString());
 
         arrayOfCoords[0] = currentMove.getOX();
         arrayOfCoords[1] = currentMove.getOY();
@@ -126,7 +124,6 @@ public class AggressivePlayer extends Player {
     }
 
     public void movePieces(boolean occupiedFlag, Piece currentPiece, int[] arrayOfCoords, Board currentBoard, Move currentMove) {
-        System.out.println(occupiedFlag);
         if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
             if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
                 this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));
@@ -137,11 +134,6 @@ public class AggressivePlayer extends Player {
         currentBoard.removePiece(currentMove.getOX(), currentMove.getOY());
         currentBoard.setPosition(currentMove.getNX(), currentMove.getNY(), currentPiece);
         currentPiece.setPosition(currentMove.getNX(), currentMove.getNY());
-    }
-
-
-    public void setArrayOfCoords(int[] array) {
-
     }
 
 
