@@ -95,5 +95,4 @@ public class Rook extends Piece {
 			return null;
 		return legalMoves;
 	}
-
 }
