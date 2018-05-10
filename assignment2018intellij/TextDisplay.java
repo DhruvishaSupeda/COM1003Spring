@@ -23,7 +23,7 @@ public class TextDisplay implements Display {
 	 * @param myPieces Pieces arraylist used to get the current board
 	 */
 	public void displayBoard(Pieces myPieces) {
-		Board playingBoard = myPieces.getPiece(0).getBoard();
+		Board playingBoard = myPieces.getPiece(1).getBoard();
 		System.out.println(" |A B C D E F G H");
 		System.out.println("- - - - - - - - -");
 		for (int y = 0; y < BOARD_HEIGHT; y++) { // MAKE BOARD_WIDTH AND HEIGHT CONSTANTS

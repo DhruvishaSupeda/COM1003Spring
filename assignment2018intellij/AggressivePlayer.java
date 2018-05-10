@@ -27,52 +27,54 @@ public class AggressivePlayer extends Player {
      * @param  allMoves all of the moves possible using all of the pieces for that player
      * @return the move chosen to be used
      */
-     public Move chooseMove(ArrayList<Move> allMoves) {
-         ArrayList<Move> trueMoves = new ArrayList<Move>();
-         ArrayList<Move> bigMoves = new ArrayList<Move>();
-         Random rand = new Random();
-         Move move = null, currentMove = null;
-         int randomMove = 0, biggestValue = 0;
+    public Move chooseMove(ArrayList<Move> allMoves) {
+        ArrayList<Move> trueMoves = new ArrayList<Move>();
+        ArrayList<Move> bigMoves = new ArrayList<Move>();
+        Random rand = new Random();
+        Move move = null, currentMove = null;
+        int randomMove = 0, biggestValue = 0;
 
-         //Puts any moves that would take a piece in trueMoves
-         for (int i = 0; i<allMoves.size(); i++) {
-             if (allMoves.get(i).getOccupied())
-                 trueMoves.add(allMoves.get(i));
-         }
+        for (int i = 0; i<allMoves.size(); i++) {
+            if (allMoves.get(i).getOccupied())
+                trueMoves.add(allMoves.get(i));
+        }
 
-         //If there are pieces to take, finds the moves which take the highest value pieces possible
-         if (trueMoves != null) {
-             //Gets everything where occupied is true
-             for (int i = 0; i < trueMoves.size(); i++) {
-                 move = trueMoves.get(i);
-                 if (playingBoard.getPiece(move.getNX(), move.getNY()).getValue() > biggestValue) {
-                     biggestValue = playingBoard.getPiece(move.getNX(), move.getNY()).getValue();
-                 }
-             }
-             //Puts all of the pieces with biggestValue into bigMoves
-             for (int i = 0; i < trueMoves.size(); i++) {
-                 move = trueMoves.get(i);
-                 if (playingBoard.getPiece(move.getNX(), move.getNY()).getValue() == biggestValue)
-                     bigMoves.add(trueMoves.get(i));
-             }
-             //If there are moves in bigMove (where biggestValue is bigger than 0), one of the moves are chosen randomly
-             if (bigMoves.size() != 0) {
-                 randomMove = rand.nextInt(bigMoves.size());
-                 currentMove = bigMoves.get(randomMove);
-             }
-             //If there are no moves in bigMove, picks a random move from all possible moves
-             else {
-                 randomMove = rand.nextInt(allMoves.size());
-                 currentMove = allMoves.get(randomMove);
-             }
-         }
-         //If there are no moves taking a piece, picks a random move from all possible moves
-         else {
-             randomMove = rand.nextInt(allMoves.size());
-             currentMove = allMoves.get(randomMove);
-         }
-         return currentMove;
-     }
+        if (trueMoves != null) {
+            //Gets everything where occupied is true
+            for (int i = 0; i < trueMoves.size(); i++) {
+                move = trueMoves.get(i);
+                if (playingBoard.getPiece(move.getNX(), move.getNY()).getValue() > biggestValue) {
+                    biggestValue = playingBoard.getPiece(move.getNX(), move.getNY()).getValue();
+                }
+            }
+            while (bigMoves.size() == 0 && biggestValue >=0) {
+                for (int i = 0; i < trueMoves.size(); i++) {
+                    move = trueMoves.get(i);
+                    if (playingBoard.getPiece(move.getNX(), move.getNY()).getValue() == biggestValue)
+                        bigMoves.add(trueMoves.get(i));
+                }
+                if (bigMoves == null) {
+                    biggestValue -= 1;
+                }
+                else
+                    break;
+            }
+
+            if (bigMoves.size() != 0) {
+                randomMove = rand.nextInt(bigMoves.size());
+                currentMove = bigMoves.get(randomMove);
+            }
+            else {
+                randomMove = rand.nextInt(allMoves.size());
+                currentMove = allMoves.get(randomMove);
+            }
+        }
+        else {
+            randomMove = rand.nextInt(allMoves.size());
+            currentMove = allMoves.get(randomMove);
+        }
+        return currentMove;
+    }
 
     /**
      * Chooses the moves out of all moves possible, and makes that move
@@ -80,13 +82,14 @@ public class AggressivePlayer extends Player {
      */
     public boolean makeMove() {
         ArrayList<Move> allMoves = new ArrayList<Move>();
+
         //Gets all of the possible moves for the player
         allMoves = getMoves();
-
         //Chooses a move out of them using the chooseMove method
         Move currentMove = chooseMove(allMoves);
+        System.out.println(currentMove.toString());
+
         boolean occupiedFlag = currentMove.getOccupied();
-        //Makes a piece for the piece in the current position
         Piece currentPiece = playingBoard.getPiece(currentMove.getOX(), currentMove.getOY());
 
         //Moves the current piece
@@ -101,7 +104,7 @@ public class AggressivePlayer extends Player {
     public ArrayList<Move> getMoves() {
         Piece currentPiece = null;
         ArrayList<Move> allMoves = new ArrayList<Move>();
-        //Iterates through each piece in the pieces for the player, and adds all of the moves available to allMoves
+        //Iterates through each piece in the pieces for the player, and adds all of the moves available
         for (int i = 0; i<getPieces().getNumPieces(); i++) {
             currentPiece = getPieces().getPiece(i);
             if (currentPiece.availableMoves() != null) {

@@ -17,21 +17,21 @@ public class Chess {
 	 */
 	public static boolean checkKing(Player player) { // GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
 		for (int i = 0; i < player.getOpponent().getPieces().getNumPieces(); i++) {
-			if (player.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING)
+			if (player.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING) {
 				return false;
+			}
 		}
 		System.out.println(player.toString() + " wins!");
 		return true;
 	}
 
 	public static void main(String[] args) {
-		// Creates board
+
+		// Creates board, pieces, displays and players to use in the game
 		Board playingBoard = new Board();
-		//Created pieces for both players
 		Pieces piecesW = new Pieces(playingBoard, PieceCode.WHITE);
 		Pieces piecesB = new Pieces(playingBoard, PieceCode.BLACK);
 		Scanner scanner = new Scanner(System.in);
-		//Creates the objects of the graphical and text displays
 		GraphicalDisplay gDisplay = new GraphicalDisplay();
 		TextDisplay tDisplay = new TextDisplay();
 		Player playerW = null, playerB = null;
@@ -45,21 +45,18 @@ public class Chess {
 			System.out.print("Would you like a GUI or text display? (1 or 0)");
 			displayType = scanner.nextInt();
 		}
-		//Sets the display based on the user input
-		if (displayType == 1)
+		if (displayType == 1) {
 			gDisplay.setDisplayNeeded(true);
-		else
+		} else
 			tDisplay.setDisplayNeeded(true);
 
-		System.out.println();
 		// Input for types of player
-    int player1 = 0, player2 = 0;
+        int player1 = 0, player2 = 0;
 		while (player1 != 1 && player1 != 2 && player1 != 3) {
 			System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
 			System.out.print("What type of player is Player 1? (White)");
 			player1 = scanner.nextInt();
 		}
-		System.out.println();
 		while (player2 != 1 && player2 != 2 && player2 != 3) {
 			System.out.println("1 for Human, 2 for Random, 3 for Aggressive");
 			System.out.print("What type of player is Player 2? (Black)");
@@ -106,39 +103,32 @@ public class Chess {
 			((HumanPlayer) playerB).setTDisplay(tDisplay);
 			break;
 		}
-		System.out.println();
 
 		// Sets the opponent for each player
 		playerW.setOpponent(playerB);
 		playerB.setOpponent(playerW);
-		// Player object used for the player making a move at the time
+		// Player object used for the
 		Player currentPlayer = playerW;
-		//Boolean value indicating who's turn it is
 		boolean whiteTurn = true;
-		boolean kingTaken = false, legalMove = false;
+		boolean kingTaken = false, legalMoveFlag = false;
 
-		//If the display type wanted is a text display
 		if (displayType == 0) {
 			while (!kingTaken) {
 				// Display board
 				tDisplay.displayBoard(piecesW);
-				//Resets legal move flag
-				legalMove = false;
-				//While the user has inputted an invalid move
-				while (!legalMove) {
+				legalMoveFlag = false;
+				while (!legalMoveFlag) {
 					System.out.println();
 					if (whiteTurn) {
 						System.out.println("Player 1 (white player)'s turn:");
 					} else {
 						System.out.println("Player 2 (black player)'s turn:");
 					}
-					//Makes the move and checks if the king has been taken
-					legalMove = currentPlayer.makeMove();
+					legalMoveFlag = currentPlayer.makeMove();
 					kingTaken = checkKing(currentPlayer);
-					//If the move is illegal, informs the user and loops back to the beginning of the while loop
-					if (!legalMove)
+					if (!legalMoveFlag)
 						System.out.println("Illegal move. Please try a valid move:");
-				}
+				} // end of while!legal
 
 				// Make it the next players turn
 				whiteTurn = !whiteTurn;
@@ -147,27 +137,22 @@ public class Chess {
 				else
 					currentPlayer = playerB;
 
-			}
+			} // end of while loop
 			tDisplay.displayBoard(piecesW);
-		} 
+		} // end of if text display
 
 		else {
-			//Displays the graphical board, and changes the label to the current player
 			gDisplay.displayBoard(piecesW);
-      gDisplay.changePlayerLabel(currentPlayer);
+            gDisplay.changePlayerLabel(currentPlayer);
 			while (!kingTaken) {
-				//Resets the legal move flag
-				legalMove = false;
+				legalMoveFlag = false;
 				System.out.print("");
-				//If the current player is human and the submit button has been pressed, makes the move
 				if (currentPlayer instanceof HumanPlayer) {
 					if (gDisplay.getButtonPressed()) {
-						//Makes the move (if possible) and updates the GUI
-						legalMove = currentPlayer.makeMove();
+						legalMoveFlag = currentPlayer.makeMove();
 						kingTaken = checkKing(currentPlayer);
 						gDisplay.displayBoard(piecesW);
-						//If the move was legal, changes to the next player so they can make a move
-						if (legalMove) {
+						if (legalMoveFlag) {
 							whiteTurn = !whiteTurn;
 							if (whiteTurn)
 								currentPlayer = playerW;
@@ -176,27 +161,25 @@ public class Chess {
 							gDisplay.changePlayerLabel(currentPlayer);
 						}
 					}
-				}
+				} // end of if button pressed
 				else {
-					//Executes when the player is an AI player as opposed to human
-					legalMove = currentPlayer.makeMove();
+					legalMoveFlag = currentPlayer.makeMove();
 					kingTaken = checkKing(currentPlayer);
 					gDisplay.displayBoard(piecesW);
-					if (legalMove) {
+					if (legalMoveFlag) {
 						whiteTurn = !whiteTurn;
 						if (whiteTurn)
 							currentPlayer = playerW;
 						else
 							currentPlayer = playerB;
-            gDisplay.changePlayerLabel(currentPlayer);
+                        gDisplay.changePlayerLabel(currentPlayer);
 					}
 				}
-				//Resets the button pressed so it can wait until submit is pressed again
 				gDisplay.setButtonPressed(false);
-			}
-			//Displays the graphical board for the last time once the king is taken
+			} // end of !kingtaken
 			gDisplay.displayBoard(piecesW);
-		}
-	}
+		} // end of else
+		//System.exit(0);
+	} // end of main
 
-}
+}// end of class

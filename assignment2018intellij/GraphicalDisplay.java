@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     //Array storing all of the labels used in the game
-    private JLabel[][] boardLabels = new JLabel[8][8];
+    private JLabel[][] boardButtons = new JLabel[8][8];
     private boolean displayNeeded, buttonPressed;
     //Four combo boxes for the user inputs
     private JComboBox letterOne = new JComboBox();
@@ -24,9 +24,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
     private final int BOARD_HEIGHT = 8;
     private final int BOARD_WIDTH = 8;
 
-    /**
-     * Constructs the initial state of the board
-     */
+
     public GraphicalDisplay() {
         setTitle("Chess");
 
@@ -56,25 +54,24 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         //Boolean variable to say whether each square should be grey or white
         boolean grey=false;
 
-        //Makes number and letter panels, makes the new labels for the pieces (makes grey if necessary)
-        //Then adds them all to the board panel
+        //Makes number and letter panels, sets borders to board labels and adds them (makes grey if necessary)
         for (int y = 0; y < BOARD_HEIGHT; y++) {
             numberPanel.add(new JLabel(Integer.toString(BOARD_WIDTH-y)));
             letterPanel.add(new JLabel(String.valueOf((char)('A' + y)), SwingConstants.CENTER));
             grey=!grey;
             for (int x = 0; x < BOARD_WIDTH; x++) {
-                boardLabels[x][y] = new JLabel();
+                boardButtons[x][y] = new JLabel();
                 if (grey)
-                    boardLabels[x][y].setBackground(Color.lightGray);
-                    boardLabels[x][y].setOpaque(true);
+                    boardButtons[x][y].setBackground(Color.lightGray);
 
-                boardLabels[x][y].setHorizontalAlignment(JLabel.CENTER);
-                boardPanel.add(boardLabels[x][y]);
+                //boardButtons[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
+                boardButtons[x][y].setHorizontalAlignment(JLabel.CENTER);
+                boardButtons[x][y].setOpaque(true);
+                boardPanel.add(boardButtons[x][y]);
                 grey = !grey;
             }
         }
 
-        //Top labels for the input panel are added
         inputPanel.add(playerLabel);
         inputPanel.add(new JLabel());
         inputPanel.add(correctness);
@@ -112,6 +109,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         displayPanel.add(boardPanel, BorderLayout.CENTER);
         contentPane.add(displayPanel, BorderLayout.CENTER);
         contentPane.add(inputPanel, BorderLayout.EAST);
+        //setVisible(true);
     }
 
     /**
@@ -122,7 +120,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         setVisible(true);
         buttonPressed = false;
         //Gets the board of the pieces to be displayed
-        Board playingBoard = myPieces.getPiece(0).getBoard();
+        Board playingBoard = myPieces.getPiece(1).getBoard();
         //Initialises the icons used to show the board
         ImageIcon b_bishop = new ImageIcon("assignment2018/images/b_bishop.png");
         ImageIcon b_rook = new ImageIcon("assignment2018/images/b_rook.png");
@@ -143,56 +141,57 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
                 if (playingBoard.getPiece(x , y) != null) {
                     switch (playingBoard.getPiece(x, y).getChar()) {
                         case PieceCode.PAWNWHITE:
-                            boardLabels[x][y].setIcon(w_pawn);
+                            boardButtons[x][y].setIcon(w_pawn);
                             break;
                         case PieceCode.KNIGHTWHITE:
-                            boardLabels[x][y].setIcon(w_knight);
+                            boardButtons[x][y].setIcon(w_knight);
                             break;
                         case PieceCode.BISHOPWHITE:
-                            boardLabels[x][y].setIcon(w_bishop);
+                            boardButtons[x][y].setIcon(w_bishop);
                             break;
                         case PieceCode.ROOKWHITE:
-                            boardLabels[x][y].setIcon(w_rook);
+                            boardButtons[x][y].setIcon(w_rook);
                             break;
                         case PieceCode.QUEENWHITE:
-                            boardLabels[x][y].setIcon(w_queen);
+                            boardButtons[x][y].setIcon(w_queen);
                             break;
                         case PieceCode.KINGWHITE:
-                            boardLabels[x][y].setIcon(w_king);
+                            boardButtons[x][y].setIcon(w_king);
                             break;
                         case PieceCode.PAWNBLACK:
-                            boardLabels[x][y].setIcon(b_pawn);
+                            boardButtons[x][y].setIcon(b_pawn);
                             break;
                         case PieceCode.KNIGHTBLACK:
-                            boardLabels[x][y].setIcon(b_knight);
+                            boardButtons[x][y].setIcon(b_knight);
                             break;
                         case PieceCode.BISHOPBLACK:
-                            boardLabels[x][y].setIcon(b_bishop);
+                            boardButtons[x][y].setIcon(b_bishop);
                             break;
                         case PieceCode.ROOKBLACK:
-                            boardLabels[x][y].setIcon(b_rook);
+                            boardButtons[x][y].setIcon(b_rook);
                             break;
                         case PieceCode.QUEENBLACK:
-                            boardLabels[x][y].setIcon(b_queen);
+                            boardButtons[x][y].setIcon(b_queen);
                             break;
                         case PieceCode.KINGBLACK:
-                            boardLabels[x][y].setIcon(b_king);
+                            boardButtons[x][y].setIcon(b_king);
                             break;
                         default:
-                            boardLabels[x][y].setIcon(null);
+                            boardButtons[x][y].setIcon(null);
                             break;
-                    }
-                }
-                //If the coordinate does not have a piece (is null), shows a blank label
+
+                    } //end of switch
+                } //end of if
+                //If the coordinate does not have a piece, shows a blank label
                 else
-                    boardLabels[x][y].setIcon(null);
-            }
-        }
+                    boardButtons[x][y].setIcon(null);
+            } //end of x for
+        } //end of y for
+
     }
 
 
     public void actionPerformed(ActionEvent e) {
-        //Makes the buttonPressed variable true to indicate the user wants to submit their input
         buttonPressed = true;
     }
 
@@ -229,7 +228,7 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
      * changes the text in the correctness label to show the user has entered an incorrect input
      */
     public void incorrectInput() {
-        correctness.setText("Invalid Move!");
+        correctness.setText("Incorrect input!");
     }
 
     /**
@@ -239,10 +238,6 @@ public class GraphicalDisplay extends JFrame implements ActionListener, Display{
         correctness.setText(null);
     }
 
-    /**
-     * Changes the player name displayed depending on who's turn it is (black or white)
-     * @param player the player who is making a move next
-     */
     public void changePlayerLabel(Player player) {
         if (player.getPieces().getPiece(1).getColour()  == PieceCode.WHITE)
             playerLabel.setText("White Player's Turn");
