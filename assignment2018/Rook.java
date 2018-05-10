@@ -18,7 +18,7 @@ public class Rook extends Piece {
 		return legalRook();
 	}
 
-	public ArrayList<Move> getYMove(int x, int y, int i, int sign) {
+	private ArrayList<Move> getYMove(int x, int y, int i, int sign) {
 	    Move theMove = null;
         ArrayList<Move> theMoves = new ArrayList<Move>();
         while (!(getBoard().outOfRange(x, y + i))) {
@@ -38,7 +38,7 @@ public class Rook extends Piece {
         return theMoves;
     }
 
-    public ArrayList<Move> getXMove(int x, int y, int i, int sign) {
+    private ArrayList<Move> getXMove(int x, int y, int i, int sign) {
 	    Move theMove = null;
         ArrayList<Move> theMoves = new ArrayList<Move>();
         while (!getBoard().outOfRange(x + i, y)) {

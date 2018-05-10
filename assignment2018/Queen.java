@@ -16,7 +16,7 @@ public class Queen extends Piece {
 		return legalQueen();
 	}
 
-	public ArrayList<Move> getYMove(int x, int y, int i, int sign) {
+	private ArrayList<Move> getYMove(int x, int y, int i, int sign) {
 		Move theMove = null;
 		ArrayList<Move> theMoves = new ArrayList<Move>();
 		while (!(getBoard().outOfRange(x, y + i))) {
@@ -36,7 +36,7 @@ public class Queen extends Piece {
 		return theMoves;
 	}
 
-	public ArrayList<Move> getXMove(int x, int y, int i, int sign) {
+	private ArrayList<Move> getXMove(int x, int y, int i, int sign) {
 		Move theMove = null;
 		ArrayList<Move> theMoves = new ArrayList<Move>();
 		while (!getBoard().outOfRange(x + i, y)) {
@@ -56,7 +56,7 @@ public class Queen extends Piece {
 		return theMoves;
 	}
 
-    public ArrayList<Move> getBMoves(int x, int y, int i, int j, int isign, int jsign) {
+    private ArrayList<Move> getBMoves(int x, int y, int i, int j, int isign, int jsign) {
         Move theMove = null;
         ArrayList<Move> theMoves = new ArrayList<Move>();
         while (!getBoard().outOfRange(x + i, y + j)) {

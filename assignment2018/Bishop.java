@@ -17,7 +17,7 @@ public class Bishop extends Piece {
 		return legalBishop();
 	}
 
-	public ArrayList<Move> getMoves(int x, int y, int i, int j, int isign, int jsign) {
+	private ArrayList<Move> getMoves(int x, int y, int i, int j, int isign, int jsign) {
 	    Move theMove = null;
 	    ArrayList<Move> theMoves = new ArrayList<Move>();
         while (!getBoard().outOfRange(x + i, y + j)) {
@@ -31,7 +31,6 @@ public class Bishop extends Piece {
                     break;
             } else {
                 theMove = new Move(this, x, y, x + i, y + j, false);
-                // System.out.println(theMove.toString());
                 theMoves.add(theMove);
             }
             i += isign;
