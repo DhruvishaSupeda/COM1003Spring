@@ -6,6 +6,11 @@ import assignment2018.codeprovided.*;
 
 import java.util.*;
 
+/**
+ * AggressivePlayer.java
+ * Subclass of Player which chooses moves based on the values of any pieces that can be taken
+ * @author Dhruvisha Supeda
+ */
 public class AggressivePlayer extends Player {
 
     private String name;
@@ -119,18 +124,16 @@ public class AggressivePlayer extends Player {
      * @param currentMove   the move object of the move being used
      */
     public void movePieces(boolean occupiedFlag, Piece currentPiece, Board currentBoard, Move currentMove) {
+        //If the move is taking an opponents piece, deletes the piece from the opponents Pieces
         if (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()) != null) {
             if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(currentMove.getNX(), currentMove.getNY())).getColour())) {
                 this.getOpponent().getPieces().delete(currentBoard.getPiece(currentMove.getNX(), currentMove.getNY()));
                 currentBoard.removePiece(currentMove.getNX(), currentMove.getNY());
             }
         }
-
+        //Moves the pieces on the board
         currentBoard.removePiece(currentMove.getOX(), currentMove.getOY());
         currentBoard.setPosition(currentMove.getNX(), currentMove.getNY(), currentPiece);
         currentPiece.setPosition(currentMove.getNX(), currentMove.getNY());
     }
-
-
-
 }

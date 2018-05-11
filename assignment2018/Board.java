@@ -2,9 +2,16 @@ package assignment2018;
 
 import assignment2018.codeprovided.*;
 
-public class Board { // MAKE BOARD WIDTH AND HEIGHT CONSTANTS
+/**
+ * Board.java
+ *
+ * Class representing the board of the game, storing the pieces as an array
+ * @author Dhruvisha Supeda
+ */
+public class Board {
 	private Piece playingBoard[][] = new Piece[8][8];
-	private int[] arrayOfCoords = new int[4];
+	private final int BOARD_HEIGHT = 8;
+	private final int BOARD_WIDTH = 8;
 
 	public Board() {
 		for (int row = 0; row < 8; row++) {
@@ -17,6 +24,11 @@ public class Board { // MAKE BOARD WIDTH AND HEIGHT CONSTANTS
 		playingBoard[x][y] = piece;
 	}
 
+	/**
+	 * Removes the piece from the current board
+	 * @param x x coordinate of piece to be removed
+	 * @param y y coordinate of piece to be removed
+	 */
 	public void removePiece(int x, int y) {
 		playingBoard[x][y] = null;
 	}
@@ -25,6 +37,12 @@ public class Board { // MAKE BOARD WIDTH AND HEIGHT CONSTANTS
 		return playingBoard[x][y];
 	}
 
+  /**
+   * Checks if the position specified is occupied by a piece
+   * @param  x x coordinate of position to be checked
+   * @param  y x coordinate of position to be checked
+   * @return   boolean that is true if the position is occupied, otherwise false
+   */
 	public boolean occupied(int x, int y) {
 		if (!outOfRange(x, y) && (playingBoard[x][y] != null))
 			return true;
@@ -32,6 +50,12 @@ public class Board { // MAKE BOARD WIDTH AND HEIGHT CONSTANTS
 			return false;
 	}
 
+	/**
+	 * Checks if the position given is out of range of the board
+	 * @param  x x coordinate of position to be checked
+   * @param  y x coordinate of position to be checked
+	 * @return   boolean that is true if the position is out of range, otherwise false
+	 */
 	public boolean outOfRange(int x, int y) {
 		if (x > 7 || y > 7 || x < 0 || y < 0)
 			return true;
@@ -39,14 +63,10 @@ public class Board { // MAKE BOARD WIDTH AND HEIGHT CONSTANTS
 			return false;
 	}
 
-	public void setArrayOfCoords() {
-
-	}
-
 	public String toString() {
 		String arrayString = "";
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = 0; i < BOARD_WIDTH; i++) {
+			for (int j = 0; j < BOARD_HEIGHT; j++) {
 				if (playingBoard[i][j] != null)
 					arrayString = arrayString + playingBoard[i][j].toString();
 			}

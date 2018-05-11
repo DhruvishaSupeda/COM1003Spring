@@ -3,6 +3,11 @@ package assignment2018;
 import assignment2018.codeprovided.*;
 import assignment2018.codeprovided.PieceCode;
 
+/**
+ * TextDisplay.java
+ * Class which initialises and shows the state of the board in the console using an array
+ * @author Dhruvisha Supeda
+ */
 public class TextDisplay implements Display {
 	private final int BOARD_HEIGHT = 8;
 	private final int BOARD_WIDTH = 8;
@@ -26,8 +31,7 @@ public class TextDisplay implements Display {
 		Board playingBoard = myPieces.getPiece(0).getBoard();
 		System.out.println(" |A B C D E F G H");
 		System.out.println("- - - - - - - - -");
-		for (int y = 0; y < BOARD_HEIGHT; y++) { // MAKE BOARD_WIDTH AND HEIGHT CONSTANTS
-			// 8-i because it goes 8 downto 1 but can't change loop
+		for (int y = 0; y < BOARD_HEIGHT; y++) {
 			System.out.print(BOARD_HEIGHT - y + "|");
 			for (int x = 0; x < BOARD_WIDTH; x++) {
 				if (playingBoard.getPiece(x, y) != null)

@@ -7,6 +7,12 @@ import assignment2018.codeprovided.PieceCode;
 
 import java.util.*;
 
+/**
+ * HumanPlayer.java
+ *
+ * Subclass of player which lets the player input their own move
+ * @author Dhruvisha Supeda
+ */
 public class HumanPlayer extends Player {
 
 	private String name;
@@ -29,9 +35,7 @@ public class HumanPlayer extends Player {
 	/**
 	 * Converts the letters from the input from the player to numbers to be used as
 	 * coordinates
-	 *
-	 * @param xCoord
-	 *            the coordinate being converted to a number
+	 * @param xCoord the coordinate being converted to a number
 	 * @return returns the number equivalent of the letter given
 	 */
 	public static int checkCoords(char xCoord) {
@@ -120,6 +124,7 @@ public class HumanPlayer extends Player {
 		char[] coordsInput = new char[4];
 
 		if (tDisplay.getDisplayNeeded())
+			//If the player specified a text display, gets input through the console
 			arrayOfCoords = playerInput();
 		else {
 			coordsInput = gDisplay.getInput();
@@ -132,7 +137,7 @@ public class HumanPlayer extends Player {
 		if (playingBoard.occupied(arrayOfCoords[0], arrayOfCoords[1])) {
 			currentPiece = playingBoard.getPiece(arrayOfCoords[0], arrayOfCoords[1]);
 
-			// if black piece in new coordinate, make thing in move true, else false
+			// if piece in new coordinate, makes flag in move object true, else false
 			if (playingBoard.occupied(arrayOfCoords[2], arrayOfCoords[3])) {
 				occupiedFlag = true;
 			} else
@@ -142,9 +147,11 @@ public class HumanPlayer extends Player {
 			currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2], arrayOfCoords[3],
 					occupiedFlag);
 
+			//Checks if the move the user inputted is a valid move
 			legalMoveFlag = checkMove(currentPiece, currentMove);
 		}
 		gDisplay.setButtonPressed(false);
+		//Changes the label on the GUI that tells the user if they inputted a legal move or not
 		if (!legalMoveFlag) {
 			gDisplay.incorrectInput();
 			return false;
@@ -163,13 +170,14 @@ public class HumanPlayer extends Player {
 	 */
 	public boolean checkMove(Piece currentPiece, Move currentMove) {
 		boolean legalMoveFlag = false;
-		// Now iterate through move arraylist somehow
 
+		//Gets the legal moves from the piece being moved
 		ArrayList<Move> theLegalMoves = new ArrayList<Move>();
 		theLegalMoves = currentPiece.availableMoves();
 
 		if (theLegalMoves != null) {
 			for (int i = 0; i < theLegalMoves.size(); i++) {
+				//If the inputted move matches an available move, return true
 				if (theLegalMoves.get(i).equals(currentMove)) {
 					if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
 						legalMoveFlag = true;
@@ -189,6 +197,7 @@ public class HumanPlayer extends Player {
 	 * @param currentBoard  the board being used in the game
 	 */
 	public void movePieces(boolean occupiedFlag, Piece currentPiece, Board currentBoard) {
+		//If the coordinates to move to have a piece to be taken, deletes the piece from the opponents pieces
 		if (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) {
 			if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]))
 					.getColour())) {
@@ -197,6 +206,7 @@ public class HumanPlayer extends Player {
 			}
 		}
 
+		//Moves pieces on the board
 		currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
 		currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
 		currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);
