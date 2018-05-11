@@ -171,8 +171,8 @@ public class Queen extends Piece {
 		theMoves = getXMove(x, y, i, -1);
 		legalMoves.addAll(theMoves);
 
-		int i = 1;
-		int j = 1;
+		i = 1;
+		j = 1;
 		legalMoves.addAll(getBMoves(x, y, i, j, i, j));
 
 		i = -1;

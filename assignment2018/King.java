@@ -36,6 +36,7 @@ public class King extends Piece {
 				return theMove;
 			}
 		}
+		return null;
 	}
 
 	private ArrayList<Move> legalKing() {
@@ -53,54 +54,50 @@ public class King extends Piece {
 		int i = 0;
 		int j = 1;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
-
-		// Checks square above king on the right
-		/*
-		 * if ((!getBoard().occupied(x + 1, y + 1) || getBoard().occupied(x + 1, y + 1)
-		 * && (getBoard().getPiece(x + 1, y + 1).getColour() != this.getColour())) &&
-		 * (!getBoard().outOfRange(x + 1, y + 1))) {
-		 * 
-		 * if (getBoard().occupied(x + 1, y + 1) && (getBoard().getPiece(x + 1, y +
-		 * 1).getColour() != this.getColour())) { theMove = new Move(this, x, y, x + 1,
-		 * y + 1, true); legalMoves.add(theMove); } else { theMove = new Move(this, x,
-		 * y, x + 1, y + 1, false); legalMoves.add(theMove); } }
-		 */
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = 1;
 		j = 1;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = -1;
 		j = 1;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = -1;
 		j = 0;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = 1;
 		j = 0;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = 0;
 		j = -1;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = -1;
 		j = -1;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		i = 1;
 		j = -1;
 		theMove = getMove(x, y, i, j);
-		legalMoves.add(theMove);
+		if (theMove != null)
+			legalMoves.add(theMove);
 
 		if (legalMoves.isEmpty())
 			return null;
