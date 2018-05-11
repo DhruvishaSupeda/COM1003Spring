@@ -7,6 +7,16 @@ import assignment2018.codeprovided.PieceCode;
 
 import java.util.*;
 
+/**
+ * Chess.java
+ *
+ * Main class for the System
+ * Asks the user for inputs to pick what type of interface and players they want
+ * Has the main logic for how the game works depending on the types of players
+ * Checks after each move if the king has been taken, to know when to end the game
+ *
+ * @author Dhruvisha Supeda
+ */
 public class Chess {
 
 	/**
@@ -15,7 +25,7 @@ public class Chess {
 	 * @param player the player being checked to see if it has a king
 	 * @return returns false if the player still has a king, otherwise returns true
 	 */
-	public static boolean checkKing(Player player) { // GET OPPONENTS PIECES, IF THERE IS NO KING THEN TAKEN
+	public static boolean checkKing(Player player) {
 		for (int i = 0; i < player.getOpponent().getPieces().getNumPieces(); i++) {
 			if (player.getOpponent().getPieces().getPiece(i).getValue() == PieceCode.KING)
 				return false;
@@ -149,7 +159,7 @@ public class Chess {
 
 			}
 			tDisplay.displayBoard(piecesW);
-		} 
+		}
 
 		else {
 			//Displays the graphical board, and changes the label to the current player

@@ -6,6 +6,12 @@ import assignment2018.codeprovided.*;
 
 import java.util.*;
 
+/**
+ * RandomPlayer.java
+ *
+ * Subclass of player that chooses a move out of every move available and makes the move
+ * @author Dhruvisha Supeda
+ */
 public class RandomPlayer extends Player {
 
   private String name;
@@ -27,15 +33,17 @@ public class RandomPlayer extends Player {
    */
   public boolean makeMove() {
     ArrayList<Move> allMoves = new ArrayList<Move>();
+    //Gets all available moves
     allMoves = getMoves();
 
+    //Chooses a random move out of all possible moves
     Random rand = new Random();
     int randomMove = rand.nextInt(allMoves.size());
-
     Move currentMove = allMoves.get(randomMove);
+
+    //Makes the move
     boolean occupiedFlag = currentMove.getOccupied();
     Piece currentPiece = playingBoard.getPiece(currentMove.getOX(), currentMove.getOY());
-
     movePieces(occupiedFlag, currentPiece, playingBoard, currentMove);
 
     return true;
@@ -48,6 +56,7 @@ public class RandomPlayer extends Player {
   public ArrayList<Move> getMoves() {
     Piece currentPiece = null;
     ArrayList<Move> allMoves = new ArrayList<Move>();
+    //Goes through every piece in the players pieces, and adds the available moves for each one
     for (int i = 0; i<this.getPieces().getNumPieces(); i++) {
       currentPiece = this.getPieces().getPiece(i);
       if (currentPiece.availableMoves() != null) {

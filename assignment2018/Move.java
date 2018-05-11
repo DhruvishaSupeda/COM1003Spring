@@ -2,6 +2,12 @@ package assignment2018;
 
 import assignment2018.codeprovided.*;
 
+/**
+ * Move.java
+ *
+ * Represents a move a piece can take in the game
+ * @author Dhruvisha Supeda
+ */
 public class Move {
 
 	private Piece piece;
@@ -21,6 +27,11 @@ public class Move {
 		occupiedToTake = o;
 	}
 
+	/**
+	 * Checks if the move is equal to the move passed in
+	 * @param  move2 the move this move needs to be compared against
+	 * @return       true if the moves are equal, otherwise false
+	 */
 	public boolean equals(Move move2) {
 		return (piece == move2.piece && x == move2.x && y == move2.y && newX == move2.newX && newY == move2.newY
 				&& occupiedToTake == move2.occupiedToTake);

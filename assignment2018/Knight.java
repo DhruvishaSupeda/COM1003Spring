@@ -6,6 +6,11 @@ import assignment2018.Move;
 import assignment2018.codeprovided.Piece;
 import assignment2018.codeprovided.PieceCode;
 
+/**
+ * Knight.java
+ * Class representing the knight
+ * @author Dhruvisha Supeda
+ */
 public class Knight extends Piece {
 
 	public Knight(int ix, int iy, int c, Board b) {

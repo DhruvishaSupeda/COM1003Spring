@@ -6,6 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * GraphicalDisplay.java
+ *
+ * Constructs and updates a GUI with dropdowns for input for the user
+ * @author Dhruvisha Supeda
+ */
 public class GraphicalDisplay extends JFrame implements ActionListener, Display{
 
     //Array storing all of the labels used in the game
