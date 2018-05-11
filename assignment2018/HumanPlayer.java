@@ -11,6 +11,7 @@ import java.util.*;
  * HumanPlayer.java
  *
  * Subclass of player which lets the player input their own move
+ * 
  * @author Dhruvisha Supeda
  */
 public class HumanPlayer extends Player {
@@ -35,7 +36,9 @@ public class HumanPlayer extends Player {
 	/**
 	 * Converts the letters from the input from the player to numbers to be used as
 	 * coordinates
-	 * @param xCoord the coordinate being converted to a number
+	 * 
+	 * @param xCoord
+	 *            the coordinate being converted to a number
 	 * @return returns the number equivalent of the letter given
 	 */
 	public static int checkCoords(char xCoord) {
@@ -73,9 +76,10 @@ public class HumanPlayer extends Player {
 	}
 
 	/**
-	 * Asks the user for input if the player is a HumanPlayer
-	 * Checks if in the input is correct, and if it is converts it to 4 integers to be used by the rest of
+	 * Asks the user for input if the player is a HumanPlayer Checks if in the input
+	 * is correct, and if it is converts it to 4 integers to be used by the rest of
 	 * the program
+	 * 
 	 * @param player
 	 * @return
 	 */
@@ -84,16 +88,17 @@ public class HumanPlayer extends Player {
 		boolean correct = false;
 		System.out.print("Please enter your move: ");
 		String coords = scanner.nextLine().toUpperCase();
-		// Uses space as delimiter and puts from and to coordinates into the array as 4 elements
+		// Uses space as delimiter and puts from and to coordinates into the array as 4
+		// elements
 		char[] arrayOfCoords = coords.replaceAll("\\s", "").toCharArray();
-		//the array to store the integer equivalent
+		// the array to store the integer equivalent
 		int[] arrayOfCoordsInts = new int[4];
 
 		// arrayOfCoords[0] and arrayOfCoords[1] are the current x and y coordinates
-		// arrayOfCoords[2] and arrayOfCoords[3] are the x and y coordinates to be moved to
+		// arrayOfCoords[2] and arrayOfCoords[3] are the x and y coordinates to be moved
+		// to
 		while (!correct) {
-			if ((arrayOfCoords.length == 4)
-                    && (arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H')
+			if ((arrayOfCoords.length == 4) && (arrayOfCoords[0] >= 'A' && arrayOfCoords[0] <= 'H')
 					&& (arrayOfCoords[1] >= '1' && arrayOfCoords[1] <= '8')
 					&& (arrayOfCoords[2] >= 'A' && arrayOfCoords[2] <= 'H')
 					&& (arrayOfCoords[3] >= '1' && arrayOfCoords[3] <= '8')) {
@@ -113,8 +118,9 @@ public class HumanPlayer extends Player {
 	}
 
 	/**
-	 * gets the input from the user from both graphical or text displayed
-	 * makes the move if valid
+	 * gets the input from the user from both graphical or text displayed makes the
+	 * move if valid
+	 * 
 	 * @return [description]
 	 */
 	public boolean makeMove() {
@@ -124,7 +130,7 @@ public class HumanPlayer extends Player {
 		char[] coordsInput = new char[4];
 
 		if (tDisplay.getDisplayNeeded())
-			//If the player specified a text display, gets input through the console
+			// If the player specified a text display, gets input through the console
 			arrayOfCoords = playerInput();
 		else {
 			coordsInput = gDisplay.getInput();
@@ -147,11 +153,12 @@ public class HumanPlayer extends Player {
 			currentMove = new Move(currentPiece, arrayOfCoords[0], arrayOfCoords[1], arrayOfCoords[2], arrayOfCoords[3],
 					occupiedFlag);
 
-			//Checks if the move the user inputted is a valid move
+			// Checks if the move the user inputted is a valid move
 			legalMoveFlag = checkMove(currentPiece, currentMove);
 		}
 		gDisplay.setButtonPressed(false);
-		//Changes the label on the GUI that tells the user if they inputted a legal move or not
+		// Changes the label on the GUI that tells the user if they inputted a legal
+		// move or not
 		if (!legalMoveFlag) {
 			gDisplay.incorrectInput();
 			return false;
@@ -163,21 +170,25 @@ public class HumanPlayer extends Player {
 	}
 
 	/**
-	 * checks the user input against all of the available moves to see if it is valid
-	 * @param  currentPiece the piece to be moved
-	 * @param  currentMove  the move given by the user
-	 * @return              returns whether the move is legal or not
+	 * checks the user input against all of the available moves to see if it is
+	 * valid
+	 * 
+	 * @param currentPiece
+	 *            the piece to be moved
+	 * @param currentMove
+	 *            the move given by the user
+	 * @return returns whether the move is legal or not
 	 */
 	public boolean checkMove(Piece currentPiece, Move currentMove) {
 		boolean legalMoveFlag = false;
 
-		//Gets the legal moves from the piece being moved
+		// Gets the legal moves from the piece being moved
 		ArrayList<Move> theLegalMoves = new ArrayList<Move>();
 		theLegalMoves = currentPiece.availableMoves();
 
 		if (theLegalMoves != null) {
 			for (int i = 0; i < theLegalMoves.size(); i++) {
-				//If the inputted move matches an available move, return true
+				// If the inputted move matches an available move, return true
 				if (theLegalMoves.get(i).equals(currentMove)) {
 					if (currentPiece.getColour() == pieces.getPiece(0).getColour()) {
 						legalMoveFlag = true;
@@ -192,12 +203,17 @@ public class HumanPlayer extends Player {
 
 	/**
 	 * makes the move by moving the pieces and deleting if necessary
-	 * @param occupiedFlag  boolean to show whether the piece to move into is occupied
-	 * @param currentPiece  the piece being moved
-	 * @param currentBoard  the board being used in the game
+	 * 
+	 * @param occupiedFlag
+	 *            boolean to show whether the piece to move into is occupied
+	 * @param currentPiece
+	 *            the piece being moved
+	 * @param currentBoard
+	 *            the board being used in the game
 	 */
 	public void movePieces(boolean occupiedFlag, Piece currentPiece, Board currentBoard) {
-		//If the coordinates to move to have a piece to be taken, deletes the piece from the opponents pieces
+		// If the coordinates to move to have a piece to be taken, deletes the piece
+		// from the opponents pieces
 		if (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]) != null) {
 			if (occupiedFlag && (currentPiece.getColour() != (currentBoard.getPiece(arrayOfCoords[2], arrayOfCoords[3]))
 					.getColour())) {
@@ -206,7 +222,7 @@ public class HumanPlayer extends Player {
 			}
 		}
 
-		//Moves pieces on the board
+		// Moves pieces on the board
 		currentBoard.removePiece(arrayOfCoords[0], arrayOfCoords[1]);
 		currentBoard.setPosition(arrayOfCoords[2], arrayOfCoords[3], currentPiece);
 		currentPiece.setPosition(arrayOfCoords[2], arrayOfCoords[3]);

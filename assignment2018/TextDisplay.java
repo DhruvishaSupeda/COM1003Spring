@@ -4,8 +4,10 @@ import assignment2018.codeprovided.*;
 import assignment2018.codeprovided.PieceCode;
 
 /**
- * TextDisplay.java
- * Class which initialises and shows the state of the board in the console using an array
+ * TextDisplay.java 
+ * Class which initialises and shows the state of the board in
+ * the console using an array
+ * 
  * @author Dhruvisha Supeda
  */
 public class TextDisplay implements Display {
@@ -25,7 +27,9 @@ public class TextDisplay implements Display {
 
 	/**
 	 * Displays the board in the console using the board object
-	 * @param myPieces Pieces arraylist used to get the current board
+	 * 
+	 * @param myPieces
+	 *            Pieces arraylist used to get the current board
 	 */
 	public void displayBoard(Pieces myPieces) {
 		Board playingBoard = myPieces.getPiece(0).getBoard();

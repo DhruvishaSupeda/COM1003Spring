@@ -7,8 +7,9 @@ import assignment2018.codeprovided.Piece;
 import assignment2018.codeprovided.PieceCode;
 
 /**
- * Knight.java
+ * Knight.java 
  * Class representing the knight
+ * 
  * @author Dhruvisha Supeda
  */
 public class Knight extends Piece {

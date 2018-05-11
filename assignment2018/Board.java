@@ -6,6 +6,7 @@ import assignment2018.codeprovided.*;
  * Board.java
  *
  * Class representing the board of the game, storing the pieces as an array
+ * 
  * @author Dhruvisha Supeda
  */
 public class Board {
@@ -26,8 +27,11 @@ public class Board {
 
 	/**
 	 * Removes the piece from the current board
-	 * @param x x coordinate of piece to be removed
-	 * @param y y coordinate of piece to be removed
+	 * 
+	 * @param x
+	 *            x coordinate of piece to be removed
+	 * @param y
+	 *            y coordinate of piece to be removed
 	 */
 	public void removePiece(int x, int y) {
 		playingBoard[x][y] = null;
@@ -37,12 +41,15 @@ public class Board {
 		return playingBoard[x][y];
 	}
 
-  /**
-   * Checks if the position specified is occupied by a piece
-   * @param  x x coordinate of position to be checked
-   * @param  y x coordinate of position to be checked
-   * @return   boolean that is true if the position is occupied, otherwise false
-   */
+	/**
+	 * Checks if the position specified is occupied by a piece
+	 * 
+	 * @param x
+	 *            x coordinate of position to be checked
+	 * @param y
+	 *            x coordinate of position to be checked
+	 * @return boolean that is true if the position is occupied, otherwise false
+	 */
 	public boolean occupied(int x, int y) {
 		if (!outOfRange(x, y) && (playingBoard[x][y] != null))
 			return true;
@@ -52,9 +59,12 @@ public class Board {
 
 	/**
 	 * Checks if the position given is out of range of the board
-	 * @param  x x coordinate of position to be checked
-   * @param  y x coordinate of position to be checked
-	 * @return   boolean that is true if the position is out of range, otherwise false
+	 * 
+	 * @param x
+	 *            x coordinate of position to be checked
+	 * @param y
+	 *            x coordinate of position to be checked
+	 * @return boolean that is true if the position is out of range, otherwise false
 	 */
 	public boolean outOfRange(int x, int y) {
 		if (x > 7 || y > 7 || x < 0 || y < 0)
